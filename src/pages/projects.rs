@@ -12,22 +12,27 @@ pub fn Projects() -> impl IntoView {
         DocLink {
             href: "https://opendevicepartnership.github.io/documentation/why/why.html",
             title: "Why ODP?",
+            external: true,
         },
         DocLink {
             href: "https://opendevicepartnership.github.io/documentation/intro/welcome.html",
             title: "Getting Started with ODP",
+            external: true,
         },
         DocLink {
             href: "https://opendevicepartnership.github.io/documentation/intro/tutorial/tutorial.html",
             title: "Tutorials",
+            external: true,
         },
         DocLink {
             href: "https://opendevicepartnership.github.io/documentation/specs/specifications.html",
             title: "Specifications",
+            external: true,
         },
         DocLink {
             href: "/community",
             title: "Contributing to ODP",
+            external: false,
         },
     ];
 

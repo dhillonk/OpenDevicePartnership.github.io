@@ -126,6 +126,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 href="https://opendevicepartnership.github.io/documentation/intro/concepts/patina.html"
                                 class="link"
                                 style="text-decoration: none;"
+                                target="_blank"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
                                 <span style="text-decoration: underline;">{"Read the Boot Firmware Guide"}</span>
@@ -181,6 +182,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 href="https://opendevicepartnership.github.io/documentation/intro/concepts/Embedded_controller.html"
                                 class="link"
                                 style="text-decoration: none;"
+                                target="_blank"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
                                 <span style="text-decoration: underline;">{"Read the Secure EC Guide"}</span>
@@ -234,6 +236,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 href="https://opendevicepartnership.github.io/documentation/intro/concepts/EC_Services.html"
                                 class="link"
                                 style="text-decoration: none;"
+                                target="_blank"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
                                 <span style="text-decoration: underline;">{"Read the EC Services Guide"}</span>

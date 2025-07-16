@@ -5,6 +5,7 @@ use leptos_router::components::A;
 pub struct DocLink {
     pub href: &'static str,
     pub title: &'static str,
+    pub external: bool,
 }
 
 #[component]
@@ -58,12 +59,24 @@ pub fn DocumentationTraining(#[prop(default = vec![])] links: Vec<DocLink>) -> i
             <ul class="flex flex-col pt-4" style="width: 760px;">
                 {links.into_iter().map(|link| view! {
                     <li>
-                        <div class="link_large" style="text-decoration: none;">
-                            <a href=link.href target="_blank" style="text-decoration: none;">
-                                <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">{link.title}</span>
-                            </a>
-                        </div>
+                        <Show
+                            when=move || link.external
+                            fallback= move || view! {
+                            <div class="link_large internal-link" style="text-decoration: none;">
+                                <A href=link.href>
+                                    <span style="text-decoration: none;">{"→ "}</span>
+                                    <span style="text-decoration: underline;">{link.title}</span>
+                                </A>
+                            </div>
+                        }
+                        >
+                            <div class="link_large external-link" style="text-decoration: none;">
+                                <a href=link.href target="_blank" style="text-decoration: none;">
+                                    <span style="text-decoration: none;">{"→ "}</span>
+                                    <span style="text-decoration: underline;">{link.title}</span>
+                                </a>
+                            </div>
+                        </Show>
                     </li>
                 }).collect_view()}
             </ul>
