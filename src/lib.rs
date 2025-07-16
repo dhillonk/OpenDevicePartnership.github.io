@@ -34,7 +34,7 @@ pub fn App() -> impl IntoView {
         <Meta charset="UTF-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <Router>
+        <Router base="/">
             <Routes fallback=|| view! { NotFound }>
                 <Route path=path!("/home") view=Home />
                 <Route path=path!("/getting-started") view=GettingStarted />
