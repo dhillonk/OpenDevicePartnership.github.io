@@ -90,7 +90,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                 <div class="flex flex-row gap-[60px] items-center">
                     {/* Image Button */}
                     <div>
-                        <ImageButton href="/boot-firmware" img_src="/images/Patina.svg" alt="Boot Firmware" width=600 height=518 />
+                        <ImageButton href="/boot-firmware" img_src="/images/patina.svg" alt="Boot Firmware" width=600 height=518 />
                     </div>
                     {/* Text Content */}
                     <div class="flex flex-col items-start" style="flex: 1;">
@@ -146,7 +146,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                 {/* Row 2 */}
                 <div class="flex flex-row gap-[60px] items-center">
                     <div>
-                        <ImageButton href="/embedded-controller" img_src="/images/EC.svg" alt="Embedded Controller" width=600 height=518 />
+                        <ImageButton href="/embedded-controller" img_src="/images/ec.svg" alt="Embedded Controller" width=600 height=518 />
                     </div>
                     <div class="flex flex-col items-start" style="flex: 1;">
                         <span
@@ -199,7 +199,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                 {/* Row 3 */}
                 <div class="flex flex-row gap-[60px] items-center">
                     <div>
-                        <ImageButton href="/windows-ec-services" img_src="/images/ECServices.svg" alt="EC Services" width=600 height=518 />
+                        <ImageButton href="/windows-ec-services" img_src="/images/ec_services.svg" alt="EC Services" width=600 height=518 />
                     </div>
                     <div class="flex flex-col items-start" style="flex: 1;">
                         <span

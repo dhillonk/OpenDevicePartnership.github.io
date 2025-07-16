@@ -64,9 +64,9 @@ pub fn CommunityTeams() -> impl IntoView {
             {/* Row 3: Teams Image and Label */}
             <div class="flex flex-col items-left" style="margin-bottom: 80px;">
                 <picture>
-                    <source srcset="/images/dark/Teams.svg" media="(prefers-color-scheme: dark)" />
+                    <source srcset="/images/dark/teams.svg" media="(prefers-color-scheme: dark)" />
                     <img
-                        src="/images/light/Teams.svg"
+                        src="/images/light/teams.svg"
                         alt="Teams"
                         class="icon"
                     />

@@ -50,9 +50,9 @@ pub fn ProjectIntroduction(
                         </span>
                     </div>
                     <picture style="width: 100%; height: 100%;">
-                        <source srcset="/images/Patina_Header.svg" />
+                        <source srcset="/images/patina_header.svg" />
                         <img
-                            src="/images/Patina_Header.svg"
+                            src="/images/patina_header.svg"
                             alt="Patina Project"
                             class="icon"
                             style="
