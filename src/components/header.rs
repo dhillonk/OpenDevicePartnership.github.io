@@ -51,6 +51,7 @@ fn ExternalNavButton(href: &'static str, label: &'static str) -> impl IntoView {
         <a
             href=href
             class="odp-header-btn odp-header-btn-text"
+            target="_blank"
         >
             {label}
         </a>
