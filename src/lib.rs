@@ -18,7 +18,7 @@ use crate::pages::team_ec_services::TeamECServices;
 use crate::pages::team_patina::TeamPatina;
 use crate::pages::unified_ec_services::WindowsEcServices;
 
-/// An app router which renders the homepage and handles 404's
+/// An app router which renders the homepage
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
