@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_router::components::A;
 
 #[component]
 pub fn Header() -> impl IntoView {
@@ -32,18 +33,14 @@ fn NavButton(href: &'static str, label: &'static str) -> impl IntoView {
     let is_active = move || location.pathname.get().starts_with(href);
 
     view! {
-        <a
+        <A
             href=href
-            class=move || {
-                let base = "odp-header-btn odp-header-btn-text";
-                if is_active() {
-                    format!("{base} odp-header-btn-active odp-header-btn-active-text")
-                } else {
-                    format!("{base} ")
-                }
-            }
+            class:odp-header-btn=true
+            class:odp-header-btn-text=true
+            class:odp-header-btn-active=is_active
+            class:odp-header-btn-active-text=is_active
         >
             {label}
-        </a>
+        </A>
     }
 }

@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_router::components::A;
 
 #[derive(Clone)]
 pub struct DocLink {
@@ -57,10 +58,12 @@ pub fn DocumentationTraining(#[prop(default = vec![])] links: Vec<DocLink>) -> i
             <ul class="flex flex-col pt-4" style="width: 760px;">
                 {links.into_iter().map(|link| view! {
                     <li>
-                        <a href=link.href class="link_large" style="text-decoration: none;">
-                            <span style="text-decoration: none;">{"→ "}</span>
-                            <span style="text-decoration: underline;">{link.title}</span>
-                        </a>
+                        <div class="link_large" style="text-decoration: none;">
+                            <A href=link.href>
+                                <span style="text-decoration: none;">{"→ "}</span>
+                                <span style="text-decoration: underline;">{link.title}</span>
+                            </A>
+                        </div>
                     </li>
                 }).collect_view()}
             </ul>
