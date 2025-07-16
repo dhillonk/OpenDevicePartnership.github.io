@@ -130,14 +130,16 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 <span style="text-decoration: none;">{"→ "}</span>
                                 <span style="text-decoration: underline;">{"Read the Boot Firmware Guide"}</span>
                             </a>
-                            // <a
-                            //     href="https://github.com/OpenDevicePartnership/patina"
-                            //     class="link"
-                            //     style="text-decoration: none;"
-                            // >
-                            //     <span style="text-decoration: none;">{"→ "}</span>
-                            //     <span style="text-decoration: underline;">{"View Patina on GitHub"}</span>
-                            // </a>
+                            <span
+                                class="p2"
+                                style="
+                                    display: block;
+                                    text-align: left;
+                                    color: #888;
+                                "
+                            >
+                                {"Patina GitHub repo coming soon!"}
+                            </span>
                         </div>
                     </div>
                 </div>
