@@ -108,5 +108,17 @@ pub fn ProjectIntroduction(
                 </div>
             </div>
         </section>
+        <div>
+            <span
+                class="p1"
+                style="
+                display: block;
+                text-align: left;
+                padding-left: 20px;
+                "
+            >
+                Repository Diagram
+            </span>
+        </div>
     }
 }
