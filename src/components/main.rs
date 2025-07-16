@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_router::components::A;
 
 #[component]
 pub fn Main() -> impl IntoView {
@@ -23,35 +24,27 @@ pub fn Main() -> impl IntoView {
                 </div>
 
                 <div class="flex flex-col">
-                    <button
-                        class="background_secondary w-[478px] h-[176px] flex items-center justify-center px-[60px]"
-                        style="border: none;"
-                        on:click=move |_| window().location().set_href("/getting-started").unwrap()
-                    >
-                        <div class="flex flex-row items-center justify-center gap-4">
-                            <span class="h3">
-                                "Getting started"
-                            </span>
-                            <span class="h3">
-                                r"→"
-                            </span>
-                        </div>
-                    </button>
-
-                    <button
-                        class="background_tertiary w-[478px] h-[176px] flex items-center justify-center px-[60px]"
-                        style="border: none;"
-                        on:click=move |_| window().location().set_href("/projects").unwrap()
-                    >
-                        <div class="flex flex-row items-center justify-center gap-4">
-                            <span class="h3">
-                                "Projects"
-                            </span>
-                            <span class="h3">
-                                r"→"
-                            </span>
-                        </div>
-                    </button>
+                    <div style="border: none; text-decoration: none;" class="flex background_secondary w-[478px] h-[176px] items-center justify-center px-[60px]">
+                        <A
+                            href="/getting-started"
+                        >
+                            <div class="flex flex-row items-center justify-center gap-4">
+                                <span class="h3">"Getting started"</span>
+                                <span class="h3">"→"</span>
+                            </div>
+                        </A>
+                    </div>
+                    
+                    <div style="border: none; text-decoration: none;" class="flex background_tertiary w-[478px] h-[176px] items-center justify-center px-[60px]">
+                        <A
+                            href="/projects"
+                        >
+                            <div class="flex flex-row items-center justify-center gap-4">
+                                <span class="h3">"Projects"</span>
+                                <span class="h3">"→"</span>
+                            </div>
+                        </A>
+                    </div>
                 </div>
             </div>
 
