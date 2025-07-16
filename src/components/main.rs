@@ -34,7 +34,7 @@ pub fn Main() -> impl IntoView {
                             </div>
                         </A>
                     </div>
-                    
+
                     <div style="border: none; text-decoration: none;" class="flex background_tertiary w-[478px] h-[176px] items-center justify-center px-[60px]">
                         <A
                             href="/projects"
