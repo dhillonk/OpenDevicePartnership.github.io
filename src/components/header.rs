@@ -19,7 +19,7 @@ pub fn Header() -> impl IntoView {
             <nav class="flex [column-gap:25px]">
                 <NavButton href="/getting-started" label="Getting Started"/>
                 <NavButton href="/projects" label="Projects"/>
-                <NavButton href="https://opendevicepartnership.github.io/documentation/" label="Library"/>
+                <ExternalNavButton href="https://opendevicepartnership.github.io/documentation/" label="Library"/>
                 <NavButton href="/community" label="Community"/>
                 <NavButton href="/home" label="Home"/>
             </nav>
@@ -42,5 +42,17 @@ fn NavButton(href: &'static str, label: &'static str) -> impl IntoView {
         >
             {label}
         </A>
+    }
+}
+
+#[component]
+fn ExternalNavButton(href: &'static str, label: &'static str) -> impl IntoView {
+    view! {
+        <a
+            href=href
+            class="odp-header-btn odp-header-btn-text"
+        >
+            {label}
+        </a>
     }
 }
