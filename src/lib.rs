@@ -34,20 +34,22 @@ pub fn App() -> impl IntoView {
         <Meta charset="UTF-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <Router base="/">
-            <Routes fallback=|| view! { NotFound }>
-                <Route path=path!("/home") view=Home />
-                <Route path=path!("/getting-started") view=GettingStarted />
-                <Route path=path!("/boot-firmware") view=BootFirmware />
-                <Route path=path!("/community") view=Community />
-                <Route path=path!("/team-ec") view=TeamEC />
-                <Route path=path!("/team-patina") view=TeamPatina />
-                <Route path=path!("/embedded-controller") view=EmbeddedController />
-                <Route path=path!("/windows-ec-services") view=WindowsEcServices />
-                <Route path=path!("/projects") view=Projects />
-                <Route path=path!("/") view=Home />
-                <Route path=path!("/team-ec-services") view=TeamECServices />
-            </Routes>
-        </Router>
+        <div class="min-h-screen w-full">
+            <Router base="/">
+                <Routes fallback=|| view! { NotFound }>
+                    <Route path=path!("/home") view=Home />
+                    <Route path=path!("/getting-started") view=GettingStarted />
+                    <Route path=path!("/boot-firmware") view=BootFirmware />
+                    <Route path=path!("/community") view=Community />
+                    <Route path=path!("/team-ec") view=TeamEC />
+                    <Route path=path!("/team-patina") view=TeamPatina />
+                    <Route path=path!("/embedded-controller") view=EmbeddedController />
+                    <Route path=path!("/windows-ec-services") view=WindowsEcServices />
+                    <Route path=path!("/projects") view=Projects />
+                    <Route path=path!("/") view=Home />
+                    <Route path=path!("/team-ec-services") view=TeamECServices />
+                </Routes>
+            </Router>
+        </div>
     }
 }
