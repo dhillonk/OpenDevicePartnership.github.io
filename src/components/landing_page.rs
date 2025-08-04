@@ -12,46 +12,34 @@ pub fn LandingPage() -> impl IntoView {
                 padding: 120px;
             "
         >
-            <h1
-                class="h1"
-                style="
-                    text-align: center;
-                "
-            >
-                {"An Open Collaboration for Secure, Modern Devices"}
-            </h1>
-
-            <div class="flex flex-row justify-center items-center mt-[80px] gap-[80px]">
-                <div
-                    style="
-                        width: 660px;
-                        height: 690;
-                        background: #E5E7EB;
-                        border-radius: 24px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-family: Geist, sans-serif;
-                        font-size: 40px;
-                        color: #888;
-                        text-align: center;
-                    "
-                >
-                <img
-                    src="/images/laptop.png"
-                    style="width: 100%; height: 100%; object-fit: cover;"
-                />
+            <div class="flex flex-row gap-[80px] items-start">
+                {/* Left Column: h1 */}
+                <div class="flex flex-col items-start flex-shrink-0" style="width: 800px">
+                    <span
+                        class="h1"
+                        style="
+                            display: block;
+                            text-align: left;
+                        "
+                    >
+                        {"An Open Collaboration for Secure, Modern Devices"}
+                    </span>
                 </div>
-                <div
-                    class="p1"
-                    style="
-                        width: 650px;
-                        text-align: left;
-                    "
-                >
-                    {"The Open Device Partnership (ODP) is a global initiative to make it easier for developers and device makers to build secure, efficient, and reliable client devices for cross-platform needs and certified environments."}
-                    <br /><br />
-                    {"By combining open standards with collaborative development practices, ODP reduces complexity, improves security, and accelerates innovation across diverse silicon and hardware platforms."}
+                {/* Right Column: Text */}
+                <div class="flex flex-col items-start flex-shrink min-w-0" style="width: 650px;">
+                    <span
+                        class="p1"
+                        style="
+                            display: block;
+                            text-align: left;
+                            word-break: break-word;
+                            overflow-wrap: break-word;
+                        "
+                    >
+                        {"The Open Device Partnership (ODP) is a global initiative to make it easier for developers and device makers to build secure, efficient, and reliable client devices for cross-platform needs and certified environments."}
+                        <br /><br />
+                        {"By combining open standards with collaborative development practices, ODP reduces complexity, improves security, and accelerates innovation across diverse silicon and hardware platforms."}
+                    </span>
                 </div>
             </div>
         </div>

@@ -35,7 +35,7 @@
   .h1 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 140px;
+    font-size: 120px;
     font-style: normal;
     font-weight: 400;
     line-height: 95%;
@@ -46,7 +46,7 @@
   .h2 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 60px;
+    font-size: 40px;
     font-style: normal;
     font-weight: 500;
     line-height: 110%; /* 66px */
@@ -138,7 +138,7 @@
   .link_large {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 35px;
+    font-size: 30px;
     font-style: normal;
     font-weight: 500;
     line-height: 130%; /* 45.5px */
