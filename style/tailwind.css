@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html, body {
+    @apply min-h-screen w-full min-w-full overflow-x-hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body > *:first-child {
+    margin-top: 0 !important;
+  }
+}
 
 @layer components {
   

@@ -4,7 +4,7 @@ use leptos_router::components::A;
 #[component]
 pub fn Header() -> impl IntoView {
     view! {
-        <header class="w-full h-[160px] px-[120px] bg-white dark:bg-black flex items-center justify-between">
+        <header class="w-full h-[160px] px-[120px] bg-white dark:bg-black flex items-center justify-between z-50 m-0 p-0">
             <div class="flex items-center space-x-6">
                 <picture>
                     <source srcset="/images/dark/odplogo.svg" media="(prefers-color-scheme: dark)" />

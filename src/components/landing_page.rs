@@ -201,9 +201,9 @@ pub fn LandingPage() -> impl IntoView {
             "
         >
             <div class="flex flex-row gap-[60px] justify-start">
-                <ImageButton href="/boot-firmware" img_src="/images/patina.svg" alt="Boot Firmware" />
-                <ImageButton href="/embedded-controller" img_src="/images/ec.svg" alt="Embedded Controller" />
-                <ImageButton href="/windows-ec-services" img_src="/images/ec_services.svg" alt="EC Services" />
+                <ImageButton href="/boot-firmware" img_src="/images/patina.png" alt="Boot Firmware" />
+                <ImageButton href="/embedded-controller" img_src="/images/ec.png" alt="Embedded Controller" />
+                <ImageButton href="/windows-ec-services" img_src="/images/ec_services.png" alt="EC Services" />
             </div>
         </section>
 
