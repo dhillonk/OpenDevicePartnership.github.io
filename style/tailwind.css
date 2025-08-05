@@ -211,5 +211,22 @@
   .odp-header-btn-active {
     @apply bg-black dark:bg-white border-white dark:border-black;
   }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 150px;
+    justify-items: center;
+    padding: 0px 240px;
+  }
+
+  .member-image {
+      width: 150px;
+      height: 150px;
+      background-color: grey;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 8px;
+  }
 }
 

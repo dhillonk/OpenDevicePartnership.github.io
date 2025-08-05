@@ -83,7 +83,6 @@ pub fn TeamEC() -> impl IntoView {
                 <h1>"Uh oh! Something went wrong!"</h1>
 
                 <p>"Errors: "</p>
-                // Render a list of errors as strings - good for development purposes
                 <ul>
                     {move || {
                         errors
@@ -92,34 +91,33 @@ pub fn TeamEC() -> impl IntoView {
                             .map(|(_, e)| view! { <li>{e.to_string()}</li> })
                             .collect_view()
                     }}
-
                 </ul>
             }
         }>
 
             <div class="w-full min-h-screen overflow-x-hidden">
                 <Header />
-                <a
-                    href="javascript:history.back()"
-                    class="block"
-                    style="margin: 0; padding: 0;"
-                >
-                    <picture>
-                        <source srcset="/images/dark/backbutton.svg" media="(prefers-color-scheme: dark)" />
-                        <img
-                            src="/images/light/backbutton.svg"
-                            alt="Back"
-                            style="margin: 0; padding: 0; display: block;"
-                        />
-                    </picture>
-                </a>
-                <section
+                <div
                     class="background_primary"
-                    style="
-                        padding: 120px;
-                        margin-top: -80px;
-                    "
+                    style="padding: 120px; position: relative;"
                 >
+                    <div style="position: absolute; left: 0; top: 0;">
+                        <a
+                            href="javascript:history.back()"
+                            class="block"
+                            style="margin: 0; padding: 0;"
+                        >
+                            <picture>
+                                <source srcset="/images/dark/backbutton.svg" media="(prefers-color-scheme: dark)" />
+                                <img
+                                    src="/images/light/backbutton.svg"
+                                    alt="Back"
+                                    style="margin: 0; padding: 0; display: block;"
+                                />
+                            </picture>
+                        </a>
+                    </div>
+                    
                     <div class="flex flex-row gap-[80px]">
                         {/* Left Column */}
                         <div class="flex flex-col items-start" style="width: 700px;">
@@ -137,11 +135,11 @@ pub fn TeamEC() -> impl IntoView {
                         <div class="flex flex-col items-start" style="width: 600px;">
                             {/* Team Introduction */}
                             <span
-                            class="mono"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
+                                class="mono"
+                                style="
+                                    display: block;
+                                    text-align: left;
+                                "
                             >
                                 {"Secure EC team"}
                             </span>
@@ -156,11 +154,10 @@ pub fn TeamEC() -> impl IntoView {
                             </span>
                         </div>
                     </div>
-                </section>
+                </div>
                 <TeamGrid members=team />
                 <Footer />
             </div>
-
         </ErrorBoundary>
     }
 }

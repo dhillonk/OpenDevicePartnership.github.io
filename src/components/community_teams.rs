@@ -9,18 +9,6 @@ pub fn CommunityTeams() -> impl IntoView {
                 padding: 120px;
             "
         >
-            {/* Row 1: Header */}
-            <div style="margin-bottom: 56px;">
-                <span
-                    class="p_mono"
-                    style="
-                        display: block;
-                    "
-                >
-                    {"COMMUNITY"}
-                </span>
-            </div>
-
             {/* Row 2: Two Columns */}
             <div class="flex flex-row gap-[60px]" style="margin-bottom: 80px;">
                 <div style="width: 950px;">
