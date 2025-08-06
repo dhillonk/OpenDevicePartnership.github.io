@@ -58,7 +58,6 @@ It’s time for firmware to act like real software — and Patina makes that pos
                 <h1>"Uh oh! Something went wrong!"</h1>
 
                 <p>"Errors: "</p>
-                // Render a list of errors as strings - good for development purposes
                 <ul>
                     {move || {
                         errors
@@ -67,14 +66,20 @@ It’s time for firmware to act like real software — and Patina makes that pos
                             .map(|(_, e)| view! { <li>{e.to_string()}</li> })
                             .collect_view()
                     }}
-
                 </ul>
             }
         }>
 
             <div class="w-full min-h-screen" style="overflow-x: auto;">
                 <Header />
-                <ProjectIntroduction project_title=project_title project_summary=project_summary project_what=project_what project_why=project_why />
+                <ProjectIntroduction
+                    project_title=project_title
+                    project_summary=project_summary
+                    project_what=project_what
+                    project_why=project_why
+                    big_image_url="/images/PatinaBackground.png"
+                    small_image_url="/images/dark/ProjectIcon_P_Patina_DarkMode.svg"
+                />
                 <RepositoryGraph nodes=nodes_data links=links_data/>
                 <DocumentationTraining links=links />
                 <Footer />
