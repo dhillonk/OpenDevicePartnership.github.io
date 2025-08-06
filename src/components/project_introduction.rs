@@ -6,34 +6,76 @@ pub fn ProjectIntroduction(
     #[prop(into)] project_summary: String,
     #[prop(into)] project_what: String,
     #[prop(into)] project_why: String,
+    #[prop(into, optional)] small_image_url: String,
+    #[prop(into, optional)] big_image_url: String,
 ) -> impl IntoView {
     view! {
-        <section
-            class="background_primary"
-            style="
-                padding: 120px 120px 120px 0;
-            "
-        >
+        <section class="background_primary">
             <div class="flex flex-row gap-[80px]">
-                {/* Left Column */}
-                <div class="flex flex-col items-start" style="width: 1035px; height: 930px; position: relative; margin-left: 0; padding-left: 0;">
+                {/* Left Column: Big Picture with Overlayed Text and Small Image */}
+                <div
+                    class="relative"
+                    style="
+                        width: 1035px;
+                        height: 930px;
+                        margin-left: 0;
+                        padding-left: 0;
+                        flex-shrink: 0;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                    "
+                >
+                    {/* Big Picture */}
+                    <img
+                        src={big_image_url}
+                        alt="Project Main"
+                        style="
+                            width: 1035px;
+                            height: 930px;
+                            object-fit: cover;
+                            display: block;
+                            border-top-right-radius: 100px;
+                            border-bottom-right-radius: 100px;
+                        "
+                    />
+                    {/* Overlayed Text and Small Picture */}
                     <div
                         style="
                             position: absolute;
                             top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            z-index: 10;
-                            text-align: center;
+                            left: 0;
+                            transform: translateY(-50%);
+                            z-index: 2;
+                            text-align: left;
+                            width: 90%;
+                            padding-left: 60px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
                         "
                     >
+                        {/* Small Picture aligned with project title and 60px above */}
+                        <img
+                            src={small_image_url}
+                            alt="Project Logo"
+                            style="
+                                width: 102px;
+                                height: 102px;
+                                object-fit: contain;
+                                margin-bottom: 60px;
+                                margin-left: 0;
+                            "
+                        />
                         <span
                             class="h1"
                             style="
                                 display: block;
                                 color: white;
-                                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
                                 margin-bottom: 10px;
+                                word-break: break-word;
+                                text-align: left;
                             "
                         >
                             {project_title}
@@ -43,25 +85,13 @@ pub fn ProjectIntroduction(
                             style="
                                 display: block;
                                 color: white;
-                                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                                word-break: break-word;
+                                text-align: left;
                             "
                         >
                             {project_summary}
                         </span>
                     </div>
-                    <picture style="width: 100%; height: 100%;">
-                        <source srcset="/images/patina_header.svg" />
-                        <img
-                            src="/images/patina_header.svg"
-                            alt="Patina Project"
-                            class="icon"
-                            style="
-                                width: 100%;
-                                height: 100%;
-                                object-fit: contain;
-                            "
-                        />
-                    </picture>
                 </div>
                 {/* Right Column */}
                 <div class="flex flex-col items-start" style="width: 600px;">
@@ -77,7 +107,7 @@ pub fn ProjectIntroduction(
                     </span>
                     {/* WHAT description */}
                     <span
-                        class="p1"
+                        class="p2"
                         style="
                             display: block;
                             text-align: left;
@@ -97,7 +127,7 @@ pub fn ProjectIntroduction(
                     </span>
                     {/* WHY description */}
                     <span
-                        class="p1"
+                        class="p2"
                         style="
                             display: block;
                             text-align: left;
@@ -108,13 +138,15 @@ pub fn ProjectIntroduction(
                 </div>
             </div>
         </section>
-        <div>
+        <div class="background_primary">
             <span
                 class="p1"
                 style="
                 display: block;
                 text-align: left;
                 padding-left: 20px;
+                padding-top: 100px;
+                padding-bottom: 20px;
                 "
             >
                 Repository Diagram
