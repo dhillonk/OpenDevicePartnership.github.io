@@ -10,7 +10,7 @@ use leptos::prelude::*;
 #[component]
 pub fn WindowsEcServices() -> impl IntoView {
     let links = vec![
-                DocLink {
+        DocLink {
             href: "https://opendevicepartnership.github.io/documentation/guide/why/why.html",
             title: "Why ODP?",
             external: true,

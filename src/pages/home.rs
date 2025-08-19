@@ -10,7 +10,7 @@ use leptos::prelude::*;
 pub fn Home() -> impl IntoView {
     // Documentation links for the DocumentationTraining section
     let links = vec![
-                DocLink {
+        DocLink {
             href: "https://opendevicepartnership.github.io/documentation/guide/why/why.html",
             title: "Why ODP?",
             external: true,
