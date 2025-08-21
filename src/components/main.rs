@@ -84,16 +84,10 @@ pub fn Main() -> impl IntoView {
                             "Learn how ODP projects help build secure, modern devices"
                         </span>
                     </div>
-                    <iframe
-                        width="1200"
-                        height="690"
-                        style="border-radius: 10px; display: block;"
-                        src="https://www.youtube.com/embed/FMlPxYSY1LM?rel=0"
-                        title="YouTube Video of the Open Device Partnership"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <video width="1200" height="690" controls>
+                        <source src="/images/intro.mp4" type="video/mp4" />
+                        <track kind="captions" src="/images/intro.vtt" srclang="en" label="English" />
+                    </video>
                 </div>
             </div>
         </main>
