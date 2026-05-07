@@ -20,8 +20,8 @@ const PARTNERS: &[Partner] = &[
     },
     Partner {
         name: "CIX",
-        logo: "/images/partners/cix.svg"
-    }
+        logo: "/images/partners/cix.svg",
+    },
 ];
 
 #[component]
