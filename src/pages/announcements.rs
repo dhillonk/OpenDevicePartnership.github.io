@@ -77,7 +77,6 @@ pub fn AnnouncementsPage() -> impl IntoView {
     // Set selected from query param if present
     {
         let location = location.clone();
-        let set_selected = set_selected.clone();
         let announcements_clone = announcements.clone();
         Effect::new(move |_| {
             let search = location.search.get();

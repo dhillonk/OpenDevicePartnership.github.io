@@ -1,8 +1,8 @@
 use crate::components::documentation_training::{DocLink, DocumentationTraining};
-use crate::components::partners_grid::PartnersGrid;
 use crate::components::footer::Footer;
 use crate::components::header::Header;
 use crate::components::main::Main;
+use crate::components::partners_grid::PartnersGrid;
 
 use leptos::prelude::*;
 
