@@ -22,6 +22,7 @@
 //! Remove it once every primitive is in active use.
 #![allow(dead_code, unused_imports)]
 
+mod arrow_link;
 mod button;
 mod container;
 mod grid;
@@ -31,6 +32,7 @@ mod mono;
 mod stack;
 mod text;
 
+pub use arrow_link::{ArrowLink, ArrowLinkSize};
 pub use button::{Button, ButtonVariant, IconButton};
 pub use container::Container;
 pub use grid::Grid;

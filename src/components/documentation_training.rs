@@ -1,7 +1,6 @@
 use crate::components::themed_icon::ThemedIcon;
-use crate::components::ui::{Heading, HeadingLevel, Text, TextSize};
+use crate::components::ui::{ArrowLink, ArrowLinkSize, Heading, HeadingLevel, Text, TextSize};
 use leptos::prelude::*;
-use leptos_router::components::A;
 
 #[derive(Clone)]
 pub struct DocLink {
@@ -67,26 +66,12 @@ pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links
                     .map(|link| {
                         view! {
                             <li>
-                                <Show
-                                    when=move || link.external
-                                    fallback=move || {
-                                        view! {
-                                            <div class="link_mobile md:link_large internal-link no-underline">
-                                                <A href=link.href>
-                                                    <span class="no-underline">{"→ "}</span>
-                                                    <span class="underline">{link.title}</span>
-                                                </A>
-                                            </div>
-                                        }
-                                    }
-                                >
-                                    <div class="link_mobile md:link_large external-link no-underline">
-                                        <a href=link.href target="_blank" class="no-underline">
-                                            <span class="no-underline">{"→ "}</span>
-                                            <span class="underline">{link.title}</span>
-                                        </a>
-                                    </div>
-                                </Show>
+                                <ArrowLink
+                                    href=link.href
+                                    title=link.title
+                                    size=ArrowLinkSize::Large
+                                    external=link.external
+                                />
                             </li>
                         }
                     })

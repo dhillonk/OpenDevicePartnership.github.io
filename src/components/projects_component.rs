@@ -1,6 +1,6 @@
 use crate::components::image_button::ImageButton;
 use crate::components::section::Section;
-use crate::components::ui::{Heading, HeadingLevel, Mono, Text, TextSize};
+use crate::components::ui::{ArrowLink, Heading, HeadingLevel, Mono, Text, TextSize};
 use leptos::prelude::*;
 
 #[component]
@@ -114,10 +114,5 @@ fn ProjectRow(
 
 #[component]
 fn ProjectLink(href: &'static str, title: &'static str) -> impl IntoView {
-    view! {
-        <a href=href class="link no-underline">
-            <span class="no-underline">{"→ "}</span>
-            <span class="underline">{title}</span>
-        </a>
-    }
+    view! { <ArrowLink href=href title=title /> }
 }
