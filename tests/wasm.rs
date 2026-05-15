@@ -18,8 +18,10 @@
 use leptos::prelude::*;
 use leptos_router::components::Router;
 use odp::components::header::Header;
+use odp::components::landing::{ClosingColumnsSection, HeroSection, ProjectsSection, ValuePropositionSection};
 use odp::components::team_hero::TeamHero;
 use odp::components::themed_icon::ThemedIcon;
+use odp::components::ui::{ArrowLink, ArrowLinkSize, IconBlock, ValuePropCard};
 use wasm_bindgen::{JsCast, JsValue};
 use wasm_bindgen_test::*;
 use web_sys::HtmlElement;
@@ -125,4 +127,144 @@ fn header_logo_is_wrapped_in_home_anchor() {
         logo_anchor.query_selector("picture").unwrap().is_some(),
         "logo anchor should wrap the themed-icon picture"
     );
+}
+
+// ---------------------------------------------------------------------------
+// t30 — <ArrowLink>
+// ---------------------------------------------------------------------------
+
+#[wasm_bindgen_test]
+fn arrow_link_external_renders_target_blank_and_external_class() {
+    let root = mount(|| {
+        view! { <ArrowLink href="https://example.com" title="External" size=ArrowLinkSize::Large /> }
+    });
+
+    let wrapper = root.query_selector("div").unwrap().expect("wrapper div");
+    let class = wrapper.get_attribute("class").unwrap();
+    assert!(class.contains("external-link"), "wrapper class = {class}");
+    assert!(!class.contains("internal-link"));
+
+    let anchor = wrapper.query_selector("a").unwrap().expect("anchor");
+    assert_eq!(anchor.get_attribute("href").as_deref(), Some("https://example.com"));
+    assert_eq!(anchor.get_attribute("target").as_deref(), Some("_blank"));
+    assert_eq!(anchor.get_attribute("rel").as_deref(), Some("noopener noreferrer"));
+
+    // Arrow + label spans both present.
+    let spans = anchor.get_elements_by_tag_name("span");
+    assert_eq!(spans.length(), 2, "expected arrow + label spans");
+}
+
+#[wasm_bindgen_test]
+fn arrow_link_internal_renders_router_anchor_without_target() {
+    let root = mount(|| {
+        view! {
+            <Router>
+                <ArrowLink href="/community" title="Community" />
+            </Router>
+        }
+    });
+
+    let wrapper = root.query_selector("div").unwrap().expect("wrapper div");
+    let class = wrapper.get_attribute("class").unwrap();
+    assert!(class.contains("internal-link"), "wrapper class = {class}");
+    assert!(!class.contains("external-link"));
+
+    let anchor = wrapper.query_selector("a").unwrap().expect("anchor");
+    assert_eq!(anchor.get_attribute("href").as_deref(), Some("/community"));
+    assert!(
+        anchor.get_attribute("target").is_none(),
+        "internal links must not open new tab"
+    );
+}
+
+// ---------------------------------------------------------------------------
+// t31 — <IconBlock>
+// ---------------------------------------------------------------------------
+
+#[wasm_bindgen_test]
+fn icon_block_wraps_themed_icon_with_children() {
+    let root = mount(|| {
+        view! {
+            <IconBlock name="lock" alt="Lock">
+                <span class="probe-child">"hello"</span>
+            </IconBlock>
+        }
+    });
+
+    assert!(
+        root.query_selector("picture").unwrap().is_some(),
+        "IconBlock should render the ThemedIcon picture"
+    );
+    let child = root.query_selector(".probe-child").unwrap().expect("probe child");
+    assert_eq!(child.text_content().as_deref(), Some("hello"));
+}
+
+// ---------------------------------------------------------------------------
+// t32 — <ValuePropCard>
+// ---------------------------------------------------------------------------
+
+#[wasm_bindgen_test]
+fn value_prop_card_contains_icon_title_and_body() {
+    let root = mount(|| {
+        view! { <ValuePropCard icon="lock" icon_alt="Lock" title="Probe Title" body="Probe body text." /> }
+    });
+
+    assert!(
+        root.query_selector("picture").unwrap().is_some(),
+        "value-prop card should render the icon"
+    );
+    let html = root.inner_html();
+    assert!(html.contains("Probe Title"), "missing title in: {html}");
+    assert!(html.contains("Probe body text."), "missing body in: {html}");
+}
+
+// ---------------------------------------------------------------------------
+// t33 — landing page sections
+// ---------------------------------------------------------------------------
+
+fn assert_contains(root: &web_sys::Element, needle: &str) {
+    let html = root.inner_html();
+    assert!(html.contains(needle), "expected `{needle}` in section html");
+}
+
+#[wasm_bindgen_test]
+fn hero_section_renders_headline() {
+    let root = mount(|| view! { <HeroSection /> });
+    assert_contains(&root, "An Open Collaboration for Secure, Modern Devices");
+}
+
+#[wasm_bindgen_test]
+fn value_proposition_section_renders_three_cards() {
+    let root = mount(|| view! { <ValuePropositionSection /> });
+    assert_contains(&root, "Value Proposition");
+    assert_contains(&root, "Enhanced Security");
+    assert_contains(&root, "Standardization");
+    assert_contains(&root, "Accelerated Development");
+    let pictures = root.get_elements_by_tag_name("picture");
+    assert_eq!(pictures.length(), 3, "expected 3 value-prop card icons");
+}
+
+#[wasm_bindgen_test]
+fn projects_section_renders_intro_and_three_image_buttons() {
+    let root = mount(|| {
+        view! {
+            <Router>
+                <ProjectsSection />
+            </Router>
+        }
+    });
+    assert_contains(&root, "ODP Projects");
+    let imgs = root.get_elements_by_tag_name("img");
+    assert!(
+        imgs.length() >= 3,
+        "expected >=3 project tile images, got {}",
+        imgs.length()
+    );
+}
+
+#[wasm_bindgen_test]
+fn closing_columns_section_renders_both_columns() {
+    let root = mount(|| view! { <ClosingColumnsSection /> });
+    assert_contains(&root, "Partner-Oriented Vision");
+    assert_contains(&root, "Get Involved!");
 }
