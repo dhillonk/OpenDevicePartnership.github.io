@@ -43,3 +43,13 @@
 
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# repo_graph.{js,css} are NOT fingerprinted (they're injected at
+# runtime by RepositoryGraph and ship to dist root via copy-file).
+# Cache for a week and revalidate -- a stale window of one week is
+# acceptable for the project graph code.
+/repo_graph.js
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/repo_graph.css
+  Cache-Control: public, max-age=604800, must-revalidate

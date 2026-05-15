@@ -195,8 +195,8 @@ jobs:
             fi
           }
           check 'odp-*_bg.wasm'       'wasm'             230
-          check 'tailwind-*.css'      'tailwind CSS'      15
-          check 'repo_graph-*.css'    'repo_graph CSS'     2
+          check 'tailwind-*.css'      'tailwind CSS'      10
+          check 'repo_graph.css'      'repo_graph CSS'     2
           check 'odp-*.js'            'wasm-bindgen JS'   20
           if [ "$fail" -ne 0 ]; then
             echo "::error::One or more assets exceeded their size budget."

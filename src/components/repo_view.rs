@@ -10,16 +10,17 @@
 //!
 //! Both assets are loaded **lazily**, only when a `RepositoryGraph`
 //! component first mounts (i.e. when the user navigates to a project
-//! page). This keeps the ~280 KB D3 bundle off the critical path for
-//! every other page.
+//! page). This keeps the ~280 KB D3 bundle and the graph stylesheet
+//! off the critical path for every other page.
 //!
 //! ## Load order on first mount
 //!
 //! 1. The Effect publishes per-page payload as `window.__odpGraphData`.
 //! 2. The Effect calls `request_render()`. If `__odpRenderGraph` is
 //!    already defined (subsequent mounts), it runs immediately.
-//! 3. The Effect calls `ensure_graph_script()`, which injects
-//!    `<script src="/repo_graph.js">` exactly once. When that script
+//! 3. The Effect calls `ensure_graph_assets()`, which injects
+//!    `<link rel="stylesheet" href="/repo_graph.css">` and
+//!    `<script src="/repo_graph.js">` exactly once. When the script
 //!    finishes loading, it self-executes `render()` because
 //!    `__odpGraphData` is already set (see `public/repo_graph.js`).
 //! 4. `repo_graph.js` itself injects `<script src=".../d3.v7.min.js">`
@@ -34,13 +35,15 @@ use web_sys::js_sys;
 
 const REPO_GRAPH_SCRIPT_ID: &str = "odp-repo-graph-script";
 const REPO_GRAPH_SCRIPT_SRC: &str = "/repo_graph.js";
+const REPO_GRAPH_STYLE_ID: &str = "odp-repo-graph-style";
+const REPO_GRAPH_STYLE_HREF: &str = "/repo_graph.css";
 
 #[component]
 pub fn RepositoryGraph(#[prop(into)] nodes: String, #[prop(into)] links: String) -> impl IntoView {
     Effect::new(move |_| {
         publish_graph_data(&nodes, &links);
         request_render();
-        ensure_graph_script();
+        ensure_graph_assets();
     });
 
     view! {
@@ -89,25 +92,36 @@ fn request_render() {
     }
 }
 
-/// Injects `<script src="/repo_graph.js">` into `<head>` exactly once
-/// per session. Subsequent calls are cheap no-ops.
-fn ensure_graph_script() {
+/// Injects `<link rel="stylesheet">` and `<script src="/repo_graph.js">`
+/// into `<head>` exactly once per session. Subsequent calls are cheap
+/// no-ops. Both assets are kept off the critical path so the landing
+/// page (and every non-project route) never pays for them.
+fn ensure_graph_assets() {
     let Some(window) = web_sys::window() else {
         return;
     };
     let Some(document) = window.document() else {
         return;
     };
-    if document.get_element_by_id(REPO_GRAPH_SCRIPT_ID).is_some() {
-        return;
-    }
-    let Ok(script) = document.create_element("script") else {
+    let Some(head) = document.head() else {
         return;
     };
-    let _ = script.set_attribute("id", REPO_GRAPH_SCRIPT_ID);
-    let _ = script.set_attribute("src", REPO_GRAPH_SCRIPT_SRC);
-    let _ = script.set_attribute("defer", "");
-    if let Some(head) = document.head() {
-        let _ = head.append_child(&script);
+
+    if document.get_element_by_id(REPO_GRAPH_STYLE_ID).is_none() {
+        if let Ok(link) = document.create_element("link") {
+            let _ = link.set_attribute("id", REPO_GRAPH_STYLE_ID);
+            let _ = link.set_attribute("rel", "stylesheet");
+            let _ = link.set_attribute("href", REPO_GRAPH_STYLE_HREF);
+            let _ = head.append_child(&link);
+        }
+    }
+
+    if document.get_element_by_id(REPO_GRAPH_SCRIPT_ID).is_none() {
+        if let Ok(script) = document.create_element("script") {
+            let _ = script.set_attribute("id", REPO_GRAPH_SCRIPT_ID);
+            let _ = script.set_attribute("src", REPO_GRAPH_SCRIPT_SRC);
+            let _ = script.set_attribute("defer", "");
+            let _ = head.append_child(&script);
+        }
     }
 }
