@@ -19,8 +19,10 @@ inject_scripts = true
 # frozen = false
 # Require Cargo.lock is up to date
 # locked = false
-# Control minification
-# minify = "never" # can be one of: never, on_release, always
+# Control minification: "always" minifies CSS (incl. tailwind) and HTML
+# in both dev and release builds. The wasm artifact is governed by the
+# cargo release profile (Cargo.toml) -- this only affects asset minify.
+minify = "always"
 # Allow disabling sub-resource integrity (SRI)
 # no_sri = false
 # An optional cargo profile to use

@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link data-trunk rel="tailwind-css" href="/style/tailwind.css" />
-    <link data-trunk rel="css" href="/style/repo_graph.css" />
+    <link data-trunk rel="copy-file" href="/style/repo_graph.css" />
     <link data-trunk rel="copy-dir" href="/public/images"/>
+    <link data-trunk rel="copy-dir" href="/public/fonts"/>
     <link data-trunk rel="copy-file" href="/public/repo_graph.js"/>
+    <link data-trunk rel="copy-file" href="/public/_headers"/>
 
-    <!-- Repository graph dependencies. Loaded once per page so the
-         RepositoryGraph component can call window.__odpRenderGraph()
-         immediately on mount without racing against script downloads. -->
-    <script defer src="https://d3js.org/d3.v7.min.js"></script>
-    <script defer src="/repo_graph.js"></script>
+    <!--
+      Repository graph dependencies (D3 + repo_graph.js) are NOT loaded
+      here. They are injected on demand by `RepositoryGraph` (see
+      src/components/repo_view.rs), which keeps ~90 KB gz off the
+      initial bundle on the landing page, /projects, /teams, etc.
+    -->
 
     <!--
       `data-wasm-opt-params` forwards extra flags to wasm-opt. The bundled
@@ -30,7 +33,7 @@
       data-weak-refs
     />
     <link rel="icon" href="images/odpicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
   </head>
   <body></body>
 </html>
