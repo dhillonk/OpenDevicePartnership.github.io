@@ -4,15 +4,15 @@ use leptos::prelude::*;
 #[component]
 pub fn ProjectsComponent() -> impl IntoView {
     view! {
-        <section class="background_primary px-6 py-8 md:px-32 md:py-32">
+        <section class="background_primary px-6 py-8 md:px-16 lg:px-32 md:py-20 lg:py-32">
             <div class="flex flex-col md:flex-row gap-10 md:gap-20">
-                <div class="flex flex-col items-start w-full md:w-[700px]">
+                <div class="flex flex-col items-start w-full md:flex-1">
                     <span class="h1 block text-left">{"System Firmware Domains"}</span>
                     <span class="h2 block text-left">
                         {"Reusable foundations for secure, high-quality device platforms"}
                     </span>
                 </div>
-                <div class="flex flex-col items-start w-full md:w-[600px] mt-8 md:mt-0">
+                <div class="flex flex-col items-start w-full md:flex-1 mt-8 md:mt-0">
                     <span class="mono block text-left">{"WHAT"}</span>
                     <span class="p1 block text-left">
                         {"ODP supports development across three core areas of system firmware. Each domain is designed for modularity, security, and long-term reuse across hardware platforms."}
@@ -26,21 +26,16 @@ pub fn ProjectsComponent() -> impl IntoView {
         </section>
 
         // Projects Details Section
-        <section class="background_primary px-6 py-8 md:px-32 md:py-32">
+        <section class="background_primary px-6 py-8 md:px-16 lg:px-32 md:py-20 lg:py-32">
             <div class="flex flex-col gap-16">
 
                 <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton
-                            href="/boot-firmware"
-                            img_src="/images/patina.png"
-                            alt="Boot Firmware"
-                            width=600
-                            height=518
-                            mobile_width=Some(320)
-                            mobile_height=Some(250)
-                        />
-                    </div>
+                    <ImageButton
+                        href="/boot-firmware"
+                        img_src="/images/patina.png"
+                        alt="Boot Firmware"
+                        class="aspect-square max-w-[600px]"
+                    />
                     <div
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"
@@ -75,17 +70,12 @@ pub fn ProjectsComponent() -> impl IntoView {
                     </div>
                 </div>
                 <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton
-                            href="/embedded-controller"
-                            img_src="/images/ec.png"
-                            alt="Embedded Controller"
-                            width=600
-                            height=518
-                            mobile_width=Some(320)
-                            mobile_height=Some(250)
-                        />
-                    </div>
+                    <ImageButton
+                        href="/embedded-controller"
+                        img_src="/images/ec.png"
+                        alt="Embedded Controller"
+                        class="aspect-square max-w-[600px]"
+                    />
                     <div
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"
@@ -122,17 +112,12 @@ pub fn ProjectsComponent() -> impl IntoView {
                     </div>
                 </div>
                 <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton
-                            href="/windows-ec-services"
-                            img_src="/images/ec_services.png"
-                            alt="EC Services"
-                            width=600
-                            height=518
-                            mobile_width=Some(320)
-                            mobile_height=Some(250)
-                        />
-                    </div>
+                    <ImageButton
+                        href="/windows-ec-services"
+                        img_src="/images/ec_services.png"
+                        alt="EC Services"
+                        class="aspect-square max-w-[600px]"
+                    />
                     <div
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"

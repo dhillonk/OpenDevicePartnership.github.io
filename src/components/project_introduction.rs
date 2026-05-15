@@ -15,39 +15,25 @@ pub fn ProjectIntroduction(
         <section class="background_primary">
             <div class="flex flex-col md:flex-row gap-20">
 
-                <div
-                    class="relative w-full md:w-[700px] h-[400px] md:h-[630px]"
-                    style="margin-left: 0; padding-left: 0; flex-shrink: 0; position: relative; display: flex; align-items: center; justify-content: flex-start;"
-                >
+                <div class="relative w-full max-w-[700px] aspect-square flex items-center justify-start flex-shrink-0">
 
                     <img
                         src=big_image_url
                         alt="Project Main"
-                        class="w-full h-[400px] md:w-[700px] md:h-[630px]"
-                        style="object-fit: cover; display: block; border-top-right-radius: 40px; border-bottom-right-radius: 40px;"
+                        class="w-full h-full object-cover block rounded-r-3xl"
                     />
 
-                    <div
-                        class="absolute top-1/2 left-0 w-[90%] pl-2 md:pl-16 flex flex-col items-start"
-                        style="transform: translateY(-50%); z-index: 2; text-align: left;"
-                    >
+                    <div class="absolute top-1/2 left-0 w-[90%] pl-2 md:pl-16 flex flex-col items-start -translate-y-1/2 z-[2] text-left">
 
                         <img
                             src=small_image_url
                             alt="Project Logo"
-                            class="w-[48px] h-[48px] md:w-[102px] md:h-[102px] mb-4 md:mb-16 ml-0"
-                            style="object-fit: contain;"
+                            class="w-[48px] h-[48px] md:w-[102px] md:h-[102px] mb-4 md:mb-16 ml-0 object-contain"
                         />
-                        <span
-                            class="h1"
-                            style="display: block; color: white; margin-bottom: 10px; word-break: break-word; text-align: left;"
-                        >
+                        <span class="h1 block !text-white mb-2.5 break-words text-left">
                             {project_title}
                         </span>
-                        <span
-                            class="p1"
-                            style="display: block; color: white; word-break: break-word; text-align: left;"
-                        >
+                        <span class="p1 block !text-white break-words text-left">
                             {project_summary}
                         </span>
                     </div>

@@ -312,19 +312,23 @@
     @apply bg-black dark:bg-white border-white dark:border-black;
   }
 
+  /* Auto-fit grid for the team / steering-committee member tiles.
+   *
+   * Tile minimum width matches the .member-image size (180px gives the
+   * 150px portrait a small breathing margin). `auto-fit` reflows from
+   * 1 column on phones up to as many columns as fit on wide displays
+   * with no media queries.
+   *
+   * Gap is fluid via clamp() so tablets don't get the desktop 150 px
+   * gap that used to dominate the row. Horizontal padding is the call
+   * site's responsibility (the wrapper uses Tailwind's `px-2 md:px-32`)
+   * so we don't double-pad here.
+   */
   .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-gap: 150px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: clamp(2rem, 4vw, 6rem);
     justify-items: center;
-    padding: 0px 8px;
-  }
-
-  @media (min-width: 768px) {
-    .grid-container {
-      padding-left: 240px;
-      padding-right: 240px;
-    }
   }
 
   .member-image {
