@@ -50,7 +50,7 @@ pub fn DocumentationTraining(#[prop(default = vec![])] links: Vec<DocLink>) -> i
                         <Show
                             when=move || link.external
                             fallback= move || view! {
-                            <div class="link_large_mobile md:link_large internal-link" style="text-decoration: none;">
+                            <div class="link_mobile md:link_large internal-link" style="text-decoration: none;">
                                 <A href=link.href>
                                     <span style="text-decoration: none;">{"→ "}</span>
                                     <span style="text-decoration: underline;">{link.title}</span>
@@ -58,7 +58,7 @@ pub fn DocumentationTraining(#[prop(default = vec![])] links: Vec<DocLink>) -> i
                             </div>
                         }
                         >
-                            <div class="link_large_mobile md:link_large external-link" style="text-decoration: none;">
+                            <div class="link_mobile md:link_large external-link" style="text-decoration: none;">
                                 <a href=link.href target="_blank" style="text-decoration: none;">
                                     <span style="text-decoration: none;">{"→ "}</span>
                                     <span style="text-decoration: underline;">{link.title}</span>

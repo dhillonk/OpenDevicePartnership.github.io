@@ -45,7 +45,7 @@ pub fn ProjectIntroduction(
                             {project_title}
                         </span>
                         <span
-                            class="p3_mobile md:p1"
+                            class="p2_mobile md:p1"
                             style="display: block; color: white; word-break: break-word; text-align: left;"
                         >
                             {project_summary}
