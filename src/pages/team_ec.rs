@@ -1,6 +1,6 @@
-use crate::components::footer::Footer;
-use crate::components::header::Header;
+use crate::components::page_layout::PageLayout;
 use crate::components::team_grid::{TeamGrid, TeamMember};
+use crate::components::themed_icon::ThemedIcon;
 
 use leptos::prelude::*;
 
@@ -78,102 +78,43 @@ pub fn TeamEC() -> impl IntoView {
     let team = create_team();
 
     view! {
-        <ErrorBoundary fallback=|errors| {
-            view! {
-                <h1>"Uh oh! Something went wrong!"</h1>
-
-                <p>"Errors: "</p>
-                <ul>
-                    {move || {
-                        errors
-                            .get()
-                            .into_iter()
-                            .map(|(_, e)| view! { <li>{e.to_string()}</li> })
-                            .collect_view()
-                    }}
-                </ul>
-            }
-        }>
-
-            <div class="w-full min-h-screen overflow-x-hidden">
-                <Header />
-                <div
-                    class="background_primary px-2 md:px-[120px] py-4 md:py-[120px]"
-                    style="position: relative;"
-                >
-                    {/* Back Button: above content on mobile, absolutely positioned on desktop */}
-                    <div class="block md:hidden mb-4">
-                        <a
-                            href="javascript:history.back()"
-                            class="block"
-                            style="margin: 0; padding: 0;"
-                        >
-                            <picture>
-                                <source srcset="/images/dark/backbutton.svg" media="(prefers-color-scheme: dark)" />
-                                <img
-                                    src="/images/light/backbutton.svg"
-                                    alt="Back"
-                                    style="margin: 0; padding: 0; display: block;"
-                                />
-                            </picture>
-                        </a>
-                    </div>
-                    <div class="hidden md:block" style="position: absolute; left: 0; top: 0;">
-                        <a
-                            href="javascript:history.back()"
-                            class="block"
-                            style="margin: 0; padding: 0;"
-                        >
-                            <picture>
-                                <source srcset="/images/dark/backbutton.svg" media="(prefers-color-scheme: dark)" />
-                                <img
-                                    src="/images/light/backbutton.svg"
-                                    alt="Back"
-                                    style="margin: 0; padding: 0; display: block;"
-                                />
-                            </picture>
-                        </a>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-[80px] items-start">
-                        {/* Left Column */}
-                        <div class="flex flex-col items-start w-full md:w-[700px]">
-                            <span
-                                class="h1_mobile md:h1"
-                                style="
-                                    display: block;
-                                    text-align: left;
-                                "
-                            >
-                                {"Meet the team"}
-                            </span>
-                        </div>
-                        {/* Right Column */}
-                        <div class="flex flex-col items-start w-full md:w-[600px]">
-                            {/* Team Introduction */}
-                            <span
-                                class="mono"
-                                style="
-                                    display: block;
-                                    text-align: left;
-                                "
-                            >
-                                {"Secure EC team"}
-                            </span>
-                            <span
-                                class="p1_mobile md:p1"
-                                style="
-                                    display: block;
-                                    text-align: left;
-                                "
-                            >
-                                {"Developing and managing secure EC internals"}
-                            </span>
-                        </div>
+        <PageLayout>
+            <div
+                class="background_primary px-2 md:px-[120px] py-4 md:py-[120px]"
+                style="position: relative;"
+            >
+                {}
+                <div class="block md:hidden mb-4">
+                    <a href="javascript:history.back()" class="block m-0 p-0">
+                        <ThemedIcon
+                            name="backbutton"
+                            alt="Back"
+                            style="margin: 0; padding: 0; display: block;"
+                        />
+                    </a>
+                </div>
+                <div class="hidden md:block" style="position: absolute; left: 0; top: 0;">
+                    <a href="javascript:history.back()" class="block m-0 p-0">
+                        <ThemedIcon
+                            name="backbutton"
+                            alt="Back"
+                            style="margin: 0; padding: 0; display: block;"
+                        />
+                    </a>
+                </div>
+                <div class="flex flex-col md:flex-row gap-[80px] items-start">
+                    {} <div class="flex flex-col items-start w-full md:w-[700px]">
+                        <span class="h1_mobile md:h1 block text-left">{"Meet the team"}</span>
+                    </div> {}
+                    <div class="flex flex-col items-start w-full md:w-[600px]">
+                        {} <span class="mono block text-left">{"Secure EC team"}</span>
+                        <span class="p1_mobile md:p1 block text-left">
+                            {"Developing and managing secure EC internals"}
+                        </span>
                     </div>
                 </div>
-                <TeamGrid members=team />
-                <Footer />
             </div>
-        </ErrorBoundary>
+            <TeamGrid members=team />
+        </PageLayout>
     }
 }

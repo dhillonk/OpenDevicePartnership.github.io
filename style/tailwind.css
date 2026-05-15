@@ -20,6 +20,29 @@
 }
 
 @layer utilities {
+  /*
+   * Typography & surface utility classes.
+   *
+   * Naming convention
+   *   .hN          - desktop / large-screen size of heading level N
+   *   .hN_mobile   - small-screen size of the same heading; the call site
+   *                  pairs them as `class="h2_mobile md:h2"` so the mobile
+   *                  variant is the default and the desktop variant kicks
+   *                  in at the `md` (>= 768 px) breakpoint.
+   *   .pN          - paragraph / body sizes (.p is the base, .p1 / .p2
+   *                  are larger emphasised body sizes, .p_mono is the
+   *                  display monospaced lockup, .mono is the small caps
+   *                  monospaced label).
+   *   .link*       - underlined inline links.
+   *   .background_*- surface tokens (primary/secondary/tertiary/quaternary).
+   *
+   * Known issues to address in a follow-up (visual changes required):
+   *   - Several classes have no mobile twin (.p_mono, .mono, .link_large,
+   *     .icon, .odp-btn-text, .odp-header-btn-text).
+   */
+
+  /* Surfaces ---------------------------------------------------------- */
+
   .header_background {
     @apply bg-[#FFFFFF] dark:bg-[#171717];
   }
@@ -43,7 +66,10 @@
   .background_announcement {
     @apply bg-[#FEEED6] dark:bg-[#FEEED6];
   }
-  
+
+  /* Headings ---------------------------------------------------------- */
+
+  /* Display headline used as the page-level h1 on desktop. */
   .h1 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -55,6 +81,7 @@
     margin-bottom: 12px;
   }
 
+  /* Mobile twin of .h1 (60 < 100, OK). */
   .h1_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -66,6 +93,7 @@
     margin-bottom: 12px;
   }
 
+  /* Section heading. */
   .h2 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -77,17 +105,19 @@
     margin-bottom: 12px;
   }
   
+  /* Mobile twin of .h2 (28 < 30, OK). */
   .h2_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 50px;
+    font-size: 28px;
     font-style: normal;
     font-weight: 500;
-    line-height: 110%; /* 66px */
+    line-height: 110%;
     letter-spacing: -1.2px;
     margin-bottom: 12px;
   }
 
+  /* Sub-section heading (e.g. card titles). */
   .h3 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -99,17 +129,21 @@
     margin-bottom: 12px;
   }
 
+  /* Mobile twin of .h3 (20 < 25, OK). */
   .h3_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 600;
-    line-height: 120%; /* 42px */
+    line-height: 120%;
     letter-spacing: -0.7px;
     margin-bottom: 12px;
   }
 
+  /* Body / paragraph text. ----------------------------------------- */
+
+  /* Default body text. */
   .p {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -119,15 +153,17 @@
     line-height: 130%; /* 26px */
   }
 
+  /* Mobile twin of .p (16 < 20, OK). */
   .p_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 10px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 110%; /* 26px */
+    line-height: 130%;
   }
 
+  /* Lead / intro paragraph. */
   .p1 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -139,17 +175,19 @@
     margin-bottom: 12px;
   }
 
+  /* Mobile twin of .p1 (22 < 30, OK). */
   .p1_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 30px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 500;
-    line-height: 130%; /* 49px */
+    line-height: 130%;
     letter-spacing: -0.7px;
     margin-bottom: 12px;
   }
 
+  /* Secondary paragraph (smaller than .p1, used for descriptive copy). */
   .p2 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -161,6 +199,7 @@
     margin-bottom: 12px;
   }
 
+  /* Mobile twin of .p2 (18 < 25, OK). */
   .p2_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -172,6 +211,7 @@
     margin-bottom: 12px;
   }
 
+  /* Display monospaced lockup; no mobile twin defined. */
   .p_mono {
     @apply text-black dark:text-white;
     font-family: "Geist Mono", monospace;
@@ -183,6 +223,7 @@
     text-transform: uppercase;
   }
 
+  /* Small uppercase monospace label (WHAT / WHY / WHO). No mobile twin. */
   .mono {
     @apply text-black dark:text-white;
     font-family: "Geist Mono", monospace;
@@ -195,6 +236,9 @@
     margin-bottom: 12px;
   }
 
+  /* Inline links. -------------------------------------------------- */
+
+  /* Underlined link, default desktop size. */
   .link {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -211,6 +255,8 @@
     text-underline-position: from-font;
   }
 
+  /* Mobile twin of .link (20 < 25, OK). Also used as a fallback for the
+   * undefined .link_large_mobile in src/components/documentation_training.rs. */
   .link_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -227,6 +273,8 @@
     text-underline-position: from-font;
   }
 
+  /* Larger underlined link (used in the Documentation list). No mobile
+   * twin; pages pair it with .link_mobile on small screens. */
   .link_large {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -242,6 +290,9 @@
     text-underline-position: from-font;
   }
 
+  /* Misc lockups & buttons. ---------------------------------------- */
+
+  /* Square icon container (150x150). Same size on every breakpoint. */
   .icon {
     display: flex;
     width: 150px;

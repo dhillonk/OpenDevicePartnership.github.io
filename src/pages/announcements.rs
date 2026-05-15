@@ -9,19 +9,35 @@ fn patina_press_release() -> impl IntoView {
     view! {
         <div>
             <p class="mb-4">
-                <strong>"October 7, 2025 – Redmond, WA"</strong> " – The " <strong>"Open Device Partnership (ODP)"</strong> " is announcing " <strong>"Patina"</strong>", a new open-source firmware project is public, and details will be shared at the upcoming "
-                <a href="https://uefi.org/events/uefi-2025-developers-conference-and-plugfest" class="underline hover:text-blue-600 transition-colors duration-150">
+                <strong>"October 7, 2025 – Redmond, WA"</strong>
+                " – The "
+                <strong>"Open Device Partnership (ODP)"</strong>
+                " is announcing "
+                <strong>"Patina"</strong>
+                ", a new open-source firmware project is public, and details will be shared at the upcoming "
+                <a
+                    href="https://uefi.org/events/uefi-2025-developers-conference-and-plugfest"
+                    class="underline hover:text-blue-600 transition-colors duration-150"
+                >
                     "UEFI 2025 Developer Conference & Plugfest"
                 </a>
                 ", October 7–10 in Sunnyvale, California. Patina is a Rust-based, UEFI-compatible firmware designed for memory safety and to address long standing challenges in the PC firmware ecosystem. It reimagines system firmware development to meet the evolving needs of modern hardware, software development lifecycles, supply chains, and industry collaboration. Patina joins a growing portfolio of ODP projects aimed at building a secure, modern foundation for device enablement. To learn more about Patina, please visit the project page and documentation here: "
-                <a href="https://opendevicepartnership.github.io/patina" class="underline hover:text-blue-600 transition-colors duration-150">
+                <a
+                    href="https://opendevicepartnership.github.io/patina"
+                    class="underline hover:text-blue-600 transition-colors duration-150"
+                >
                     "Patina Documentation"
                 </a>
                 "."
             </p>
 
             <p class="mb-4">
-                "ODP is an industry-wide, open-source initiative focused on advancing " <strong>"security, fundamentals, and standardization"</strong> " in device software. The partnership's work addresses long-standing challenges in firmware and system design by leveraging " <strong>"memory-safe programming languages like Rust"</strong> " and " <strong>"hardware-rooted security features"</strong> " and doing so based on standards that will work across a partner's entire device product line. This approach reduces exposure to common vulnerabilities while providing manufacturers with a sustainable, consistent foundation that lowers engineering costs across product lines."
+                "ODP is an industry-wide, open-source initiative focused on advancing "
+                <strong>"security, fundamentals, and standardization"</strong>
+                " in device software. The partnership's work addresses long-standing challenges in firmware and system design by leveraging "
+                <strong>"memory-safe programming languages like Rust"</strong> " and "
+                <strong>"hardware-rooted security features"</strong>
+                " and doing so based on standards that will work across a partner's entire device product line. This approach reduces exposure to common vulnerabilities while providing manufacturers with a sustainable, consistent foundation that lowers engineering costs across product lines."
             </p>
 
             <p class="mb-4">
@@ -29,13 +45,16 @@ fn patina_press_release() -> impl IntoView {
             </p>
             <ul class="list-disc pl-12 mb-4">
                 <li class="mb-2">
-                    <strong>"Secure EC firmware"</strong>", providing a modern, security-focused embedded controller implementation designed to eliminate classes of bugs prevalent in legacy EC codebases."
+                    <strong>"Secure EC firmware"</strong>
+                    ", providing a modern, security-focused embedded controller implementation designed to eliminate classes of bugs prevalent in legacy EC codebases."
                 </li>
                 <li class="mb-2">
-                    <strong>"Unified OS-EC service interface"</strong>", ensuring that operating systems can interact with embedded controllers in a consistent, well-defined way across devices."
+                    <strong>"Unified OS-EC service interface"</strong>
+                    ", ensuring that operating systems can interact with embedded controllers in a consistent, well-defined way across devices."
                 </li>
                 <li class="mb-2">
-                    <strong>"MPTF"</strong>", extending recent advancements in the Windows power-thermal framework to meet partner needs."
+                    <strong>"MPTF"</strong>
+                    ", extending recent advancements in the Windows power-thermal framework to meet partner needs."
                 </li>
             </ul>
             <p class="mb-4">
@@ -52,7 +71,10 @@ fn patina_press_release() -> impl IntoView {
 
             <p class="mb-4">
                 "👉 Learn more and get involved at "
-                <a href="https://opendevicepartnership.org/" class="underline hover:text-blue-600 transition-colors duration-150">
+                <a
+                    href="https://opendevicepartnership.org/"
+                    class="underline hover:text-blue-600 transition-colors duration-150"
+                >
                     "opendevicepartnership.org"
                 </a>"."
             </p>
@@ -103,46 +125,58 @@ pub fn AnnouncementsPage() -> impl IntoView {
     view! {
         <div class="flex flex-col w-full min-h-screen background_quaternary">
             <Header background_class="background_quaternary" />
-            <div class="h2_mobile md:h1 px-4 md:px-10 pt-4 md:pt-20 pb-4 md:pb-20">Announcements</div>
+            <div class="h2_mobile md:h1 px-4 md:px-10 pt-4 md:pt-20 pb-4 md:pb-20">
+                Announcements
+            </div>
             <div class="flex flex-col lg:flex-row w-full flex-1 relative">
                 <div class="w-full lg:w-[450px] xl:w-[500px] min-h-[200px] lg:min-h-[600px] xl:min-h-[700px] overflow-y-auto background_tertiary z-10 p-2 md:p-4 lg:p-6 mb-4 lg:mb-0">
                     <ul class="space-y-2 md:space-y-4">
-                        {announcements.iter().enumerate().map(|(i, (link, _, slug))| {
-                            let navigate = navigate.clone();
-                            let slug = *slug;
-                            view! {
-                                <li>
-                                    <button
-                                        class="link_mobile md:link w-full text-left p-2 md:p-3"
-                                        on:click=move |_| {
-                                            set_selected.set(i);
-                                            navigate(&format!("/announcements?id={}", slug), Default::default());
-                                        }
-                                    >
-                                        {*link}
-                                    </button>
-                                </li>
-                            }
-                        }).collect::<Vec<_>>()}
+                        {announcements
+                            .iter()
+                            .enumerate()
+                            .map(|(i, (link, _, slug))| {
+                                let navigate = navigate.clone();
+                                let slug = *slug;
+                                view! {
+                                    <li>
+                                        <button
+                                            class="link_mobile md:link w-full text-left p-2 md:p-3"
+                                            on:click=move |_| {
+                                                set_selected.set(i);
+                                                navigate(
+                                                    &format!("/announcements?id={}", slug),
+                                                    Default::default(),
+                                                );
+                                            }
+                                        >
+                                            {*link}
+                                        </button>
+                                    </li>
+                                }
+                            })
+                            .collect::<Vec<_>>()}
                     </ul>
                 </div>
                 <div class="flex-1 min-h-[400px] lg:min-h-[600px] xl:min-h-[700px] background_primary rounded-tl-[20px] md:rounded-tl-[30px] lg:rounded-tl-[50px] -ml-0 lg:-ml-16 z-20 overflow-y-auto p-4 md:p-6 lg:p-10">
                     {move || {
-                        let (title, content): (String, AnyView) = if let Some((_, title, slug)) = announcements.get(selected.get()) {
+                        let (title, content): (String, AnyView) = if let Some((_, title, slug)) = announcements
+                            .get(selected.get())
+                        {
                             let content = match *slug {
                                 "welcome-patina-announcement" => patina_press_release().into_any(),
                                 _ => view! { <p>"Content not found"</p> }.into_any(),
                             };
                             (title.to_string(), content)
                         } else {
-                            ("No announcement selected".to_string(), view! { <p>{""}</p> }.into_any())
+                            (
+                                "No announcement selected".to_string(),
+                                view! { <p>{""}</p> }.into_any(),
+                            )
                         };
                         view! {
                             <div class="p_mobile md:p">
                                 <div class="h2_mobile md:h2 pb-4 md:pb-6">{title}</div>
-                                <div class="p2_mobile md:p2">
-                                    {content}
-                                </div>
+                                <div class="p2_mobile md:p2">{content}</div>
                             </div>
                         }
                     }}

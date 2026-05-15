@@ -1,6 +1,5 @@
-use crate::components::documentation_training::{DocLink, DocumentationTraining};
-use crate::components::footer::Footer;
-use crate::components::header::Header;
+use crate::components::documentation_training::DocumentationTraining;
+use crate::components::page_layout::PageLayout;
 use crate::components::project_introduction::ProjectIntroduction;
 use crate::components::repo_view::RepositoryGraph;
 
@@ -9,34 +8,6 @@ use leptos::prelude::*;
 /// Default Home Page
 #[component]
 pub fn WindowsEcServices() -> impl IntoView {
-    let links = vec![
-        DocLink {
-            href: "https://opendevicepartnership.github.io/documentation/guide/why/why.html",
-            title: "Why ODP?",
-            external: true,
-        },
-        DocLink {
-            href: "https://opendevicepartnership.github.io/documentation/guide/intro/getting_started.html",
-            title: "Getting Started with ODP",
-            external: true,
-        },
-        DocLink {
-            href: "https://opendevicepartnership.github.io/documentation/guide/intro/welcome.html",
-            title: "Tutorials",
-            external: true,
-        },
-        DocLink {
-            href: "https://opendevicepartnership.github.io/documentation/guide/specs/specifications.html",
-            title: "Specifications",
-            external: true,
-        },
-        DocLink {
-            href: "/community",
-            title: "Contributing to ODP",
-            external: false,
-        },
-    ];
-
     let project_title = "Unified Embedded Controller Interface";
     let project_summary = "";
     let project_what = r#"The Unified Windows EC Service interface defines runtime coordination between firmware components using async message-passing. 
@@ -52,35 +23,18 @@ pub fn WindowsEcServices() -> impl IntoView {
     let links_data = r#"[{"source": 0, "target": 1}, {"source": 1, "target": 2}]"#;
 
     view! {
-        <ErrorBoundary fallback=|errors| {
-            view! {
-                <h1>"Uh oh! Something went wrong!"</h1>
-
-                <p>"Errors: "</p>
-                // Render a list of errors as strings - good for development purposes
-                <ul>
-                    {move || {
-                        errors
-                            .get()
-                            .into_iter()
-                            .map(|(_, e)| view! { <li>{e.to_string()}</li> })
-                            .collect_view()
-                    }}
-
-                </ul>
-            }
-        }>
-
-            <div class="w-full min-h-screen" style="overflow-x: auto;">
-                <Header />
-                <ProjectIntroduction project_title=project_title project_summary=project_summary project_what=project_what project_why=project_why
-                    project_who="/team-ec-services"
-                    big_image_url="/images/ECServicesBackground.png"
-                    small_image_url="/images/dark/ProjectIcon_ES_Patina_DarkMode.svg" />
-                <RepositoryGraph nodes=nodes_data links=links_data/>
-                <DocumentationTraining links=links />
-                <Footer />
-            </div>
-        </ErrorBoundary>
+        <PageLayout scrollable_x=true>
+            <ProjectIntroduction
+                project_title=project_title
+                project_summary=project_summary
+                project_what=project_what
+                project_why=project_why
+                project_who="/team-ec-services"
+                big_image_url="/images/ECServicesBackground.png"
+                small_image_url="/images/dark/ProjectIcon_ES_Patina_DarkMode.svg"
+            />
+            <RepositoryGraph nodes=nodes_data links=links_data />
+            <DocumentationTraining />
+        </PageLayout>
     }
 }

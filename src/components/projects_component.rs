@@ -4,71 +4,20 @@ use leptos::prelude::*;
 #[component]
 pub fn ProjectsComponent() -> impl IntoView {
     view! {
-        <section
-            class="background_primary px-6 py-8 md:px-[120px] md:py-[120px]"
-        >
+        <section class="background_primary px-6 py-8 md:px-[120px] md:py-[120px]">
             <div class="flex flex-col md:flex-row gap-[40px] md:gap-[80px]">
-                {/* Left Column */}
-                <div class="flex flex-col items-start w-full md:w-[700px]">
-                    <span
-                        class="h1_mobile md:h1"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
-                        {"System Firmware Domains"}
-                    </span>
-                    <span
-                        class="h2_mobile md:h2"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
+                {} <div class="flex flex-col items-start w-full md:w-[700px]">
+                    <span class="h1_mobile md:h1 block text-left">{"System Firmware Domains"}</span>
+                    <span class="h2_mobile md:h2 block text-left">
                         {"Reusable foundations for secure, high-quality device platforms"}
                     </span>
-                </div>
-                {/* Right Column */}
+                </div> {}
                 <div class="flex flex-col items-start w-full md:w-[600px] mt-8 md:mt-0">
-                    {/* WHAT label */}
-                    <span
-                        class="mono"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
-                        {"WHAT"}
-                    </span>
-                    {/* WHAT description */}
-                    <span
-                        class="p1_mobile md:p1"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
+                    {} <span class="mono block text-left">{"WHAT"}</span> {}
+                    <span class="p1_mobile md:p1 block text-left">
                         {"ODP supports development across three core areas of system firmware. Each domain is designed for modularity, security, and long-term reuse across hardware platforms."}
-                    </span>
-                    {/* WHY label */}
-                    <span
-                        class="mono"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
-                        {"WHY"}
-                    </span>
-                    {/* WHY description */}
-                    <span
-                        class="p1_mobile md:p1"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
+                    </span> {} <span class="mono block text-left">{"WHY"}</span> {}
+                    <span class="p1_mobile md:p1 block text-left">
                         {"Modern computing devices need modern solutions that prioritize memory safety and security from the language on up."}
                     </span>
                 </div>
@@ -76,43 +25,32 @@ pub fn ProjectsComponent() -> impl IntoView {
         </section>
 
         // Projects Details Section
-        <section
-            class="background_primary px-6 py-8 md:px-[120px] md:py-[120px]"
-        >
+        <section class="background_primary px-6 py-8 md:px-[120px] md:py-[120px]">
             <div class="flex flex-col gap-[60px]">
-                {/* Row 1 */}
+                {}
                 <div class="flex flex-col md:flex-row gap-[32px] md:gap-[60px] items-center">
-                    {/* Image Button */}
-                    <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton href="/boot-firmware" img_src="/images/patina.png" alt="Boot Firmware" width=600 height=518 mobile_width=Some(320) mobile_height=Some(250) />
-                    </div>
-                    {/* Text Content */}
-                    <div class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0" style="flex: 1;">
-                        <span
-                            class="h2_mobile md:h2"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                    {} <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
+                        <ImageButton
+                            href="/boot-firmware"
+                            img_src="/images/patina.png"
+                            alt="Boot Firmware"
+                            width=600
+                            height=518
+                            mobile_width=Some(320)
+                            mobile_height=Some(250)
+                        />
+                    </div> {}
+                    <div
+                        class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
+                        style="flex: 1;"
+                    >
+                        <span class="h2_mobile md:h2 block text-left">
                             {"Patina (Boot Firmware)"}
                         </span>
-                        <span
-                            class="p1_mobile md:p1"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                        <span class="p1_mobile md:p1 block text-left">
                             {"Rethink your boot firmware"}
                         </span>
-                        <span
-                            class="p2_mobile md:p2"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                        <span class="p2_mobile md:p2 block text-left">
                             {"Patina provides a UEFI compatible firmware interface written in the Rust language with a focus on memory safety and composition.  Compatible with current UEFI device drivers and loaders but with a focus on the future."}
                         </span>
                         <div class="flex flex-col gap-[8px]">
@@ -122,7 +60,9 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 style="text-decoration: none;"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">{"Read the Patina Documentation"}</span>
+                                <span style="text-decoration: underline;">
+                                    {"Read the Patina Documentation"}
+                                </span>
                             </a>
                             <a
                                 href="https://github.com/opendevicepartnership/patina"
@@ -130,42 +70,36 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 style="text-decoration: none;"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">{"View Patina Source Code on GitHub"}</span>
+                                <span style="text-decoration: underline;">
+                                    {"View Patina Source Code on GitHub"}
+                                </span>
                             </a>
                         </div>
                     </div>
-                </div>
-                {/* Row 2 */}
+                </div> {}
                 <div class="flex flex-col md:flex-row gap-[32px] md:gap-[60px] items-center">
                     <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton href="/embedded-controller" img_src="/images/ec.png" alt="Embedded Controller" width=600 height=518 mobile_width=Some(320) mobile_height=Some(250) />
+                        <ImageButton
+                            href="/embedded-controller"
+                            img_src="/images/ec.png"
+                            alt="Embedded Controller"
+                            width=600
+                            height=518
+                            mobile_width=Some(320)
+                            mobile_height=Some(250)
+                        />
                     </div>
-                    <div class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0" style="flex: 1;">
-                        <span
-                            class="h2_mobile md:h2"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                    <div
+                        class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
+                        style="flex: 1;"
+                    >
+                        <span class="h2_mobile md:h2 block text-left">
                             {"Secure Embedded Controller"}
                         </span>
-                        <span
-                            class="p1_mobile md:p1"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                        <span class="p1_mobile md:p1 block text-left">
                             {"A Secure end-to-end Rust-based EC implementation"}
                         </span>
-                        <span
-                            class="p2_mobile md:p2"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                        <span class="p2_mobile md:p2 block text-left">
                             {"ODP EC provides a modern embedded controller firmware written in Rust. Designed for safety and composability, it serves as a foundational layer for secure device management."}
                         </span>
                         <div class="flex flex-col gap-[8px]">
@@ -175,7 +109,9 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 style="text-decoration: none;"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">{"Read the Secure EC Documentation"}</span>
+                                <span style="text-decoration: underline;">
+                                    {"Read the Secure EC Documentation"}
+                                </span>
                             </a>
                             <a
                                 href="https://github.com/OpenDevicePartnership/embedded-services"
@@ -183,42 +119,36 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 style="text-decoration: none;"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">{"View Secure EC Source Code on GitHub"}</span>
+                                <span style="text-decoration: underline;">
+                                    {"View Secure EC Source Code on GitHub"}
+                                </span>
                             </a>
                         </div>
                     </div>
-                </div>
-                {/* Row 3 */}
+                </div> {}
                 <div class="flex flex-col md:flex-row gap-[32px] md:gap-[60px] items-center">
                     <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton href="/windows-ec-services" img_src="/images/ec_services.png" alt="EC Services" width=600 height=518 mobile_width=Some(320) mobile_height=Some(250) />
+                        <ImageButton
+                            href="/windows-ec-services"
+                            img_src="/images/ec_services.png"
+                            alt="EC Services"
+                            width=600
+                            height=518
+                            mobile_width=Some(320)
+                            mobile_height=Some(250)
+                        />
                     </div>
-                    <div class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0" style="flex: 1;">
-                        <span
-                            class="h2_mobile md:h2"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                    <div
+                        class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
+                        style="flex: 1;"
+                    >
+                        <span class="h2_mobile md:h2 block text-left">
                             {"Unified Embedded Controller Services"}
                         </span>
-                        <span
-                            class="p1_mobile md:p1"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                        <span class="p1_mobile md:p1 block text-left">
                             {"A standard and secure cross-architecture EC services implementation"}
                         </span>
-                        <span
-                            class="p2_mobile md:p2"
-                            style="
-                                display: block;
-                                text-align: left;
-                            "
-                        >
+                        <span class="p2_mobile md:p2 block text-left">
                             {"ODP EC Services provides a modern EC services firmware written in Rust. Designed for safety and composability, it serves as a foundational layer for secure EC services on Windows platforms."}
                         </span>
                         <div class="flex flex-col gap-[8px]">
@@ -228,7 +158,9 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 style="text-decoration: none;"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">{"Read the EC Services Documentation"}</span>
+                                <span style="text-decoration: underline;">
+                                    {"Read the EC Services Documentation"}
+                                </span>
                             </a>
                             <a
                                 href="https://github.com/OpenDevicePartnership/haf-ec-service"
@@ -236,7 +168,9 @@ pub fn ProjectsComponent() -> impl IntoView {
                                 style="text-decoration: none;"
                             >
                                 <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">{"View EC Services Source Code on GitHub"}</span>
+                                <span style="text-decoration: underline;">
+                                    {"View EC Services Source Code on GitHub"}
+                                </span>
                             </a>
                         </div>
                     </div>
