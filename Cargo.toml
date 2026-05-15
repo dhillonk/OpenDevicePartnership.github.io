@@ -19,3 +19,6 @@ wasm-bindgen-test = "0.3"
 
 [package.metadata.leptos]
 assets-dir="public"
+
+[profile.release]
+strip = true

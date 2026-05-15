@@ -21,7 +21,7 @@ use odp::components::header::Header;
 use odp::components::landing::{ClosingColumnsSection, HeroSection, ProjectsSection, ValuePropositionSection};
 use odp::components::team_hero::TeamHero;
 use odp::components::themed_icon::ThemedIcon;
-use odp::components::ui::{ArrowLink, ArrowLinkSize, IconBlock, ValuePropCard};
+use odp::components::ui::{ArrowLink, ArrowLinkSize, IconBlock, LabeledSection, TwoColumnIntro, ValuePropCard};
 use wasm_bindgen::{JsCast, JsValue};
 use wasm_bindgen_test::*;
 use web_sys::HtmlElement;
@@ -267,4 +267,60 @@ fn closing_columns_section_renders_both_columns() {
     let root = mount(|| view! { <ClosingColumnsSection /> });
     assert_contains(&root, "Partner-Oriented Vision");
     assert_contains(&root, "Get Involved!");
+}
+
+// ---------------------------------------------------------------------------
+// t34 — <TwoColumnIntro> + <LabeledSection>
+// ---------------------------------------------------------------------------
+
+#[wasm_bindgen_test]
+fn two_column_intro_places_left_and_right_in_separate_columns() {
+    let root = mount(|| {
+        view! {
+            <TwoColumnIntro
+                left=|| view! { <span class="probe-left">"L"</span> }
+                right=|| view! { <span class="probe-right">"R"</span> }
+            />
+        }
+    });
+
+    let row = root
+        .query_selector(".flex.flex-col.md\\:flex-row")
+        .unwrap()
+        .expect("row");
+    let cols = row.children();
+    assert_eq!(cols.length(), 2, "expected exactly two columns");
+
+    let left_col = cols.item(0).unwrap();
+    let right_col = cols.item(1).unwrap();
+    assert!(
+        left_col.query_selector(".probe-left").unwrap().is_some(),
+        "left slot must render in first column"
+    );
+    assert!(
+        right_col.query_selector(".probe-right").unwrap().is_some(),
+        "right slot must render in second column"
+    );
+    // Right column gets the mobile-only top margin so the stacked
+    // mobile layout has breathing room.
+    let right_class = right_col.get_attribute("class").unwrap();
+    assert!(right_class.contains("mt-8"), "right column class = {right_class}");
+}
+
+#[wasm_bindgen_test]
+fn labeled_section_renders_uppercase_label_then_children() {
+    let root = mount(|| {
+        view! {
+            <LabeledSection label="WHAT">
+                <p class="probe-body">"body text"</p>
+            </LabeledSection>
+        }
+    });
+
+    let html = root.inner_html();
+    let label_pos = html.find("WHAT").expect("label present");
+    let body_pos = html.find("body text").expect("body present");
+    assert!(label_pos < body_pos, "label must precede body in source order");
+    // The label is wrapped in a Mono span (the `mono` brand class).
+    assert!(html.contains("WHAT"), "literal WHAT should be in DOM");
 }

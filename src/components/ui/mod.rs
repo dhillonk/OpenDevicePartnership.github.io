@@ -28,10 +28,12 @@ mod container;
 mod grid;
 mod heading;
 mod icon_block;
+mod labeled_section;
 mod link;
 mod mono;
 mod stack;
 mod text;
+mod two_column_intro;
 mod value_prop_card;
 
 pub use arrow_link::{ArrowLink, ArrowLinkSize};
@@ -40,10 +42,12 @@ pub use container::Container;
 pub use grid::Grid;
 pub use heading::{Heading, HeadingLevel};
 pub use icon_block::{IconBlock, IconBlockSize};
+pub use labeled_section::LabeledSection;
 pub use link::{Link, LinkSize};
 pub use mono::{Mono, MonoSize};
 pub use stack::{Stack, StackDirection};
 pub use text::{Text, TextSize};
+pub use two_column_intro::TwoColumnIntro;
 pub use value_prop_card::ValuePropCard;
 
 // Re-exports so callers can pull every primitive from a single path.
