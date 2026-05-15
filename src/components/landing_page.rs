@@ -1,78 +1,82 @@
 use crate::components::image_button::ImageButton;
+use crate::components::section::{Section, Surface};
 use crate::components::themed_icon::ThemedIcon;
+use crate::components::ui::{Heading, HeadingLevel, Text, TextSize};
 use leptos::prelude::*;
 
 #[component]
 pub fn LandingPage() -> impl IntoView {
     view! {
-        <div
-            class="background_primary px-4 sm:px-8 md:px-16 lg:px-32"
-            style="width: auto; height: auto;"
-        >
+        <Section>
             <div class="flex flex-col md:flex-row gap-20 items-start">
                 <div class="flex flex-col items-start min-w-0 w-full md:flex-1">
-                    <span class="h1 break-words w-full block text-left">
+                    <Heading level=HeadingLevel::H1 class="break-words w-full text-left">
                         {"An Open Collaboration for Secure, Modern Devices"}
-                    </span>
+                    </Heading>
                 </div>
                 <div class="flex flex-col items-start min-w-0 w-full md:flex-1">
-                    <span class="p1 break-words w-full block text-left">
+                    <Text size=TextSize::Lead class="break-words w-full text-left">
                         {"The Open Device Partnership (ODP) is a global initiative to make it easier for developers and device makers to build secure, efficient, and reliable client devices for cross-platform needs and certified environments."}
-                        <br /><br />
+                        <br />
+                        <br />
                         {"By combining open standards with collaborative development practices, ODP reduces complexity, improves security, and accelerates innovation across diverse silicon and hardware platforms."}
-                    </span>
+                    </Text>
                 </div>
             </div>
-        </div>
-        <section class="background_secondary px-4 sm:px-8 md:px-16 lg:px-32 py-20">
+        </Section>
+        <Section surface=Surface::Secondary class="py-20">
             <div>
-                <h2 class="h2 text-left">{"Value Proposition"}</h2>
+                <Heading level=HeadingLevel::H2 class="text-left">
+                    {"Value Proposition"}
+                </Heading>
                 <div class="flex flex-col md:flex-row gap-16">
                     <div class="flex flex-col items-start w-full md:flex-1">
                         <ThemedIcon name="lock" alt="Security Icon" class="icon" />
-                        <span class="h3 break-words w-full block text-left">
+                        <Heading level=HeadingLevel::H3 class="break-words w-full text-left">
                             {"Enhanced Security"}
-                        </span>
-                        <span class="p2 break-words w-full block text-left">
+                        </Heading>
+                        <Text size=TextSize::Large class="break-words w-full text-left">
                             {"Security threats continue to evolve. ODP takes a proactive approach: reducing attack surfaces, using secure hardware features, leveraging the memory-safe Rust language, and designing every component with security-first principles."}
-                        </span>
+                        </Text>
                     </div>
                     <div class="flex flex-col items-start w-full md:flex-1">
                         <ThemedIcon name="checkcircle" alt="Interoperability Icon" class="icon" />
-                        <span class="h3 break-words w-full block text-left">
+                        <Heading level=HeadingLevel::H3 class="break-words w-full text-left">
                             {"Standardization"}
-                        </span>
-                        <span class="p2 break-words w-full block text-left">
+                        </Heading>
+                        <Text size=TextSize::Large class="break-words w-full text-left">
                             {"Many device firmware components are 'invisible plumbing' - necessary but costly to build and maintain. ODP's standards-based approach simplifies this infrastructure, maximizing reuse across devices, architectures (x86 and ARM), and generations."}
-                        </span>
+                        </Text>
                     </div>
                     <div class="flex flex-col items-start w-full md:flex-1">
                         <ThemedIcon name="fastforward" alt="Innovation Icon" class="icon" />
-                        <span class="h3 break-words w-full block text-left">
+                        <Heading level=HeadingLevel::H3 class="break-words w-full text-left">
                             {"Accelerated Development"}
-                        </span>
-                        <span class="p2 break-words w-full block text-left">
+                        </Heading>
+                        <Text size=TextSize::Large class="break-words w-full text-left">
                             {"Open collaboration means sharing solutions, reducing duplicated work, and speeding up the development of high-quality products."}
-                        </span>
+                        </Text>
                     </div>
                 </div>
             </div>
-        </section>
+        </Section>
 
         // ODP Projects Section
-        <section class="background_primary px-4 sm:px-8 md:px-16 lg:px-32 py-32">
+        <Section class="py-32">
             <div style="max-width: 960px;">
-                <h2 class="h2 text-left">{"ODP Projects"}</h2>
-                <p class="p2" style="text-align: left; max-width: 100%;">
+                <Heading level=HeadingLevel::H2 class="text-left">
+                    {"ODP Projects"}
+                </Heading>
+                <Text size=TextSize::Large class="text-left max-w-full">
                     {"While ODP's first projects focus on boot firmware and embedded controller software, the partnership welcomes new ideas aligned with our core goals: security, efficiency, and broad reusability."}
                     <br />
                     <br />
-                </p>
+                </Text>
             </div>
-        </section>
+        </Section>
 
         // Boot Firmware Buttons Section
-        <section class="background_primary px-4 sm:px-8 md:px-16 lg:px-32 pb-32">
+        <Section class="pb-32">
             <div class="flex flex-col md:flex-row gap-16 justify-start">
                 <ImageButton
                     href="/boot-firmware"
@@ -90,24 +94,28 @@ pub fn LandingPage() -> impl IntoView {
                     alt="EC Services"
                 />
             </div>
-        </section>
+        </Section>
 
         // Two Columns Section
-        <section class="background_primary px-4 sm:px-8 md:px-16 lg:px-32 py-20">
+        <Section class="py-20">
             <div class="flex flex-col md:flex-row gap-16">
-                <div class="flex flex-col items-start" style="flex: 1;">
-                    <span class="h3 block text-left">{"Partner-Oriented Vision"}</span>
-                    <span class="p2 block text-left">
+                <div class="flex flex-col items-start flex-1">
+                    <Heading level=HeadingLevel::H3 class="text-left">
+                        {"Partner-Oriented Vision"}
+                    </Heading>
+                    <Text size=TextSize::Large class="text-left">
                         {"ODP is an inclusive partnership open to OEMs, ODMs, silicon vendors, hardware developers, security researchers, and anyone committed to improving device software foundations."}
-                    </span>
+                    </Text>
                 </div>
-                <div class="flex flex-col items-start" style="flex: 1;">
-                    <span class="h3 block text-left">{"Get Involved!"}</span>
-                    <span class="p2 block text-left">
+                <div class="flex flex-col items-start flex-1">
+                    <Heading level=HeadingLevel::H3 class="text-left">
+                        {"Get Involved!"}
+                    </Heading>
+                    <Text size=TextSize::Large class="text-left">
                         {"Explore our documentation, clone our public repositories, and contribute your expertise. Together, we can raise the standard for trusted devices."}
-                    </span>
+                    </Text>
                 </div>
             </div>
-        </section>
+        </Section>
     }
 }

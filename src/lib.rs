@@ -1,9 +1,11 @@
+use crate::components::site_shell::{SiteShell, SiteShellScrollable};
 use leptos::prelude::*;
 use leptos_meta::*;
 use leptos_router::{components::*, path};
 
 // Modules
 mod components;
+mod data;
 mod pages;
 
 // Top-Level pages
@@ -38,17 +40,31 @@ pub fn App() -> impl IntoView {
         <div class="min-h-screen w-full">
             <Router base="/">
                 <Routes fallback=|| view! { NotFound }>
-                    <Route path=path!("/home") view=Home />
-                    <Route path=path!("/getting-started") view=GettingStarted />
-                    <Route path=path!("/boot-firmware") view=BootFirmware />
-                    <Route path=path!("/community") view=Community />
-                    <Route path=path!("/team-ec") view=TeamEC />
-                    <Route path=path!("/team-patina") view=TeamPatina />
-                    <Route path=path!("/embedded-controller") view=EmbeddedController />
-                    <Route path=path!("/windows-ec-services") view=WindowsEcServices />
-                    <Route path=path!("/projects") view=Projects />
-                    <Route path=path!("/") view=Home />
-                    <Route path=path!("/team-ec-services") view=TeamECServices />
+                    // Pages whose content always fits the viewport horizontally
+                    // share the standard chrome with `overflow-x: hidden`.
+                    <ParentRoute path=path!("") view=SiteShell>
+                        <Route path=path!("/") view=Home />
+                        <Route path=path!("/community") view=Community />
+                        <Route path=path!("/team-ec") view=TeamEC />
+                        <Route path=path!("/team-ec-services") view=TeamECServices />
+                        <Route path=path!("/team-patina") view=TeamPatina />
+                    </ParentRoute>
+
+                    // Pages that may overflow horizontally (the project pages
+                    // embed the wide repository graph SVG, the projects index
+                    // and the getting-started page have wide hero images) use
+                    // a chrome variant with `overflow-x: auto`.
+                    <ParentRoute path=path!("") view=SiteShellScrollable>
+                        <Route path=path!("/getting-started") view=GettingStarted />
+                        <Route path=path!("/boot-firmware") view=BootFirmware />
+                        <Route path=path!("/embedded-controller") view=EmbeddedController />
+                        <Route path=path!("/windows-ec-services") view=WindowsEcServices />
+                        <Route path=path!("/projects") view=Projects />
+                    </ParentRoute>
+
+                    // Announcements brings its own chrome (different
+                    // background colour and a custom Header variant) so it
+                    // stays a top-level route.
                     <Route path=path!("/announcements") view=AnnouncementsPage />
                 </Routes>
             </Router>
