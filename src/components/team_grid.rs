@@ -15,7 +15,7 @@ pub struct TeamMember {
 pub fn TeamGrid(#[prop(into)] members: Vec<TeamMember>) -> impl IntoView {
     view! {
         <div class="background_primary">
-            <div class="grid-container px-2 md:px-30 pb-30">
+            <div class="grid-container px-2 md:px-32 pb-32">
                 {members
                     .into_iter()
                     .map(|member| {

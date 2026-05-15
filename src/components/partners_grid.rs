@@ -34,13 +34,13 @@ const PARTNERS: &[PartnerInfo] = &[
 #[component]
 pub fn PartnersGrid() -> impl IntoView {
     view! {
-        <section class="background_primary px-4 md:px-30 py-20">
-            <div class="mb-15">
+        <section class="background_primary px-4 md:px-32 py-20">
+            <div class="mb-16">
                 <span class="h1_mobile md:h1 break-words w-full block text-left">
                     {"Our Partners"}
                 </span>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-15 items-center justify-items-center">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 items-center justify-items-center">
                 <For
                     each=|| PARTNERS.iter()
                     key=|partner| partner.name

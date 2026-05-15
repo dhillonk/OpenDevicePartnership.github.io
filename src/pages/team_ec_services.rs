@@ -31,8 +31,8 @@ pub fn TeamECServices() -> impl IntoView {
 
     view! {
         <PageLayout>
-            <div class="background_primary px-2 md:px-30 py-4 md:py-30" style="position: relative;">
-                {}
+            <div class="background_primary px-2 md:px-32 py-4 md:py-32" style="position: relative;">
+
                 <div class="block md:hidden mb-4">
                     <a href="javascript:history.back()" class="block m-0 p-0">
                         <ThemedIcon
@@ -52,9 +52,10 @@ pub fn TeamECServices() -> impl IntoView {
                     </a>
                 </div>
                 <div class="flex flex-col md:flex-row gap-20 items-start">
-                    {} <div class="flex flex-col items-start w-full md:w-[700px]">
+                    <div class="flex flex-col items-start w-full md:w-[700px]">
                         <span class="h1_mobile md:h1 block text-left">{"Meet the team"}</span>
-                    </div> {} <div class="flex flex-col items-start w-full md:w-[600px]">
+                    </div>
+                    <div class="flex flex-col items-start w-full md:w-[600px]">
                         <span class="mono block text-left">{"Unified EC services team"}</span>
                         <span class="p1_mobile md:p1 block text-left">
                             {"Designing and managing implementation of a unified EC Services interface"}

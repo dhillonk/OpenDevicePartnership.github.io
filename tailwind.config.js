@@ -18,18 +18,6 @@ module.exports = {
       // pairs in style/tailwind.css would force every future palette tweak
       // to chase nine hex codes through CSS; centralizing here makes the
       // palette one edit and exposes the tokens to devtools.
-      // Page-rhythm spacing tokens. Tailwind's default scale already covers the
-      // 8px-multiple values we use most (8 = 32px, 10 = 40px, 20 = 80px), but
-      // the 60px and 120px steps that appear repeatedly in section padding,
-      // row gaps, and column gaps fall outside the default scale and were
-      // previously expressed as one-off `[60px]` / `[120px]` arbitrary values.
-      // Naming them `15` and `30` keeps the conventional "1 unit = 4px" reading
-      // (15 * 4 = 60, 30 * 4 = 120) so call sites stay readable as plain
-      // Tailwind utilities (`md:px-30`, `gap-15`) instead of bracket escapes.
-      spacing: {
-        '15': '60px',
-        '30': '120px',
-      },
       colors: {
         surface: {
           primary: '#FFFFFF',

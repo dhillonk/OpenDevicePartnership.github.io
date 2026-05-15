@@ -8,7 +8,7 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
     let menu_open = RwSignal::new(false);
     view! {
         <header class=format!(
-            "w-full h-[80px] md:h-[160px] px-2 md:px-30 {} flex items-center justify-between z-50 m-0 p-0 relative",
+            "w-full h-[80px] md:h-[160px] px-2 md:px-32 {} flex items-center justify-between z-50 m-0 p-0 relative",
             background_class,
         )>
             <div class="flex items-center space-x-6">
@@ -19,7 +19,6 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
                 />
             </div>
 
-            {}
             <button
                 class="md:hidden flex flex-col justify-center items-center w-10 h-10 p-2 focus:outline-none"
                 aria-label="Open menu"
@@ -30,7 +29,6 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
                 <span class="block w-6 h-0.5 bg-black dark:bg-white"></span>
             </button>
 
-            {}
             <nav class="hidden md:flex [column-gap:25px]">
                 <NavButton href="/getting-started" label="Getting Started" />
                 <NavButton href="/projects" label="Projects" />
@@ -42,7 +40,6 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
                 <NavButton href="/home" label="Home" />
             </nav>
 
-            {}
             <nav
                 class="absolute right-0 top-full w-[80vw] max-w-xs background_primary flex-col items-end px-4 py-4 space-y-2 shadow-lg md:hidden transition-all duration-200"
                 style=move || if menu_open.get() { "display: flex;" } else { "display: none;" }
