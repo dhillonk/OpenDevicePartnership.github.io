@@ -12,7 +12,7 @@ pub fn Partner(name: &'static str, url: &'static str, logo: &'static str) -> imp
                 <img
                     src=logo
                     alt=name
-                    class="max-w-[180px] max-h-[70px] md:max-w-[200px] md:max-h-[80px] object-contain"
+                    class="w-full h-full max-w-[180px] max-h-[70px] md:max-w-[200px] md:max-h-[80px] object-contain"
                 />
             </a>
         </div>
