@@ -108,10 +108,10 @@ pub fn TeamPatina() -> impl IntoView {
                     </a>
                 </div>
                 <div class="flex flex-col md:flex-row gap-20 items-start">
-                    <div class="flex flex-col items-start w-full md:w-[700px]">
+                    <div class="flex flex-col items-start w-full md:flex-1">
                         <span class="h1 block text-left">{"Meet the team"}</span>
                     </div>
-                    <div class="flex flex-col items-start w-full md:w-[600px]">
+                    <div class="flex flex-col items-start w-full md:flex-1">
                         <span class="mono block text-left">{"Patina team"}</span>
                         <span class="p1 block text-left">
                             {"Developing and managing development of a new modern UEFI"}

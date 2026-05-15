@@ -6,13 +6,13 @@ pub fn ProjectsComponent() -> impl IntoView {
     view! {
         <section class="background_primary px-6 py-8 md:px-32 md:py-32">
             <div class="flex flex-col md:flex-row gap-10 md:gap-20">
-                <div class="flex flex-col items-start w-full md:w-[700px]">
+                <div class="flex flex-col items-start w-full md:flex-1">
                     <span class="h1 block text-left">{"System Firmware Domains"}</span>
                     <span class="h2 block text-left">
                         {"Reusable foundations for secure, high-quality device platforms"}
                     </span>
                 </div>
-                <div class="flex flex-col items-start w-full md:w-[600px] mt-8 md:mt-0">
+                <div class="flex flex-col items-start w-full md:flex-1 mt-8 md:mt-0">
                     <span class="mono block text-left">{"WHAT"}</span>
                     <span class="p1 block text-left">
                         {"ODP supports development across three core areas of system firmware. Each domain is designed for modularity, security, and long-term reuse across hardware platforms."}

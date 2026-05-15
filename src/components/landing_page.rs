@@ -7,12 +7,12 @@ pub fn LandingPage() -> impl IntoView {
     view! {
         <div class="background_primary px-2 md:px-32" style="width: auto; height: auto;">
             <div class="flex flex-col md:flex-row gap-20 items-start">
-                <div class="flex flex-col items-start flex-shrink-0 w-full md:w-[800px]">
+                <div class="flex flex-col items-start min-w-0 w-full md:flex-1">
                     <span class="h1 break-words w-full block text-left">
                         {"An Open Collaboration for Secure, Modern Devices"}
                     </span>
                 </div>
-                <div class="flex flex-col items-start flex-shrink min-w-0 w-full md:w-[650px]">
+                <div class="flex flex-col items-start min-w-0 w-full md:flex-1">
                     <span class="p1 break-words w-full block text-left">
                         {"The Open Device Partnership (ODP) is a global initiative to make it easier for developers and device makers to build secure, efficient, and reliable client devices for cross-platform needs and certified environments."}
                         <br /><br />
@@ -25,7 +25,7 @@ pub fn LandingPage() -> impl IntoView {
             <div>
                 <h2 class="h2 text-left">{"Value Proposition"}</h2>
                 <div class="flex flex-col md:flex-row gap-16">
-                    <div class="flex flex-col items-start w-full md:w-[400px]">
+                    <div class="flex flex-col items-start w-full md:flex-1">
                         <ThemedIcon name="lock" alt="Security Icon" class="icon" />
                         <span class="h3 break-words w-full block text-left">
                             {"Enhanced Security"}
@@ -34,7 +34,7 @@ pub fn LandingPage() -> impl IntoView {
                             {"Security threats continue to evolve. ODP takes a proactive approach: reducing attack surfaces, using secure hardware features, leveraging the memory-safe Rust language, and designing every component with security-first principles."}
                         </span>
                     </div>
-                    <div class="flex flex-col items-start w-full md:w-[400px]">
+                    <div class="flex flex-col items-start w-full md:flex-1">
                         <ThemedIcon name="checkcircle" alt="Interoperability Icon" class="icon" />
                         <span class="h3 break-words w-full block text-left">
                             {"Standardization"}
@@ -43,7 +43,7 @@ pub fn LandingPage() -> impl IntoView {
                             {"Many device firmware components are 'invisible plumbing' - necessary but costly to build and maintain. ODP's standards-based approach simplifies this infrastructure, maximizing reuse across devices, architectures (x86 and ARM), and generations."}
                         </span>
                     </div>
-                    <div class="flex flex-col items-start w-full md:w-[400px]">
+                    <div class="flex flex-col items-start w-full md:flex-1">
                         <ThemedIcon name="fastforward" alt="Innovation Icon" class="icon" />
                         <span class="h3 break-words w-full block text-left">
                             {"Accelerated Development"}

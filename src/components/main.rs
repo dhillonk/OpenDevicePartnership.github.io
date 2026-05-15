@@ -45,7 +45,7 @@ pub fn Main() -> impl IntoView {
 
             <div class="flex flex-col pt-10 px-2 sm:px-4 md:pl-[117px] w-full">
                 <div class="flex flex-col lg:flex-row items-start w-full gap-4">
-                    <div class="flex flex-col items-start w-full lg:w-[423px] mr-0 lg:mr-16 mb-6 lg:mb-0">
+                    <div class="flex flex-col items-start w-full lg:flex-1 mr-0 lg:mr-16 mb-6 lg:mb-0">
                         <ThemedIcon
                             name="video"
                             alt="Video Icon"
@@ -67,7 +67,7 @@ pub fn Main() -> impl IntoView {
                         </span>
                     </div>
                     <div
-                        class="w-full lg:w-[1200px] aspect-video rounded-lg overflow-hidden"
+                        class="w-full lg:flex-[2] aspect-video rounded-lg overflow-hidden"
                         style="max-width:100vw;"
                     >
                         <iframe
