@@ -1,4 +1,5 @@
 use crate::components::image_button::ImageButton;
+use crate::components::themed_icon::ThemedIcon;
 use leptos::prelude::*;
 
 #[component]
@@ -45,14 +46,7 @@ pub fn LandingPage() -> impl IntoView {
                 <div class="flex flex-col md:flex-row gap-[60px]">
                     {/* Column 1 */}
                     <div class="flex flex-col items-start w-full md:w-[400px]">
-                        <picture>
-                            <source srcset="/images/dark/lock.svg" media="(prefers-color-scheme: dark)" />
-                            <img
-                                src="/images/light/lock.svg"
-                                alt="Security Icon"
-                                class="icon"
-                            />
-                        </picture>
+                        <ThemedIcon name="lock" alt="Security Icon" class="icon" />
                         <span
                             class="h3_mobile md:h3 break-words w-full"
                             style="display: block; text-align: left;"
@@ -68,14 +62,7 @@ pub fn LandingPage() -> impl IntoView {
                     </div>
                     {/* Column 2 */}
                     <div class="flex flex-col items-start w-full md:w-[400px]">
-                        <picture>
-                            <source srcset="/images/dark/checkcircle.svg" media="(prefers-color-scheme: dark)" />
-                            <img
-                                src="/images/light/checkcircle.svg"
-                                alt="Interoperability Icon"
-                                class="icon"
-                            />
-                        </picture>
+                        <ThemedIcon name="checkcircle" alt="Interoperability Icon" class="icon" />
                         <span
                             class="h3_mobile md:h3 break-words w-full"
                             style="display: block; text-align: left;"
@@ -91,14 +78,7 @@ pub fn LandingPage() -> impl IntoView {
                     </div>
                     {/* Column 3 */}
                     <div class="flex flex-col items-start w-full md:w-[400px]">
-                        <picture>
-                            <source srcset="/images/dark/fastforward.svg" media="(prefers-color-scheme: dark)" />
-                            <img
-                                src="/images/light/fastforward.svg"
-                                alt="Innovation Icon"
-                                class="icon"
-                            />
-                        </picture>
+                        <ThemedIcon name="fastforward" alt="Innovation Icon" class="icon" />
                         <span
                             class="h3_mobile md:h3 break-words w-full"
                             style="display: block; text-align: left;"

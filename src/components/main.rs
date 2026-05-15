@@ -1,3 +1,4 @@
+use crate::components::themed_icon::ThemedIcon;
 use leptos::prelude::*;
 use leptos_router::components::A;
 
@@ -53,21 +54,18 @@ pub fn Main() -> impl IntoView {
                 {/* Top row: icon/text + main iframe */}
                 <div class="flex flex-col lg:flex-row items-start w-full gap-4">
                     <div class="flex flex-col items-start w-full lg:w-[423px] mr-0 lg:mr-[60px] mb-6 lg:mb-0">
-                        <picture>
-                            <source srcset="/images/dark/video.svg" media="(prefers-color-scheme: dark)" />
-                            <img
-                                src="/images/light/video.svg"
-                                alt="Video Icon"
-                                style="
-                                    width: 150px;
-                                    height: 150px;
-                                    padding: 0;
-                                    object-fit: contain;
-                                    display: block;
-                                    margin-bottom: 16px;
-                                "
-                            />
-                        </picture>
+                        <ThemedIcon
+                            name="video"
+                            alt="Video Icon"
+                            style="
+                                width: 150px;
+                                height: 150px;
+                                padding: 0;
+                                object-fit: contain;
+                                display: block;
+                                margin-bottom: 16px;
+                            "
+                        />
                         <span class="h2_mobile md:h2 block w-full max-w-full text-left break-words" style="word-break:break-word;">
                             "Welcome"
                         </span>

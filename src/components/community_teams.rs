@@ -1,4 +1,5 @@
 use crate::components::team_grid::{TeamGrid, TeamMember};
+use crate::components::themed_icon::ThemedIcon;
 use leptos::prelude::*;
 
 fn create_steering_committee() -> Vec<TeamMember> {
@@ -77,14 +78,7 @@ pub fn CommunityTeams() -> impl IntoView {
 
             {/* Row 3: Teams Image */}
             <div class="flex flex-col items-left" style="margin-bottom: 80px;">
-                <picture>
-                    <source srcset="/images/dark/teams.svg" media="(prefers-color-scheme: dark)" />
-                    <img
-                        src="/images/light/teams.svg"
-                        alt="Teams"
-                        class="icon"
-                    />
-                </picture>
+                <ThemedIcon name="teams" alt="Teams" class="icon" />
                 <span
                     class="h2_mobile md:h2 break-words w-full"
                     style="display: flex; justify-content: left; align-items: left;"

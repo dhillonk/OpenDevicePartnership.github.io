@@ -1,3 +1,4 @@
+use crate::components::themed_icon::ThemedIcon;
 use leptos::prelude::RwSignal;
 use leptos::prelude::*;
 use leptos_router::components::A;
@@ -8,14 +9,11 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
     view! {
         <header class={format!("w-full h-[80px] md:h-[160px] px-2 md:px-[120px] {} flex items-center justify-between z-50 m-0 p-0 relative", background_class)}>
             <div class="flex items-center space-x-6">
-                <picture>
-                    <source srcset="/images/dark/odplogo.svg" media="(prefers-color-scheme: dark)" />
-                    <img
-                        src="/images/light/odplogo.svg"
-                        alt="ODP Logo"
-                        class="w-[100px] h-[34.5px] md:w-[149px] md:h-[51.43px] object-contain"
-                    />
-                </picture>
+                <ThemedIcon
+                    name="odplogo"
+                    alt="ODP Logo"
+                    class="w-[100px] h-[34.5px] md:w-[149px] md:h-[51.43px] object-contain"
+                />
             </div>
 
             {/* Hamburger icon for mobile */}

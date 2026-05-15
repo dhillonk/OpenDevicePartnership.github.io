@@ -1,6 +1,7 @@
 use crate::components::footer::Footer;
 use crate::components::header::Header;
 use crate::components::team_grid::{TeamGrid, TeamMember};
+use crate::components::themed_icon::ThemedIcon;
 
 use leptos::prelude::*;
 
@@ -108,14 +109,11 @@ pub fn TeamEC() -> impl IntoView {
                             class="block"
                             style="margin: 0; padding: 0;"
                         >
-                            <picture>
-                                <source srcset="/images/dark/backbutton.svg" media="(prefers-color-scheme: dark)" />
-                                <img
-                                    src="/images/light/backbutton.svg"
-                                    alt="Back"
-                                    style="margin: 0; padding: 0; display: block;"
-                                />
-                            </picture>
+                            <ThemedIcon
+                                name="backbutton"
+                                alt="Back"
+                                style="margin: 0; padding: 0; display: block;"
+                            />
                         </a>
                     </div>
                     <div class="hidden md:block" style="position: absolute; left: 0; top: 0;">
@@ -124,14 +122,11 @@ pub fn TeamEC() -> impl IntoView {
                             class="block"
                             style="margin: 0; padding: 0;"
                         >
-                            <picture>
-                                <source srcset="/images/dark/backbutton.svg" media="(prefers-color-scheme: dark)" />
-                                <img
-                                    src="/images/light/backbutton.svg"
-                                    alt="Back"
-                                    style="margin: 0; padding: 0; display: block;"
-                                />
-                            </picture>
+                            <ThemedIcon
+                                name="backbutton"
+                                alt="Back"
+                                style="margin: 0; padding: 0; display: block;"
+                            />
                         </a>
                     </div>
                     <div class="flex flex-col md:flex-row gap-[80px] items-start">

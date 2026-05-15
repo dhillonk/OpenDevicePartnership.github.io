@@ -1,3 +1,4 @@
+use crate::components::themed_icon::ThemedIcon;
 use leptos::prelude::*;
 use leptos_router::components::A;
 
@@ -48,15 +49,12 @@ pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links
         >
             {/* Left: Image and text box */}
             <div class="flex flex-col items-start w-full" style="align-items: flex-start;">
-                <picture>
-                    <source srcset="/images/dark/documentation.svg" media="(prefers-color-scheme: dark)" />
-                    <img
-                        src="/images/light/documentation.svg"
-                        alt="Documentation Icon"
-                        class="w-[80px] h-[80px] md:w-[150px] md:h-[150px] object-contain mb-4"
-                        style="display: block; margin-bottom: 16px;"
-                    />
-                </picture>
+                <ThemedIcon
+                    name="documentation"
+                    alt="Documentation Icon"
+                    class="w-[80px] h-[80px] md:w-[150px] md:h-[150px] object-contain mb-4"
+                    style="display: block; margin-bottom: 16px;"
+                />
                 <span
                     class="h2_mobile md:h2 text-left break-words"
                     style="word-break:break-word; display: block; text-align: left;"
