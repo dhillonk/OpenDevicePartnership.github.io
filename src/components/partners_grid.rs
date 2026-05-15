@@ -2,6 +2,7 @@ use leptos::prelude::*;
 
 use crate::components::partner::Partner;
 use crate::components::section::Section;
+use crate::components::ui::{Heading, HeadingLevel};
 use crate::data::partners::PARTNERS;
 
 #[component]
@@ -9,7 +10,9 @@ pub fn PartnersGrid() -> impl IntoView {
     view! {
         <Section class="py-20">
             <div class="mb-16">
-                <span class="h1 break-words w-full block text-left">{"Our Partners"}</span>
+                <Heading level=HeadingLevel::H1 class="break-words w-full text-left">
+                    {"Our Partners"}
+                </Heading>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 items-center justify-items-center">
                 <For

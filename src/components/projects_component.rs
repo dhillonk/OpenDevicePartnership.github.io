@@ -1,5 +1,6 @@
 use crate::components::image_button::ImageButton;
 use crate::components::section::Section;
+use crate::components::ui::{Heading, HeadingLevel, Mono, Text, TextSize};
 use leptos::prelude::*;
 
 #[component]
@@ -8,20 +9,22 @@ pub fn ProjectsComponent() -> impl IntoView {
         <Section class="py-8 md:py-20 lg:py-32">
             <div class="flex flex-col md:flex-row gap-10 md:gap-20">
                 <div class="flex flex-col items-start w-full md:flex-1">
-                    <span class="h1 block text-left">{"System Firmware Domains"}</span>
-                    <span class="h2 block text-left">
+                    <Heading level=HeadingLevel::H1 class="text-left">
+                        {"System Firmware Domains"}
+                    </Heading>
+                    <Heading level=HeadingLevel::H2 class="text-left">
                         {"Reusable foundations for secure, high-quality device platforms"}
-                    </span>
+                    </Heading>
                 </div>
                 <div class="flex flex-col items-start w-full md:flex-1 mt-8 md:mt-0">
-                    <span class="mono block text-left">{"WHAT"}</span>
-                    <span class="p1 block text-left">
+                    <Mono class="text-left">{"WHAT"}</Mono>
+                    <Text size=TextSize::Lead class="text-left">
                         {"ODP supports development across three core areas of system firmware. Each domain is designed for modularity, security, and long-term reuse across hardware platforms."}
-                    </span>
-                    <span class="mono block text-left">{"WHY"}</span>
-                    <span class="p1 block text-left">
+                    </Text>
+                    <Mono class="text-left">{"WHY"}</Mono>
+                    <Text size=TextSize::Lead class="text-left">
                         {"Modern computing devices need modern solutions that prioritize memory safety and security from the language on up."}
-                    </span>
+                    </Text>
                 </div>
             </div>
         </Section>
@@ -30,133 +33,91 @@ pub fn ProjectsComponent() -> impl IntoView {
         <Section class="py-8 md:py-20 lg:py-32">
             <div class="flex flex-col gap-16">
 
-                <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <ImageButton
-                        href="/boot-firmware"
-                        img_src="/images/patina.png"
-                        alt="Boot Firmware"
-                        class="aspect-square max-w-[600px]"
-                    />
-                    <div
-                        class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
-                        style="flex: 1;"
-                    >
-                        <span class="h2 block text-left">{"Patina (Boot Firmware)"}</span>
-                        <span class="p1 block text-left">{"Rethink your boot firmware"}</span>
-                        <span class="p2 block text-left">
-                            {"Patina provides a UEFI compatible firmware interface written in the Rust language with a focus on memory safety and composition.  Compatible with current UEFI device drivers and loaders but with a focus on the future."}
-                        </span>
-                        <div class="flex flex-col gap-[8px]">
-                            <a
-                                href="https://opendevicepartnership.github.io/patina"
-                                class="link"
-                                style="text-decoration: none;"
-                            >
-                                <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">
-                                    {"Read the Patina Documentation"}
-                                </span>
-                            </a>
-                            <a
-                                href="https://github.com/opendevicepartnership/patina"
-                                class="link"
-                                style="text-decoration: none;"
-                            >
-                                <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">
-                                    {"View Patina Source Code on GitHub"}
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <ImageButton
-                        href="/embedded-controller"
-                        img_src="/images/ec.png"
-                        alt="Embedded Controller"
-                        class="aspect-square max-w-[600px]"
-                    />
-                    <div
-                        class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
-                        style="flex: 1;"
-                    >
-                        <span class="h2 block text-left">{"Secure Embedded Controller"}</span>
-                        <span class="p1 block text-left">
-                            {"A Secure end-to-end Rust-based EC implementation"}
-                        </span>
-                        <span class="p2 block text-left">
-                            {"ODP EC provides a modern embedded controller firmware written in Rust. Designed for safety and composability, it serves as a foundational layer for secure device management."}
-                        </span>
-                        <div class="flex flex-col gap-[8px]">
-                            <a
-                                href="https://opendevicepartnership.github.io/documentation/tracks/embedded_controller/track_overview.html"
-                                class="link"
-                                style="text-decoration: none;"
-                            >
-                                <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">
-                                    {"Read the Secure EC Documentation"}
-                                </span>
-                            </a>
-                            <a
-                                href="https://github.com/OpenDevicePartnership/embedded-services"
-                                class="link"
-                                style="text-decoration: none;"
-                            >
-                                <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">
-                                    {"View Secure EC Source Code on GitHub"}
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <ImageButton
-                        href="/windows-ec-services"
-                        img_src="/images/ec_services.png"
-                        alt="EC Services"
-                        class="aspect-square max-w-[600px]"
-                    />
-                    <div
-                        class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
-                        style="flex: 1;"
-                    >
-                        <span class="h2 block text-left">
-                            {"Unified Embedded Controller Services"}
-                        </span>
-                        <span class="p1 block text-left">
-                            {"A standard and secure cross-architecture EC services implementation"}
-                        </span>
-                        <span class="p2 block text-left">
-                            {"ODP EC Services provides a modern EC services firmware written in Rust. Designed for safety and composability, it serves as a foundational layer for secure EC services on Windows platforms."}
-                        </span>
-                        <div class="flex flex-col gap-[8px]">
-                            <a
-                                href="https://opendevicepartnership.github.io/documentation/guide/intro/concepts/EC_Services.html"
-                                class="link"
-                                style="text-decoration: none;"
-                            >
-                                <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">
-                                    {"Read the EC Services Documentation"}
-                                </span>
-                            </a>
-                            <a
-                                href="https://github.com/OpenDevicePartnership/haf-ec-service"
-                                class="link"
-                                style="text-decoration: none;"
-                            >
-                                <span style="text-decoration: none;">{"→ "}</span>
-                                <span style="text-decoration: underline;">
-                                    {"View EC Services Source Code on GitHub"}
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <ProjectRow
+                    href="/boot-firmware"
+                    img_src="/images/patina.png"
+                    alt="Boot Firmware"
+                    title="Patina (Boot Firmware)"
+                    tagline="Rethink your boot firmware"
+                    description="Patina provides a UEFI compatible firmware interface written in the Rust language with a focus on memory safety and composition.  Compatible with current UEFI device drivers and loaders but with a focus on the future."
+                    docs_href="https://opendevicepartnership.github.io/patina"
+                    docs_title="Read the Patina Documentation"
+                    source_href="https://github.com/opendevicepartnership/patina"
+                    source_title="View Patina Source Code on GitHub"
+                />
+                <ProjectRow
+                    href="/embedded-controller"
+                    img_src="/images/ec.png"
+                    alt="Embedded Controller"
+                    title="Secure Embedded Controller"
+                    tagline="A Secure end-to-end Rust-based EC implementation"
+                    description="ODP EC provides a modern embedded controller firmware written in Rust. Designed for safety and composability, it serves as a foundational layer for secure device management."
+                    docs_href="https://opendevicepartnership.github.io/documentation/tracks/embedded_controller/track_overview.html"
+                    docs_title="Read the Secure EC Documentation"
+                    source_href="https://github.com/OpenDevicePartnership/embedded-services"
+                    source_title="View Secure EC Source Code on GitHub"
+                />
+                <ProjectRow
+                    href="/windows-ec-services"
+                    img_src="/images/ec_services.png"
+                    alt="EC Services"
+                    title="Unified Embedded Controller Services"
+                    tagline="A standard and secure cross-architecture EC services implementation"
+                    description="ODP EC Services provides a modern EC services firmware written in Rust. Designed for safety and composability, it serves as a foundational layer for secure EC services on Windows platforms."
+                    docs_href="https://opendevicepartnership.github.io/documentation/guide/intro/concepts/EC_Services.html"
+                    docs_title="Read the EC Services Documentation"
+                    source_href="https://github.com/OpenDevicePartnership/haf-ec-service"
+                    source_title="View EC Services Source Code on GitHub"
+                />
             </div>
         </Section>
+    }
+}
+
+/// One "image | title + tagline + description + two doc links" row
+/// from the projects page. Three nearly-identical instances were
+/// inlined before this extraction.
+#[component]
+fn ProjectRow(
+    href: &'static str,
+    img_src: &'static str,
+    alt: &'static str,
+    title: &'static str,
+    tagline: &'static str,
+    description: &'static str,
+    docs_href: &'static str,
+    docs_title: &'static str,
+    source_href: &'static str,
+    source_title: &'static str,
+) -> impl IntoView {
+    view! {
+        <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+            <ImageButton href=href img_src=img_src alt=alt class="aspect-square max-w-[600px]" />
+            <div class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0 flex-1">
+                <Heading level=HeadingLevel::H2 class="text-left">
+                    {title}
+                </Heading>
+                <Text size=TextSize::Lead class="text-left">
+                    {tagline}
+                </Text>
+                <Text size=TextSize::Large class="text-left">
+                    {description}
+                </Text>
+                <div class="flex flex-col gap-2">
+                    <ProjectLink href=docs_href title=docs_title />
+                    <ProjectLink href=source_href title=source_title />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+#[component]
+fn ProjectLink(href: &'static str, title: &'static str) -> impl IntoView {
+    view! {
+        <a href=href class="link no-underline">
+            <span class="no-underline">{"→ "}</span>
+            <span class="underline">{title}</span>
+        </a>
     }
 }

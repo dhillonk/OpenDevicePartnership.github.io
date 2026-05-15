@@ -14,4 +14,6 @@ pub mod repo_view;
 pub mod section;
 pub mod site_shell;
 pub mod team_grid;
+pub mod team_hero;
 pub mod themed_icon;
+pub mod ui;

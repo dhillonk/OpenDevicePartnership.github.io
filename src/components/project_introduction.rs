@@ -1,4 +1,5 @@
 use crate::components::section::Section;
+use crate::components::ui::{Heading, HeadingLevel, Mono, Text, TextSize};
 use leptos::prelude::*;
 use leptos_router::components::A;
 
@@ -31,20 +32,25 @@ pub fn ProjectIntroduction(
                             alt="Project Logo"
                             class="w-[48px] h-[48px] md:w-[102px] md:h-[102px] mb-4 md:mb-16 ml-0 object-contain"
                         />
-                        <span class="h1 block !text-white mb-2.5 break-words text-left">
+                        <Heading
+                            level=HeadingLevel::H1
+                            class="!text-white mb-2.5 break-words text-left"
+                        >
                             {project_title}
-                        </span>
-                        <span class="p1 block !text-white break-words text-left">
+                        </Heading>
+                        <Text size=TextSize::Lead class="!text-white break-words text-left">
                             {project_summary}
-                        </span>
+                        </Text>
                     </div>
                 </div>
                 <div class="flex flex-col items-start px-2 md:px-0 w-full">
-                    <span class="mono block text-left">{"WHAT"}</span>
-                    <span class="p2 block text-left" inner_html=project_what></span>
-                    <span class="mono block text-left">{"WHY"}</span>
-                    <span class="p2 block text-left">{project_why}</span>
-                    <span class="mono block text-left">{"WHO"}</span>
+                    <Mono class="text-left">{"WHAT"}</Mono>
+                    <p class="p2 text-left" inner_html=project_what></p>
+                    <Mono class="text-left">{"WHY"}</Mono>
+                    <Text size=TextSize::Large class="text-left">
+                        {project_why}
+                    </Text>
+                    <Mono class="text-left">{"WHO"}</Mono>
                     <div class="link_mobile md:link block text-left">
                         <A href=project_who>{"Learn more about the team →"}</A>
                     </div>
@@ -52,18 +58,9 @@ pub fn ProjectIntroduction(
             </div>
         </Section>
         <div class="px-2 md:px-0">
-            <span
-                class="p1"
-                style="
-                display: block;
-                text-align: left;
-                padding-left: 20px;
-                padding-top: 100px;
-                padding-bottom: 20px;
-                "
-            >
-                Repository Diagram
-            </span>
+            <Text size=TextSize::Lead class="text-left pl-5 pt-[100px] pb-5">
+                "Repository Diagram"
+            </Text>
         </div>
     }
 }

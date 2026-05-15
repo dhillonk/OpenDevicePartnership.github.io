@@ -1,3 +1,4 @@
+use crate::components::ui::{Heading, HeadingLevel, Text, TextSize};
 use leptos::html::*;
 use leptos::prelude::*;
 
@@ -19,6 +20,7 @@ pub fn TeamGrid(#[prop(into)] members: Vec<TeamMember>) -> impl IntoView {
                 {members
                     .into_iter()
                     .map(|member| {
+                        let full_name = format!("{} {}", member.first_name, member.last_name);
                         view! {
                             <div>
                                 <img
@@ -26,16 +28,14 @@ pub fn TeamGrid(#[prop(into)] members: Vec<TeamMember>) -> impl IntoView {
                                     src=member.image_url
                                     alt="Profile Picture"
                                 />
-                                <div class="h3">
-                                    {format!("{} {}", member.first_name, member.last_name)}
-                                </div>
-                                <div class="p2">{member.role}</div>
-                                <div class="p2">
+                                <Heading level=HeadingLevel::H3>{full_name}</Heading>
+                                <Text size=TextSize::Large>{member.role}</Text>
+                                <Text size=TextSize::Large>
                                     {"GitHub: "}
                                     <a class="link" href=member.github_url target="_blank">
                                         {member.github_username}
                                     </a>
-                                </div>
+                                </Text>
                             </div>
                         }
                     })
