@@ -1,5 +1,7 @@
 use crate::components::footer::Footer;
 use crate::components::header::Header;
+use crate::components::ui::AnnouncementCard;
+use crate::data::announcements::{index_of, ANNOUNCEMENTS};
 use leptos::prelude::Effect;
 use leptos::prelude::*;
 use leptos_router::hooks::{use_location, use_navigate};
@@ -82,41 +84,40 @@ fn patina_press_release() -> impl IntoView {
     }
 }
 
+/// Map an announcement slug to its rendered detail content.
+fn render_content(slug: &str) -> AnyView {
+    match slug {
+        "welcome-patina-announcement" => patina_press_release().into_any(),
+        _ => view! { <p>"Content not found"</p> }.into_any(),
+    }
+}
+
+/// Parse the `id=` query parameter (without depending on a URL parser).
+/// Returns the slug substring up to the next `&`, if any.
+fn slug_from_query(search: &str) -> Option<&str> {
+    let id_start = search.find("id=")?;
+    let rest = &search[id_start + 3..];
+    Some(match rest.find('&') {
+        Some(end) => &rest[..end],
+        None => rest,
+    })
+}
+
 #[component]
 pub fn AnnouncementsPage() -> impl IntoView {
     let location = use_location();
     let navigate = use_navigate();
 
-    // List of announcement links and their content (display_text, title, slug)
-    let announcements = vec![(
-        "Oct-7-2025 Welcome Patina!",
-        "Patina Project to Launch at UEFI 2025 Developer Conference & Plugfest",
-        "welcome-patina-announcement",
-    )];
-
     let (selected, set_selected) = signal(0);
 
-    // Set selected from query param if present
+    // Sync the selected index from the `?id=slug` query param.
     {
         let location = location.clone();
-        let announcements_clone = announcements.clone();
         Effect::new(move |_| {
             let search = location.search.get();
-
-            // Check for new slug-based format: ?id=slug
-            if search.contains("id=") {
-                // Try to extract the id value more flexibly
-                if let Some(id_start) = search.find("id=") {
-                    let slug = &search[id_start + 3..];
-                    // Remove any trailing parameters
-                    let slug = if let Some(amp_pos) = slug.find('&') {
-                        &slug[..amp_pos]
-                    } else {
-                        slug
-                    };
-                    if let Some(idx) = announcements_clone.iter().position(|(_, _, s)| *s == slug) {
-                        set_selected.set(idx);
-                    }
+            if let Some(slug) = slug_from_query(&search) {
+                if let Some(idx) = index_of(slug) {
+                    set_selected.set(idx);
                 }
             }
         });
@@ -129,12 +130,12 @@ pub fn AnnouncementsPage() -> impl IntoView {
             <div class="flex flex-col lg:flex-row w-full flex-1 relative">
                 <div class="w-full lg:w-[450px] xl:w-[500px] min-h-[200px] lg:min-h-[600px] xl:min-h-[700px] overflow-y-auto background_tertiary z-10 p-2 md:p-4 lg:p-6 mb-4 lg:mb-0">
                     <ul class="space-y-2 md:space-y-4">
-                        {announcements
+                        {ANNOUNCEMENTS
                             .iter()
                             .enumerate()
-                            .map(|(i, (link, _, slug))| {
+                            .map(|(i, a)| {
                                 let navigate = navigate.clone();
-                                let slug = *slug;
+                                let slug = a.slug;
                                 view! {
                                     <li>
                                         <button
@@ -147,7 +148,7 @@ pub fn AnnouncementsPage() -> impl IntoView {
                                                 );
                                             }
                                         >
-                                            {*link}
+                                            {a.link_label}
                                         </button>
                                     </li>
                                 }
@@ -157,25 +158,21 @@ pub fn AnnouncementsPage() -> impl IntoView {
                 </div>
                 <div class="flex-1 min-h-[400px] lg:min-h-[600px] xl:min-h-[700px] background_primary rounded-tl-[20px] md:rounded-tl-[30px] lg:rounded-tl-[50px] -ml-0 lg:-ml-16 z-20 overflow-y-auto p-4 md:p-6 lg:p-10">
                     {move || {
-                        let (title, content): (String, AnyView) = if let Some((_, title, slug)) = announcements
-                            .get(selected.get())
-                        {
-                            let content = match *slug {
-                                "welcome-patina-announcement" => patina_press_release().into_any(),
-                                _ => view! { <p>"Content not found"</p> }.into_any(),
-                            };
-                            (title.to_string(), content)
+                        let idx = selected.get();
+                        if let Some(a) = ANNOUNCEMENTS.get(idx) {
+                            view! {
+                                <AnnouncementCard title=a
+                                    .title
+                                    .to_string()>{render_content(a.slug)}</AnnouncementCard>
+                            }
+                                .into_any()
                         } else {
-                            (
-                                "No announcement selected".to_string(),
-                                view! { <p>{""}</p> }.into_any(),
-                            )
-                        };
-                        view! {
-                            <div class="p_mobile md:p">
-                                <div class="h2 pb-4 md:pb-6">{title}</div>
-                                <div class="p2">{content}</div>
-                            </div>
+                            view! {
+                                <AnnouncementCard title="No announcement selected".to_string()>
+                                    <p>{""}</p>
+                                </AnnouncementCard>
+                            }
+                                .into_any()
                         }
                     }}
                 </div>

@@ -4,6 +4,7 @@ pub mod documentation_training;
 pub mod footer;
 pub mod header;
 pub mod image_button;
+pub mod landing;
 pub mod landing_page;
 pub mod main;
 pub mod partner;

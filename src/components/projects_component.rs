@@ -1,33 +1,39 @@
 use crate::components::image_button::ImageButton;
-use crate::components::section::Section;
-use crate::components::ui::{Heading, HeadingLevel, Mono, Text, TextSize};
+use crate::components::ui::{
+    ArrowLink, Heading, HeadingLevel, LabeledSection, Section, Text, TextSize, TwoColumnIntro,
+};
 use leptos::prelude::*;
 
 #[component]
 pub fn ProjectsComponent() -> impl IntoView {
     view! {
-        <Section class="py-8 md:py-20 lg:py-32">
-            <div class="flex flex-col md:flex-row gap-10 md:gap-20">
-                <div class="flex flex-col items-start w-full md:flex-1">
+        <TwoColumnIntro
+            section_class="py-8 md:py-20 lg:py-32"
+            left=|| {
+                view! {
                     <Heading level=HeadingLevel::H1 class="text-left">
                         {"System Firmware Domains"}
                     </Heading>
                     <Heading level=HeadingLevel::H2 class="text-left">
                         {"Reusable foundations for secure, high-quality device platforms"}
                     </Heading>
-                </div>
-                <div class="flex flex-col items-start w-full md:flex-1 mt-8 md:mt-0">
-                    <Mono class="text-left">{"WHAT"}</Mono>
-                    <Text size=TextSize::Lead class="text-left">
-                        {"ODP supports development across three core areas of system firmware. Each domain is designed for modularity, security, and long-term reuse across hardware platforms."}
-                    </Text>
-                    <Mono class="text-left">{"WHY"}</Mono>
-                    <Text size=TextSize::Lead class="text-left">
-                        {"Modern computing devices need modern solutions that prioritize memory safety and security from the language on up."}
-                    </Text>
-                </div>
-            </div>
-        </Section>
+                }
+            }
+            right=|| {
+                view! {
+                    <LabeledSection label="WHAT">
+                        <Text size=TextSize::Lead class="text-left">
+                            {"ODP supports development across three core areas of system firmware. Each domain is designed for modularity, security, and long-term reuse across hardware platforms."}
+                        </Text>
+                    </LabeledSection>
+                    <LabeledSection label="WHY">
+                        <Text size=TextSize::Lead class="text-left">
+                            {"Modern computing devices need modern solutions that prioritize memory safety and security from the language on up."}
+                        </Text>
+                    </LabeledSection>
+                }
+            }
+        />
 
         // Projects Details Section
         <Section class="py-8 md:py-20 lg:py-32">
@@ -114,10 +120,5 @@ fn ProjectRow(
 
 #[component]
 fn ProjectLink(href: &'static str, title: &'static str) -> impl IntoView {
-    view! {
-        <a href=href class="link no-underline">
-            <span class="no-underline">{"→ "}</span>
-            <span class="underline">{title}</span>
-        </a>
-    }
+    view! { <ArrowLink href=href title=title /> }
 }

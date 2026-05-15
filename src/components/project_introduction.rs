@@ -1,5 +1,5 @@
 use crate::components::section::Section;
-use crate::components::ui::{Heading, HeadingLevel, Mono, Text, TextSize};
+use crate::components::ui::{Heading, HeadingLevel, LabeledSection, Text, TextSize};
 use leptos::prelude::*;
 use leptos_router::components::A;
 
@@ -44,16 +44,19 @@ pub fn ProjectIntroduction(
                     </div>
                 </div>
                 <div class="flex flex-col items-start px-2 md:px-0 w-full">
-                    <Mono class="text-left">{"WHAT"}</Mono>
-                    <p class="p2 text-left" inner_html=project_what></p>
-                    <Mono class="text-left">{"WHY"}</Mono>
-                    <Text size=TextSize::Large class="text-left">
-                        {project_why}
-                    </Text>
-                    <Mono class="text-left">{"WHO"}</Mono>
-                    <div class="link_mobile md:link block text-left">
-                        <A href=project_who>{"Learn more about the team →"}</A>
-                    </div>
+                    <LabeledSection label="WHAT">
+                        <p class="p2 text-left" inner_html=project_what></p>
+                    </LabeledSection>
+                    <LabeledSection label="WHY">
+                        <Text size=TextSize::Large class="text-left">
+                            {project_why}
+                        </Text>
+                    </LabeledSection>
+                    <LabeledSection label="WHO">
+                        <div class="link_mobile md:link block text-left">
+                            <A href=project_who>{"Learn more about the team →"}</A>
+                        </div>
+                    </LabeledSection>
                 </div>
             </div>
         </Section>

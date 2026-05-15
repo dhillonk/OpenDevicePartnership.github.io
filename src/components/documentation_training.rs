@@ -1,7 +1,5 @@
-use crate::components::themed_icon::ThemedIcon;
-use crate::components::ui::{Heading, HeadingLevel, Text, TextSize};
+use crate::components::ui::{DocLinkItem, Heading, HeadingLevel, IconBlock, IconBlockSize, Text, TextSize};
 use leptos::prelude::*;
-use leptos_router::components::A;
 
 #[derive(Clone)]
 pub struct DocLink {
@@ -46,12 +44,7 @@ pub const DEFAULT_DOC_LINKS: &[DocLink] = &[
 pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links: Vec<DocLink>) -> impl IntoView {
     view! {
         <section class="flex flex-col md:flex-row items-start background_primary w-full overflow-x-hidden px-4 py-8 md:py-16 md:px-16 lg:px-32">
-            <div class="flex flex-col items-start w-full">
-                <ThemedIcon
-                    name="documentation"
-                    alt="Documentation Icon"
-                    class="w-[80px] h-[80px] md:w-[150px] md:h-[150px] object-contain mb-4 block"
-                />
+            <IconBlock name="documentation" alt="Documentation Icon" size=IconBlockSize::Hero>
                 <Heading level=HeadingLevel::H2 class="text-left break-words">
                     "Documentation"
                 </Heading>
@@ -59,35 +52,14 @@ pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links
                 <Text size=TextSize::Lead class="text-left break-words">
                     "Start developing with ODP"
                 </Text>
-            </div>
+            </IconBlock>
             <div class="hidden md:block w-[200px]"></div>
             <ul class="flex flex-col pt-4 w-full max-w-full break-words md:pt-4 md:w-[760px] md:max-w-[760px]">
                 {links
                     .into_iter()
                     .map(|link| {
                         view! {
-                            <li>
-                                <Show
-                                    when=move || link.external
-                                    fallback=move || {
-                                        view! {
-                                            <div class="link_mobile md:link_large internal-link no-underline">
-                                                <A href=link.href>
-                                                    <span class="no-underline">{"→ "}</span>
-                                                    <span class="underline">{link.title}</span>
-                                                </A>
-                                            </div>
-                                        }
-                                    }
-                                >
-                                    <div class="link_mobile md:link_large external-link no-underline">
-                                        <a href=link.href target="_blank" class="no-underline">
-                                            <span class="no-underline">{"→ "}</span>
-                                            <span class="underline">{link.title}</span>
-                                        </a>
-                                    </div>
-                                </Show>
-                            </li>
+                            <DocLinkItem href=link.href title=link.title external=link.external />
                         }
                     })
                     .collect_view()}

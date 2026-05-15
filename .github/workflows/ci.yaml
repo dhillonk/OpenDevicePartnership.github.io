@@ -114,6 +114,34 @@ jobs:
       - name: Run cargo test
         run: cargo test --all-targets --no-fail-fast
 
+  wasm-test:
+    name: wasm-pack test (headless Firefox)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install nightly Rust
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Cache cargo registry and target
+        uses: Swatinem/rust-cache@v2
+        with:
+          key: wasm-test
+
+      - name: Install wasm-pack
+        # wasm-pack ships pre-built binaries; the official installer is the
+        # fastest path on Linux runners (cargo install would compile from
+        # source for several minutes).
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      - name: Run browser tests
+        # ubuntu-latest already ships Firefox; geckodriver is auto-fetched
+        # by wasm-pack in a version that matches the installed browser.
+        run: wasm-pack test --headless --firefox --test wasm
+
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15

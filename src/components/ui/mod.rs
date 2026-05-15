@@ -22,23 +22,39 @@
 //! Remove it once every primitive is in active use.
 #![allow(dead_code, unused_imports)]
 
+mod announcement_card;
+mod arrow_link;
 mod button;
 mod container;
+mod doc_link_item;
 mod grid;
 mod heading;
+mod icon_block;
+mod labeled_section;
 mod link;
 mod mono;
+mod project_tabs;
 mod stack;
 mod text;
+mod two_column_intro;
+mod value_prop_card;
 
+pub use announcement_card::AnnouncementCard;
+pub use arrow_link::{ArrowLink, ArrowLinkSize};
 pub use button::{Button, ButtonVariant, IconButton};
 pub use container::Container;
+pub use doc_link_item::DocLinkItem;
 pub use grid::Grid;
 pub use heading::{Heading, HeadingLevel};
+pub use icon_block::{IconBlock, IconBlockSize};
+pub use labeled_section::LabeledSection;
 pub use link::{Link, LinkSize};
 pub use mono::{Mono, MonoSize};
+pub use project_tabs::{ProjectId, ProjectTabs};
 pub use stack::{Stack, StackDirection};
 pub use text::{Text, TextSize};
+pub use two_column_intro::TwoColumnIntro;
+pub use value_prop_card::ValuePropCard;
 
 // Re-exports so callers can pull every primitive from a single path.
 pub use crate::components::section::{Section, Surface};

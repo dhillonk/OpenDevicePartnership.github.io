@@ -1,6 +1,7 @@
 use crate::components::documentation_training::DocumentationTraining;
 use crate::components::project_introduction::ProjectIntroduction;
 use crate::components::repo_view::RepositoryGraph;
+use crate::components::ui::{ProjectId, ProjectTabs};
 use crate::data::projects::EC_SERVICES;
 
 use leptos::prelude::*;
@@ -18,6 +19,7 @@ pub fn WindowsEcServices() -> impl IntoView {
             big_image_url=EC_SERVICES.big_image_url
             small_image_url=EC_SERVICES.small_image_url
         />
+        <ProjectTabs active=ProjectId::EcServices />
         <RepositoryGraph nodes=EC_SERVICES.nodes_json links=EC_SERVICES.links_json />
         <DocumentationTraining />
     }

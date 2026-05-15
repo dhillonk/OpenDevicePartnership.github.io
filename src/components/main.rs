@@ -1,45 +1,19 @@
 use crate::components::themed_icon::ThemedIcon;
+use crate::components::ui::{Heading, HeadingLevel, Text, TextSize};
 use leptos::prelude::*;
-use leptos_router::components::A;
 
 #[component]
 pub fn Main() -> impl IntoView {
     view! {
         <main class="background_primary">
-            <div class="mx-auto flex flex-col lg:flex-row items-start justify-between w-full px-2 sm:px-4">
-                <div class="pl-0 lg:pl-32 flex flex-col gap-6 w-full lg:w-auto">
+            <div class="mx-auto flex flex-col items-start w-full px-2 sm:px-4">
+                <div class="pl-0 lg:pl-32 flex flex-col gap-6 w-full">
                     <h1 class="h1 py-4 w-full max-w-full text-left break-words">
                         "Building the Future of Trusted System Software Together"
                     </h1>
                     <p class="p1 w-full max-w-full text-left break-words">
                         "Leading technology partners creating secure, reusable, and reliable firmware for modern client devices."
                     </p>
-                </div>
-
-                <div class="flex flex-col w-full lg:w-auto mt-4 lg:mt-0">
-                    <div
-                        style="border: none; text-decoration: none;"
-                        class="flex background_secondary w-full lg:w-[478px] h-[120px] lg:h-[176px] items-center justify-center px-4 lg:px-16"
-                    >
-                        <A href="/getting-started">
-                            <div class="flex flex-row items-center justify-center gap-4 w-full max-w-full">
-                                <span class="h3">"Getting started"</span>
-                                <span class="h3">"→"</span>
-                            </div>
-                        </A>
-                    </div>
-
-                    <div
-                        style="border: none; text-decoration: none;"
-                        class="flex background_tertiary w-full lg:w-[478px] h-[120px] lg:h-[176px] items-center justify-center px-4 lg:px-16"
-                    >
-                        <A href="/projects">
-                            <div class="flex flex-row items-center justify-center gap-4 w-full max-w-full">
-                                <span class="h3">"Projects"</span>
-                                <span class="h3">"→"</span>
-                            </div>
-                        </A>
-                    </div>
                 </div>
             </div>
 
@@ -49,30 +23,22 @@ pub fn Main() -> impl IntoView {
                         <ThemedIcon
                             name="video"
                             alt="Video Icon"
-                            style="
-                            width: 150px;
-                            height: 150px;
-                            padding: 0;
-                            object-fit: contain;
-                            display: block;
-                            margin-bottom: 16px;
-                            "
+                            class="w-[150px] h-[150px] object-contain block mb-4"
                         />
-                        <span class="h2 block w-full max-w-full text-left break-words">
+                        <Heading
+                            level=HeadingLevel::H2
+                            class="w-full max-w-full text-left break-words"
+                        >
                             "Welcome"
-                        </span>
-                        <div style="height: 10px;"></div>
-                        <span class="p1 block w-full max-w-full text-left break-words">
+                        </Heading>
+                        <div class="h-2.5"></div>
+                        <Text size=TextSize::Lead class="w-full max-w-full text-left break-words">
                             "Learn how ODP projects help build secure, modern devices"
-                        </span>
+                        </Text>
                     </div>
-                    <div
-                        class="w-full lg:flex-[2] aspect-video rounded-lg overflow-hidden"
-                        style="max-width:100vw;"
-                    >
+                    <div class="w-full lg:flex-[2] aspect-video rounded-lg overflow-hidden max-w-screen">
                         <iframe
-                            class="w-full h-full"
-                            style="border-radius: 10px; display: block;"
+                            class="w-full h-full block rounded-[10px]"
                             src="https://www.youtube.com/embed/FMlPxYSY1LM?rel=0"
                             title="YouTube Video of the Open Device Partnership"
                             frameborder="0"
