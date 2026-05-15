@@ -69,23 +69,18 @@
 
   /* Headings ---------------------------------------------------------- */
 
-  /* Display headline used as the page-level h1 on desktop. */
+  /* Display headline used as the page-level h1.
+   *
+   * Fluidly scales between 36 px (at <=320 px viewport) and 80 px (at
+   * >=1280 px viewport). The middle term is a linear interpolation:
+   * size = 1.33rem + 4.58vw, anchored so both endpoints land exactly on
+   * the desired bounds. This obsoletes .h1_mobile -- a single class now
+   * works at every viewport.
+   */
   .h1 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 100px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 95%;
-    letter-spacing: -2.8px;
-    margin-bottom: 12px;
-  }
-
-  /* Mobile twin of .h1 (60 < 100, OK). */
-  .h1_mobile {
-    @apply text-black dark:text-white;
-    font-family: Geist, sans-serif;
-    font-size: 60px;
+    font-size: clamp(2.25rem, 1.33rem + 4.58vw, 5rem);
     font-style: normal;
     font-weight: 400;
     line-height: 100%;

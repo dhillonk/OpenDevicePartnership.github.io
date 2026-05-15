@@ -101,7 +101,7 @@ pub fn TeamEC() -> impl IntoView {
                 </div>
                 <div class="flex flex-col md:flex-row gap-20 items-start">
                     <div class="flex flex-col items-start w-full md:w-[700px]">
-                        <span class="h1_mobile md:h1 block text-left">{"Meet the team"}</span>
+                        <span class="h1 block text-left">{"Meet the team"}</span>
                     </div>
                     <div class="flex flex-col items-start w-full md:w-[600px]">
                         <span class="mono block text-left">{"Secure EC team"}</span>

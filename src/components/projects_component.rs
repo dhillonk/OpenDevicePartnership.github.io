@@ -7,7 +7,7 @@ pub fn ProjectsComponent() -> impl IntoView {
         <section class="background_primary px-6 py-8 md:px-32 md:py-32">
             <div class="flex flex-col md:flex-row gap-10 md:gap-20">
                 <div class="flex flex-col items-start w-full md:w-[700px]">
-                    <span class="h1_mobile md:h1 block text-left">{"System Firmware Domains"}</span>
+                    <span class="h1 block text-left">{"System Firmware Domains"}</span>
                     <span class="h2_mobile md:h2 block text-left">
                         {"Reusable foundations for secure, high-quality device platforms"}
                     </span>

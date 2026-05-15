@@ -39,7 +39,7 @@ pub fn CommunityTeams() -> impl IntoView {
         <section class="background_primary px-4 py-6 md:px-32">
             <div class="flex flex-col md:flex-row gap-16 mb-20">
                 <div class="w-full md:w-[950px]">
-                    <span class="h1_mobile md:h1 break-words w-full block text-left">
+                    <span class="h1 break-words w-full block text-left">
                         {"How ODP is built by its community"}
                     </span>
                 </div>
