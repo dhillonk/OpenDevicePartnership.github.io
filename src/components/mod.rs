@@ -12,5 +12,6 @@ pub mod partners_grid;
 pub mod project_introduction;
 pub mod projects_component;
 pub mod repo_view;
+pub mod section;
 pub mod team_grid;
 pub mod themed_icon;

@@ -1,3 +1,4 @@
+use crate::components::section::Section;
 use crate::components::team_grid::{TeamGrid, TeamMember};
 use crate::components::themed_icon::ThemedIcon;
 use leptos::prelude::*;
@@ -36,7 +37,7 @@ pub fn CommunityTeams() -> impl IntoView {
     let steering_committee = create_steering_committee();
 
     view! {
-        <section class="background_primary px-4 py-6 md:px-16 lg:px-32">
+        <Section class="py-6">
             <div class="flex flex-col md:flex-row gap-16 mb-20">
                 <div class="flex flex-col items-start w-full md:flex-1">
                     <span class="h1 break-words w-full block text-left">
@@ -162,6 +163,6 @@ pub fn CommunityTeams() -> impl IntoView {
                     </a>
                 </div>
             </div>
-        </section>
+        </Section>
     }
 }

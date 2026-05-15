@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 
 use crate::components::partner::Partner;
+use crate::components::section::Section;
 
 struct PartnerInfo {
     name: &'static str,
@@ -34,7 +35,7 @@ const PARTNERS: &[PartnerInfo] = &[
 #[component]
 pub fn PartnersGrid() -> impl IntoView {
     view! {
-        <section class="background_primary px-4 sm:px-8 md:px-16 lg:px-32 py-20">
+        <Section class="py-20">
             <div class="mb-16">
                 <span class="h1 break-words w-full block text-left">{"Our Partners"}</span>
             </div>
@@ -47,6 +48,6 @@ pub fn PartnersGrid() -> impl IntoView {
                     }
                 />
             </div>
-        </section>
+        </Section>
     }
 }

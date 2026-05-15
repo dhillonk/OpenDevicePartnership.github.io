@@ -1,3 +1,4 @@
+use crate::components::section::Section;
 use leptos::prelude::*;
 use leptos_router::components::A;
 
@@ -12,7 +13,7 @@ pub fn ProjectIntroduction(
     #[prop(into, optional)] big_image_url: String,
 ) -> impl IntoView {
     view! {
-        <section class="background_primary">
+        <Section padded=false>
             <div class="flex flex-col md:flex-row gap-20">
 
                 <div class="relative w-full max-w-[700px] aspect-square flex items-center justify-start flex-shrink-0">
@@ -49,8 +50,8 @@ pub fn ProjectIntroduction(
                     </div>
                 </div>
             </div>
-        </section>
-        <div class="background_primary px-2 md:px-0">
+        </Section>
+        <div class="px-2 md:px-0">
             <span
                 class="p1"
                 style="
