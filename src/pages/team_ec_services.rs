@@ -58,9 +58,7 @@ pub fn TeamECServices() -> impl IntoView {
                     <div class="block md:hidden mb-4">
                         <a
                             href="javascript:history.back()"
-                            class="block"
-                            style="margin: 0; padding: 0;"
-                        >
+                            class="block m-0 p-0">
                             <ThemedIcon
                                 name="backbutton"
                                 alt="Back"
@@ -71,9 +69,7 @@ pub fn TeamECServices() -> impl IntoView {
                     <div class="hidden md:block" style="position: absolute; left: 0; top: 0;">
                         <a
                             href="javascript:history.back()"
-                            class="block"
-                            style="margin: 0; padding: 0;"
-                        >
+                            class="block m-0 p-0">
                             <ThemedIcon
                                 name="backbutton"
                                 alt="Back"
@@ -85,33 +81,18 @@ pub fn TeamECServices() -> impl IntoView {
                         {/* Left Column */}
                         <div class="flex flex-col items-start w-full md:w-[700px]">
                             <span
-                                class="h1_mobile md:h1"
-                                style="
-                                    display: block;
-                                    text-align: left;
-                                "
-                            >
+                                class="h1_mobile md:h1 block text-left">
                                 {"Meet the team"}
                             </span>
                         </div>
                         {/* Right Column */}
                         <div class="flex flex-col items-start w-full md:w-[600px]">
                             <span
-                                class="mono"
-                                style="
-                                    display: block;
-                                    text-align: left;
-                                "
-                            >
+                                class="mono block text-left">
                                 {"Unified EC services team"}
                             </span>
                             <span
-                                class="p1_mobile md:p1"
-                                style="
-                                    display: block;
-                                    text-align: left;
-                                "
-                            >
+                                class="p1_mobile md:p1 block text-left">
                                 {"Designing and managing implementation of a unified EC Services interface"}
                             </span>
                         </div>

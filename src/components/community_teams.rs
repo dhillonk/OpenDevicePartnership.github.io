@@ -42,15 +42,13 @@ pub fn CommunityTeams() -> impl IntoView {
             {/* Row 2: Two Columns */}
             <div class="flex flex-col md:flex-row gap-[60px]" style="margin-bottom: 80px;">
                 <div class="w-full md:w-[950px]">
-                    <span class="h1_mobile md:h1 break-words w-full" style="display: block; text-align: left;">
+                    <span class="h1_mobile md:h1 break-words w-full block text-left">
                         {"How ODP is built by its community"}
                     </span>
                 </div>
                 <div class="flex flex-col justify-start w-full md:max-w-[900px]" style="flex: 1;">
                     <span
-                        class="p2 break-words w-full"
-                        style="display: block; text-align: left;"
-                    >
+                        class="p2 break-words w-full block text-left">
 
                         {"The Open Device Partnership (ODP) is a collaborative open-source initiative designed to promote cooperative innovation in firmware development through contribution and transparency."}
                         <br/>
@@ -104,15 +102,11 @@ pub fn CommunityTeams() -> impl IntoView {
             <div class="flex flex-col md:flex-row items-stretch justify-center" style="gap: 175px;">
                 <div class="flex flex-col items-start h-full" style="width: 320px; min-height: 350px; justify-content: flex-start;">
                     <span
-                        class="h3_mobile md:h3 break-words w-full"
-                        style="display: block; text-align: left;"
-                    >
+                        class="h3_mobile md:h3 break-words w-full block text-left">
                         {"Boot Firmware (Patina)"}
                     </span>
                     <span
-                        class="p2 break-words w-full"
-                        style="display: block; text-align: left;"
-                    >
+                        class="p2 break-words w-full block text-left">
                         {"Developing and managing development of a new modern UEFI"}
                     </span>
                     <div style="flex: 1 1 auto;"></div>
@@ -129,15 +123,11 @@ pub fn CommunityTeams() -> impl IntoView {
                 </div>
                 <div class="flex flex-col items-start h-full" style="width: 320px; min-height: 350px; justify-content: flex-start;">
                     <span
-                        class="h3_mobile md:h3 break-words w-full"
-                        style="display: block; text-align: left;"
-                    >
+                        class="h3_mobile md:h3 break-words w-full block text-left">
                         {"Secure Embedded Controller"}
                     </span>
                     <span
-                        class="p2 break-words w-full"
-                        style="display: block; text-align: left;"
-                    >
+                        class="p2 break-words w-full block text-left">
                         {"Developing and managing secure EC internals"}
                     </span>
                     <div style="flex: 1 1 auto;"></div>
@@ -154,15 +144,11 @@ pub fn CommunityTeams() -> impl IntoView {
                 </div>
                 <div class="flex flex-col items-start h-full" style="width: 320px; min-height: 350px; justify-content: flex-start;">
                     <span
-                        class="h3_mobile md:h3 break-words w-full"
-                        style="display: block; text-align: left;"
-                    >
+                        class="h3_mobile md:h3 break-words w-full block text-left">
                         {"Unified EC Services"}
                     </span>
                     <span
-                        class="p2 break-words w-full"
-                        style="display: block; text-align: left;"
-                    >
+                        class="p2 break-words w-full block text-left">
                         {"Designing and managing implementation of a unified EC Services interface"}
                     </span>
                     <div style="flex: 1 1 auto;"></div>

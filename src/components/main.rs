@@ -11,15 +11,11 @@ pub fn Main() -> impl IntoView {
             >
                 <div class="pl-0 md:pl-[120px] flex flex-col gap-6 w-full md:w-auto">
                     <h1
-                        class="h1_mobile md:h1 py-4 w-full max-w-full text-left break-words"
-                        style="word-break:break-word;"
-                    >
+                        class="h1_mobile md:h1 py-4 w-full max-w-full text-left break-words">
                         "Building the Future of Trusted System Software Together"
                     </h1>
                     <p
-                        class="p1_mobile md:p1 w-full max-w-full text-left"
-                        style="word-break:break-word;"
-                    >
+                        class="p1_mobile md:p1 w-full max-w-full text-left break-words">
                         "Leading technology partners creating secure, reusable, and reliable firmware for modern client devices."
                     </p>
                 </div>
@@ -66,11 +62,11 @@ pub fn Main() -> impl IntoView {
                                 margin-bottom: 16px;
                             "
                         />
-                        <span class="h2_mobile md:h2 block w-full max-w-full text-left break-words" style="word-break:break-word;">
+                        <span class="h2_mobile md:h2 block w-full max-w-full text-left break-words">
                             "Welcome"
                         </span>
                         <div style="height: 10px;"></div>
-                        <span class="p1_mobile md:p1 block w-full max-w-full text-left break-words" style="word-break:break-word;">
+                        <span class="p1_mobile md:p1 block w-full max-w-full text-left break-words">
                             "Learn how ODP projects help build secure, modern devices"
                         </span>
                     </div>

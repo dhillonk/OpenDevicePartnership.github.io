@@ -56,16 +56,12 @@ pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links
                     style="display: block; margin-bottom: 16px;"
                 />
                 <span
-                    class="h2_mobile md:h2 text-left break-words"
-                    style="word-break:break-word; display: block; text-align: left;"
-                >
+                    class="h2_mobile md:h2 text-left break-words block">
                     "Documentation"
                 </span>
                 <div style="height: 10px;"></div>
                 <span
-                    class="p1_mobile md:p1 text-left break-words"
-                    style="word-break:break-word; display: block; text-align: left;"
-                >
+                    class="p1_mobile md:p1 text-left break-words block">
                     "Start developing with ODP"
                 </span>
             </div>

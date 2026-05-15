@@ -56,52 +56,27 @@ pub fn ProjectIntroduction(
                 <div class="flex flex-col items-start px-2 md:px-0 w-full">
                     {/* WHAT label */}
                     <span
-                        class="mono"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
+                        class="mono block text-left">
                         {"WHAT"}
                     </span>
                     {/* WHAT description */}
                     <span
-                        class="p2_mobile md:p2"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                        inner_html=project_what
+                        class="p2_mobile md:p2 block text-left" inner_html=project_what
                     >
                     </span>
                     {/* WHY label */}
                     <span
-                        class="mono"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
+                        class="mono block text-left">
                         {"WHY"}
                     </span>
                     {/* WHY description */}
                     <span
-                        class="p2_mobile md:p2"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
+                        class="p2_mobile md:p2 block text-left">
                         {project_why}
                     </span>
                     {/* WHO label */}
                     <span
-                        class="mono"
-                        style="
-                            display: block;
-                            text-align: left;
-                        "
-                    >
+                        class="mono block text-left">
                         {"WHO"}
                     </span>
                     {/* WHO description */}
