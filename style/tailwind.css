@@ -37,11 +37,6 @@
    *   .background_*- surface tokens (primary/secondary/tertiary/quaternary).
    *
    * Known issues to address in a follow-up (visual changes required):
-   *   - .h2_mobile (50px) is LARGER than .h2 (30px); mobile should not
-   *     scale up. The pair is likely swapped.
-   *   - .p_mobile  (10px) is unreadable on phones; should be ~16px.
-   *   - .p1 / .p1_mobile are both 30px — no mobile shrink.
-   *   - .h3 / .h3_mobile are both 25px — no mobile shrink.
    *   - Several classes have no mobile twin (.p_mono, .mono, .link_large,
    *     .icon, .odp-btn-text, .odp-header-btn-text).
    */
@@ -98,8 +93,7 @@
     margin-bottom: 12px;
   }
 
-  /* Section heading. NOTE: 30 px is small for an h2 given h1 is 100 px;
-   * the .h2_mobile twin is *larger* than this — see follow-up issue. */
+  /* Section heading. */
   .h2 {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
@@ -111,14 +105,14 @@
     margin-bottom: 12px;
   }
   
-  /* BUG: 50 > 30 px desktop. Mobile should shrink, not grow. */
+  /* Mobile twin of .h2 (28 < 30, OK). */
   .h2_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 50px;
+    font-size: 28px;
     font-style: normal;
     font-weight: 500;
-    line-height: 110%; /* 66px */
+    line-height: 110%;
     letter-spacing: -1.2px;
     margin-bottom: 12px;
   }
@@ -135,14 +129,14 @@
     margin-bottom: 12px;
   }
 
-  /* NOTE: identical to .h3 — there is no mobile shrink today. */
+  /* Mobile twin of .h3 (20 < 25, OK). */
   .h3_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 600;
-    line-height: 120%; /* 42px */
+    line-height: 120%;
     letter-spacing: -0.7px;
     margin-bottom: 12px;
   }
@@ -159,14 +153,14 @@
     line-height: 130%; /* 26px */
   }
 
-  /* BUG: 10 px is below the practical legibility floor on phones. */
+  /* Mobile twin of .p (16 < 20, OK). */
   .p_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 10px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 110%; /* 26px */
+    line-height: 130%;
   }
 
   /* Lead / intro paragraph. */
@@ -181,14 +175,14 @@
     margin-bottom: 12px;
   }
 
-  /* NOTE: identical to .p1 — no mobile shrink today. */
+  /* Mobile twin of .p1 (22 < 30, OK). */
   .p1_mobile {
     @apply text-black dark:text-white;
     font-family: Geist, sans-serif;
-    font-size: 30px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 500;
-    line-height: 130%; /* 49px */
+    line-height: 130%;
     letter-spacing: -0.7px;
     margin-bottom: 12px;
   }
