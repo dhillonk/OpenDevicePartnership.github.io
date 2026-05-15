@@ -5,8 +5,8 @@ use leptos::prelude::*;
 #[component]
 pub fn LandingPage() -> impl IntoView {
     view! {
-        <div class="background_primary px-2 md:px-[120px]" style="width: auto; height: auto;">
-            <div class="flex flex-col md:flex-row gap-[80px] items-start">
+        <div class="background_primary px-2 md:px-30" style="width: auto; height: auto;">
+            <div class="flex flex-col md:flex-row gap-20 items-start">
                 {} <div class="flex flex-col items-start flex-shrink-0 w-full md:w-[800px]">
                     <span class="h2_mobile md:h1 break-words w-full block text-left">
                         {"An Open Collaboration for Secure, Modern Devices"}
@@ -21,13 +21,10 @@ pub fn LandingPage() -> impl IntoView {
                 </div>
             </div>
         </div>
-        <section
-            class="background_secondary px-2 md:px-[120px]"
-            style="padding-top: 80px; padding-bottom: 80px;"
-        >
+        <section class="background_secondary px-2 md:px-30 py-20">
             <div>
                 <h2 class="h2_mobile md:h2 text-left">{"Value Proposition"}</h2>
-                <div class="flex flex-col md:flex-row gap-[60px]">
+                <div class="flex flex-col md:flex-row gap-15">
                     {} <div class="flex flex-col items-start w-full md:w-[400px]">
                         <ThemedIcon name="lock" alt="Security Icon" class="icon" />
                         <span class="h3_mobile md:h3 break-words w-full block text-left">
@@ -58,10 +55,7 @@ pub fn LandingPage() -> impl IntoView {
         </section>
 
         // ODP Projects Section
-        <section
-            class="background_primary px-2 md:px-[120px]"
-            style="padding-top: 120px; padding-bottom: 120px;"
-        >
+        <section class="background_primary px-2 md:px-30 py-30">
             <div style="max-width: 960px;">
                 <h2 class="h2_mobile md:h2 text-left">{"ODP Projects"}</h2>
                 <p class="p2_mobile md:p2" style="text-align: left; max-width: 100%;">
@@ -73,8 +67,8 @@ pub fn LandingPage() -> impl IntoView {
         </section>
 
         // Boot Firmware Buttons Section
-        <section class="background_primary px-2 md:px-[120px]" style="padding-bottom: 120px;">
-            <div class="flex flex-col md:flex-row gap-[60px] justify-start">
+        <section class="background_primary px-2 md:px-30 pb-30">
+            <div class="flex flex-col md:flex-row gap-15 justify-start">
                 <ImageButton
                     href="/boot-firmware"
                     img_src="/images/patina.png"
@@ -94,11 +88,8 @@ pub fn LandingPage() -> impl IntoView {
         </section>
 
         // Two Columns Section
-        <section
-            class="background_primary px-2 md:px-[120px]"
-            style="padding-top: 80px; padding-bottom: 80px;"
-        >
-            <div class="flex flex-col md:flex-row gap-[60px]">
+        <section class="background_primary px-2 md:px-30 py-20">
+            <div class="flex flex-col md:flex-row gap-15">
                 {} <div class="flex flex-col items-start" style="flex: 1;">
                     <span class="h3_mobile md:h3 block text-left">{"Partner-Oriented Vision"}</span>
                     <span class="p2_mobile md:p2 block text-left">

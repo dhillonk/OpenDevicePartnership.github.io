@@ -8,7 +8,7 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
     let menu_open = RwSignal::new(false);
     view! {
         <header class=format!(
-            "w-full h-[80px] md:h-[160px] px-2 md:px-[120px] {} flex items-center justify-between z-50 m-0 p-0 relative",
+            "w-full h-[80px] md:h-[160px] px-2 md:px-30 {} flex items-center justify-between z-50 m-0 p-0 relative",
             background_class,
         )>
             <div class="flex items-center space-x-6">

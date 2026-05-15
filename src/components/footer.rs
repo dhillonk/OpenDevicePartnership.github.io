@@ -4,7 +4,7 @@ use leptos::prelude::*;
 #[component]
 pub fn Footer() -> impl IntoView {
     view! {
-        <footer class="w-full px-2 md:px-[60px] py-2 md:py-[32px] background_secondary">
+        <footer class="w-full px-2 md:px-15 py-2 md:py-8 background_secondary">
             <div class="flex flex-col md:flex-row items-center justify-between w-full gap-1 md:gap-0">
                 <div class="flex items-center w-full md:w-auto justify-center md:justify-start">
                     <ThemedIcon

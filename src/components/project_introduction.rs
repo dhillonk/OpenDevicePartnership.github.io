@@ -13,7 +13,7 @@ pub fn ProjectIntroduction(
 ) -> impl IntoView {
     view! {
         <section class="background_primary">
-            <div class="flex flex-col md:flex-row gap-[80px]">
+            <div class="flex flex-col md:flex-row gap-20">
                 {}
                 <div
                     class="relative w-full md:w-[700px] h-[400px] md:h-[630px]"
@@ -28,14 +28,14 @@ pub fn ProjectIntroduction(
                     />
                     {}
                     <div
-                        class="absolute top-1/2 left-0 w-[90%] pl-2 md:pl-[60px] flex flex-col items-start"
+                        class="absolute top-1/2 left-0 w-[90%] pl-2 md:pl-15 flex flex-col items-start"
                         style="transform: translateY(-50%); z-index: 2; text-align: left;"
                     >
                         {}
                         <img
                             src=small_image_url
                             alt="Project Logo"
-                            class="w-[48px] h-[48px] md:w-[102px] md:h-[102px] mb-4 md:mb-[60px] ml-0"
+                            class="w-[48px] h-[48px] md:w-[102px] md:h-[102px] mb-4 md:mb-15 ml-0"
                             style="object-fit: contain;"
                         />
                         <span

@@ -79,10 +79,7 @@ pub fn TeamEC() -> impl IntoView {
 
     view! {
         <PageLayout>
-            <div
-                class="background_primary px-2 md:px-[120px] py-4 md:py-[120px]"
-                style="position: relative;"
-            >
+            <div class="background_primary px-2 md:px-30 py-4 md:py-30" style="position: relative;">
                 {}
                 <div class="block md:hidden mb-4">
                     <a href="javascript:history.back()" class="block m-0 p-0">
@@ -102,7 +99,7 @@ pub fn TeamEC() -> impl IntoView {
                         />
                     </a>
                 </div>
-                <div class="flex flex-col md:flex-row gap-[80px] items-start">
+                <div class="flex flex-col md:flex-row gap-20 items-start">
                     {} <div class="flex flex-col items-start w-full md:w-[700px]">
                         <span class="h1_mobile md:h1 block text-left">{"Meet the team"}</span>
                     </div> {}

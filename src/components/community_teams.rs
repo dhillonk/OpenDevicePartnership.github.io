@@ -36,8 +36,8 @@ pub fn CommunityTeams() -> impl IntoView {
     let steering_committee = create_steering_committee();
 
     view! {
-        <section class="background_primary px-4 py-6 md:[120px]">
-            {} <div class="flex flex-col md:flex-row gap-[60px]" style="margin-bottom: 80px;">
+        <section class="background_primary px-4 py-6 md:px-30">
+            {} <div class="flex flex-col md:flex-row gap-15 mb-20">
                 <div class="w-full md:w-[950px]">
                     <span class="h1_mobile md:h1 break-words w-full block text-left">
                         {"How ODP is built by its community"}
@@ -75,7 +75,7 @@ pub fn CommunityTeams() -> impl IntoView {
                         </a> {"."}
                     </span>
                 </div>
-            </div> {} <div class="flex flex-col items-left" style="margin-bottom: 80px;">
+            </div> {} <div class="flex flex-col items-left mb-20">
                 <ThemedIcon name="teams" alt="Teams" class="icon" />
                 <span
                     class="h2_mobile md:h2 break-words w-full"
@@ -84,7 +84,7 @@ pub fn CommunityTeams() -> impl IntoView {
                     {"Steering Committee"}
                 </span>
             </div> {} <TeamGrid members=steering_committee /> {}
-            <div class="flex flex-col items-left" style="margin-bottom: 80px;">
+            <div class="flex flex-col items-left mb-20">
                 <span
                     class="h2_mobile md:h2 break-words w-full"
                     style="display: flex; justify-content: left; align-items: left;"

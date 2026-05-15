@@ -4,8 +4,8 @@ use leptos::prelude::*;
 #[component]
 pub fn ProjectsComponent() -> impl IntoView {
     view! {
-        <section class="background_primary px-6 py-8 md:px-[120px] md:py-[120px]">
-            <div class="flex flex-col md:flex-row gap-[40px] md:gap-[80px]">
+        <section class="background_primary px-6 py-8 md:px-30 md:py-30">
+            <div class="flex flex-col md:flex-row gap-10 md:gap-20">
                 {} <div class="flex flex-col items-start w-full md:w-[700px]">
                     <span class="h1_mobile md:h1 block text-left">{"System Firmware Domains"}</span>
                     <span class="h2_mobile md:h2 block text-left">
@@ -25,10 +25,10 @@ pub fn ProjectsComponent() -> impl IntoView {
         </section>
 
         // Projects Details Section
-        <section class="background_primary px-6 py-8 md:px-[120px] md:py-[120px]">
-            <div class="flex flex-col gap-[60px]">
+        <section class="background_primary px-6 py-8 md:px-30 md:py-30">
+            <div class="flex flex-col gap-15">
                 {}
-                <div class="flex flex-col md:flex-row gap-[32px] md:gap-[60px] items-center">
+                <div class="flex flex-col md:flex-row gap-8 md:gap-15 items-center">
                     {} <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
                         <ImageButton
                             href="/boot-firmware"
@@ -76,8 +76,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                             </a>
                         </div>
                     </div>
-                </div> {}
-                <div class="flex flex-col md:flex-row gap-[32px] md:gap-[60px] items-center">
+                </div> {} <div class="flex flex-col md:flex-row gap-8 md:gap-15 items-center">
                     <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
                         <ImageButton
                             href="/embedded-controller"
@@ -125,8 +124,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                             </a>
                         </div>
                     </div>
-                </div> {}
-                <div class="flex flex-col md:flex-row gap-[32px] md:gap-[60px] items-center">
+                </div> {} <div class="flex flex-col md:flex-row gap-8 md:gap-15 items-center">
                     <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
                         <ImageButton
                             href="/windows-ec-services"

@@ -44,7 +44,7 @@ pub const DEFAULT_DOC_LINKS: &[DocLink] = &[
 #[component]
 pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links: Vec<DocLink>) -> impl IntoView {
     view! {
-        <section class="flex flex-col md:flex-row items-start background_primary w-full overflow-x-hidden px-4 py-8 md:py-[60px] md:px-[120px]">
+        <section class="flex flex-col md:flex-row items-start background_primary w-full overflow-x-hidden px-4 py-8 md:py-15 md:px-30">
             {} <div class="flex flex-col items-start w-full" style="align-items: flex-start;">
                 <ThemedIcon
                     name="documentation"
