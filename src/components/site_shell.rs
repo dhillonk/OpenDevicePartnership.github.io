@@ -19,12 +19,18 @@ use crate::components::header::Header;
 use leptos::prelude::*;
 use leptos_router::components::Outlet;
 
+/// Outer container class used by [`SiteShell`].
+const SHELL_CLASS_HIDDEN: &str = "w-full min-h-screen overflow-x-hidden";
+
+/// Outer container class used by [`SiteShellScrollable`].
+const SHELL_CLASS_SCROLLABLE: &str = "w-full min-h-screen overflow-x-auto";
+
 /// Shell used by routes whose content is guaranteed to fit the
 /// viewport horizontally. The outer container clips horizontal
 /// overflow so a runaway grid never produces a body-level scrollbar.
 #[component]
 pub fn SiteShell() -> impl IntoView {
-    chrome("w-full min-h-screen overflow-x-hidden")
+    chrome(SHELL_CLASS_HIDDEN)
 }
 
 /// Shell used by routes that may overflow horizontally (e.g. the
@@ -32,7 +38,7 @@ pub fn SiteShell() -> impl IntoView {
 /// outer container exposes a horizontal scrollbar when needed.
 #[component]
 pub fn SiteShellScrollable() -> impl IntoView {
-    chrome("w-full min-h-screen overflow-x-auto")
+    chrome(SHELL_CLASS_SCROLLABLE)
 }
 
 fn chrome(outer_class: &'static str) -> impl IntoView {
@@ -58,5 +64,27 @@ fn chrome(outer_class: &'static str) -> impl IntoView {
                 <Footer />
             </div>
         </ErrorBoundary>
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn hidden_shell_clips_horizontal_overflow() {
+        // The default shell must NOT expose a horizontal scrollbar at
+        // the body level -- if it ever drifts to overflow-x-auto then
+        // every page suddenly grows a scrollbar from any wide child.
+        assert!(SHELL_CLASS_HIDDEN.contains("overflow-x-hidden"));
+        assert!(!SHELL_CLASS_HIDDEN.contains("overflow-x-auto"));
+        assert!(SHELL_CLASS_HIDDEN.contains("min-h-screen"));
+    }
+
+    #[test]
+    fn scrollable_shell_allows_horizontal_overflow() {
+        assert!(SHELL_CLASS_SCROLLABLE.contains("overflow-x-auto"));
+        assert!(!SHELL_CLASS_SCROLLABLE.contains("overflow-x-hidden"));
+        assert!(SHELL_CLASS_SCROLLABLE.contains("min-h-screen"));
     }
 }

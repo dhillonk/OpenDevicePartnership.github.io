@@ -28,3 +28,26 @@ pub const PARTNERS: &[PartnerInfo] = &[
         logo: "/images/partners/cix.svg",
     },
 ];
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn partners_list_well_formed() {
+        assert!(!PARTNERS.is_empty(), "PARTNERS must not be empty");
+        for partner in PARTNERS {
+            assert!(!partner.name.is_empty(), "partner name must not be empty");
+            assert!(
+                partner.url.starts_with("https://"),
+                "partner.url must be https: {:?}",
+                partner.url
+            );
+            assert!(
+                partner.logo.starts_with("/images/partners/"),
+                "partner.logo must live under /images/partners/: {:?}",
+                partner.logo
+            );
+        }
+    }
+}

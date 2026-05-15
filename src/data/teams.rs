@@ -201,3 +201,54 @@ pub fn ec_services_team() -> Vec<TeamMember> {
         },
     ]
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn assert_member_well_formed(name: &str, member: &TeamMember) {
+        assert!(!member.first_name.is_empty(), "{name}: first_name must not be empty");
+        assert!(!member.last_name.is_empty(), "{name}: last_name must not be empty");
+        assert!(
+            !member.github_username.is_empty(),
+            "{name}: github_username must not be empty"
+        );
+        assert_eq!(
+            member.github_url,
+            format!("https://github.com/{}", member.github_username),
+            "{name}: github_url must point at the configured username"
+        );
+        assert_eq!(
+            member.image_url,
+            format!("https://github.com/{}.png?size=200", member.github_username),
+            "{name}: image_url must derive from the configured username"
+        );
+    }
+
+    fn assert_roster_well_formed(name: &str, roster: &[TeamMember]) {
+        assert!(!roster.is_empty(), "{name}: roster must not be empty");
+        for member in roster {
+            assert_member_well_formed(name, member);
+        }
+    }
+
+    #[test]
+    fn steering_committee_well_formed() {
+        assert_roster_well_formed("steering_committee", &steering_committee());
+    }
+
+    #[test]
+    fn patina_team_well_formed() {
+        assert_roster_well_formed("patina_team", &patina_team());
+    }
+
+    #[test]
+    fn ec_team_well_formed() {
+        assert_roster_well_formed("ec_team", &ec_team());
+    }
+
+    #[test]
+    fn ec_services_team_well_formed() {
+        assert_roster_well_formed("ec_services_team", &ec_services_team());
+    }
+}

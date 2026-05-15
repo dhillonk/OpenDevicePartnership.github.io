@@ -65,3 +65,121 @@ pub const EC_SERVICES: ProjectCopy = ProjectCopy {
     nodes_json: include_str!("../../data/graphs/ec_services_nodes.json"),
     links_json: include_str!("../../data/graphs/ec_services_links.json"),
 };
+
+#[cfg(test)]
+mod tests {
+    //! These tests guard the data the D3 renderer consumes. The
+    //! renderer ([`crate::components::repo_view`]) ships JSON strings
+    //! straight to JavaScript without parsing them in Rust, so a
+    //! malformed JSON file would only blow up at runtime in the
+    //! browser. The tests below catch:
+    //!
+    //!  * malformed JSON (typo, trailing comma, …),
+    //!  * empty graphs (an oversight that would render a blank SVG),
+    //!  * nodes without an `id` field,
+    //!  * links whose `source`/`target` reference a missing node id.
+    //!
+    //! The graph script-load race (the bug fixed alongside t21) is a
+    //! browser-runtime concern and is not exercised here -- the data
+    //! invariants below at least guarantee that, once the renderer
+    //! does run, the payload is shaped correctly.
+    use super::*;
+    use serde_json::Value;
+
+    fn parse_array(json: &str) -> Vec<Value> {
+        let value: Value = serde_json::from_str(json).expect("graph json must parse");
+        value.as_array().expect("graph json must be a top-level array").clone()
+    }
+
+    fn assert_graph_well_formed(name: &str, nodes_json: &str, links_json: &str) {
+        let nodes = parse_array(nodes_json);
+        let links = parse_array(links_json);
+
+        assert!(
+            !nodes.is_empty(),
+            "{name}: nodes must not be empty (would render a blank graph)"
+        );
+        assert!(!links.is_empty(), "{name}: links must not be empty");
+
+        // Node ids may be either numbers or strings -- d3-force keys
+        // by `===` equality, so we compare the JSON-encoded form to
+        // catch duplicates regardless of representation.
+        let mut ids: std::collections::HashSet<String> = std::collections::HashSet::new();
+        for node in &nodes {
+            let id = node
+                .get("id")
+                .unwrap_or_else(|| panic!("{name}: every node must have an `id` field"));
+            assert!(
+                id.is_number() || id.is_string(),
+                "{name}: node id must be a number or a string, got {id}"
+            );
+            let key = id.to_string();
+            assert!(
+                ids.insert(key.clone()),
+                "{name}: duplicate node id {key} -- d3-force will collapse the duplicates"
+            );
+        }
+
+        for (i, link) in links.iter().enumerate() {
+            let source = link
+                .get("source")
+                .unwrap_or_else(|| panic!("{name}: link[{i}] missing `source`"))
+                .to_string();
+            let target = link
+                .get("target")
+                .unwrap_or_else(|| panic!("{name}: link[{i}] missing `target`"))
+                .to_string();
+            assert!(
+                ids.contains(&source),
+                "{name}: link[{i}].source {source} does not reference any node id"
+            );
+            assert!(
+                ids.contains(&target),
+                "{name}: link[{i}].target {target} does not reference any node id"
+            );
+        }
+    }
+
+    #[test]
+    fn patina_graph_is_well_formed() {
+        assert_graph_well_formed("PATINA", PATINA.nodes_json, PATINA.links_json);
+    }
+
+    #[test]
+    fn embedded_controller_graph_is_well_formed() {
+        assert_graph_well_formed(
+            "EMBEDDED_CONTROLLER",
+            EMBEDDED_CONTROLLER.nodes_json,
+            EMBEDDED_CONTROLLER.links_json,
+        );
+    }
+
+    #[test]
+    fn ec_services_graph_is_well_formed() {
+        assert_graph_well_formed("EC_SERVICES", EC_SERVICES.nodes_json, EC_SERVICES.links_json);
+    }
+
+    #[test]
+    fn project_copy_has_required_fields() {
+        for project in [&PATINA, &EMBEDDED_CONTROLLER, &EC_SERVICES] {
+            assert!(!project.title.is_empty(), "title must not be empty");
+            assert!(!project.what.is_empty(), "what must not be empty");
+            assert!(!project.why.is_empty(), "why must not be empty");
+            assert!(
+                project.team_route.starts_with('/'),
+                "team_route must be a router path: {:?}",
+                project.team_route
+            );
+            assert!(
+                project.big_image_url.starts_with('/'),
+                "big_image_url must be site-relative: {:?}",
+                project.big_image_url
+            );
+            assert!(
+                project.small_image_url.starts_with('/'),
+                "small_image_url must be site-relative: {:?}",
+                project.small_image_url
+            );
+        }
+    }
+}
