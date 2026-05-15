@@ -21,4 +21,8 @@ wasm-bindgen-test = "0.3"
 assets-dir="public"
 
 [profile.release]
+opt-level = "z"
+lto = "fat"
+codegen-units = 1
+panic = "abort"
 strip = true
