@@ -1,6 +1,5 @@
 use crate::components::documentation_training::DocumentationTraining;
-use crate::components::footer::Footer;
-use crate::components::header::Header;
+use crate::components::page_layout::PageLayout;
 use crate::components::project_introduction::ProjectIntroduction;
 use crate::components::repo_view::RepositoryGraph;
 
@@ -18,38 +17,18 @@ pub fn BootFirmware() -> impl IntoView {
     let links_data = r#"[{"source": 0, "target": 5}, {"source": 0, "target": 7}, {"source": 3, "target": 4}, {"source": 3, "target": 5}, {"source": 3, "target": 6}, {"source": 3, "target": 7}, {"source": 4, "target": 5}, {"source": 4, "target": 6}, {"source": 4, "target": 7}, {"source": 4, "target": 8}, {"source": 4, "target": 9}, {"source": 5, "target": 6}, {"source": 5, "target": 7}, {"source": 5, "target": 9}, {"source": 6, "target": 7}]"#;
 
     view! {
-        <ErrorBoundary fallback=|errors| {
-            view! {
-                <h1>"Uh oh! Something went wrong!"</h1>
-
-                <p>"Errors: "</p>
-                <ul>
-                    {move || {
-                        errors
-                            .get()
-                            .into_iter()
-                            .map(|(_, e)| view! { <li>{e.to_string()}</li> })
-                            .collect_view()
-                    }}
-                </ul>
-            }
-        }>
-
-            <div class="w-full min-h-screen" style="overflow-x: auto;">
-                <Header />
-                <ProjectIntroduction
-                    project_title=project_title
-                    project_summary=project_summary
-                    project_what=project_what
-                    project_why=project_why
-                    project_who="/team-patina"
-                    big_image_url="/images/PatinaBackground.png"
-                    small_image_url="/images/dark/ProjectIcon_P_Patina_DarkMode.svg"
-                />
-                <RepositoryGraph nodes=nodes_data links=links_data/>
-                <DocumentationTraining />
-                <Footer />
-            </div>
-        </ErrorBoundary>
+        <PageLayout scrollable_x=true>
+            <ProjectIntroduction
+                project_title=project_title
+                project_summary=project_summary
+                project_what=project_what
+                project_why=project_why
+                project_who="/team-patina"
+                big_image_url="/images/PatinaBackground.png"
+                small_image_url="/images/dark/ProjectIcon_P_Patina_DarkMode.svg"
+            />
+            <RepositoryGraph nodes=nodes_data links=links_data/>
+            <DocumentationTraining />
+        </PageLayout>
     }
 }

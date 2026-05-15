@@ -6,6 +6,7 @@ pub mod header;
 pub mod image_button;
 pub mod landing_page;
 pub mod main;
+pub mod page_layout;
 pub mod partner;
 pub mod partners_grid;
 pub mod project_introduction;

@@ -1,6 +1,5 @@
 use crate::components::documentation_training::DocumentationTraining;
-use crate::components::footer::Footer;
-use crate::components::header::Header;
+use crate::components::page_layout::PageLayout;
 use crate::components::project_introduction::ProjectIntroduction;
 use crate::components::repo_view::RepositoryGraph;
 
@@ -25,35 +24,13 @@ It’s a modern foundation for building reliable, adaptable EC firmware — not 
     let links_data = r#"[{"source": 0, "target": 2}, {"source": 0, "target": 4}, {"source": 0, "target": 5}, {"source": 0, "target": 6}, {"source": 0, "target": 11}, {"source": 0, "target": 12}, {"source": 0, "target": 13}, {"source": 0, "target": 19}, {"source": 0, "target": 20}, {"source": 0, "target": 23}, {"source": 1, "target": 4}, {"source": 2, "target": 43}, {"source": 3, "target": 17}, {"source": 3, "target": 18}, {"source": 4, "target": 3}, {"source": 4, "target": 26}, {"source": 4, "target": 36}, {"source": 5, "target": 3}, {"source": 5, "target": 26}, {"source": 5, "target": 36}, {"source": 6, "target": 4}, {"source": 7, "target": 4}, {"source": 8, "target": 4}, {"source": 9, "target": 4}, {"source": 11, "target": 8}, {"source": 11, "target": 39}, {"source": 12, "target": 4}, {"source": 12, "target": 19}, {"source": 13, "target": 14}, {"source": 13, "target": 15}, {"source": 13, "target": 21}, {"source": 13, "target": 28}, {"source": 13, "target": 29}, {"source": 13, "target": 40}, {"source": 13, "target": 42}, {"source": 14, "target": 4}, {"source": 15, "target": 4}, {"source": 16, "target": 22}, {"source": 20, "target": 4}, {"source": 21, "target": 4}, {"source": 23, "target": 9}, {"source": 25, "target": 0}, {"source": 26, "target": 10}, {"source": 28, "target": 4}, {"source": 29, "target": 4}, {"source": 30, "target": 5}, {"source": 31, "target": 5}, {"source": 33, "target": 4}, {"source": 36, "target": 32}, {"source": 36, "target": 37}, {"source": 39, "target": 4}, {"source": 40, "target": 4}, {"source": 41, "target": 4}, {"source": 42, "target": 4}, {"source": 43, "target": 30}, {"source": 43, "target": 31}]"#;
 
     view! {
-        <ErrorBoundary fallback=|errors| {
-            view! {
-                <h1>"Uh oh! Something went wrong!"</h1>
-
-                <p>"Errors: "</p>
-                // Render a list of errors as strings - good for development purposes
-                <ul>
-                    {move || {
-                        errors
-                            .get()
-                            .into_iter()
-                            .map(|(_, e)| view! { <li>{e.to_string()}</li> })
-                            .collect_view()
-                    }}
-
-                </ul>
-            }
-        }>
-
-            <div class="w-full min-h-screen" style="overflow-x: auto;">
-                <Header />
-                <ProjectIntroduction project_title=project_title project_summary=project_summary project_what=project_what project_why=project_why
-                    project_who="/team-ec"
-                    big_image_url="/images/ECBackground.png"
-                    small_image_url="/images/dark/ProjectIcon_EC_Patina_DarkMode.svg"/>
-                <RepositoryGraph nodes=nodes_data links=links_data/>
-                <DocumentationTraining />
-                <Footer />
-            </div>
-        </ErrorBoundary>
+        <PageLayout scrollable_x=true>
+            <ProjectIntroduction project_title=project_title project_summary=project_summary project_what=project_what project_why=project_why
+                project_who="/team-ec"
+                big_image_url="/images/ECBackground.png"
+                small_image_url="/images/dark/ProjectIcon_EC_Patina_DarkMode.svg"/>
+            <RepositoryGraph nodes=nodes_data links=links_data/>
+            <DocumentationTraining />
+        </PageLayout>
     }
 }
