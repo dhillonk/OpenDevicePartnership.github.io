@@ -8,8 +8,40 @@ pub struct DocLink {
     pub external: bool,
 }
 
+/// Canonical "Documentation" link list shown at the bottom of every
+/// content page. Pages typically render `<DocumentationTraining />`
+/// with no `links` prop so they pick up this default; pass an explicit
+/// `links=...` only when a page needs a different set.
+pub const DEFAULT_DOC_LINKS: &[DocLink] = &[
+    DocLink {
+        href: "https://opendevicepartnership.github.io/documentation/guide/why/why.html",
+        title: "Why ODP?",
+        external: true,
+    },
+    DocLink {
+        href: "https://opendevicepartnership.github.io/documentation/guide/intro/getting_started.html",
+        title: "Getting Started with ODP",
+        external: true,
+    },
+    DocLink {
+        href: "https://opendevicepartnership.github.io/documentation/guide/intro/welcome.html",
+        title: "Tutorials",
+        external: true,
+    },
+    DocLink {
+        href: "https://opendevicepartnership.github.io/documentation/guide/specs/specifications.html",
+        title: "Specifications",
+        external: true,
+    },
+    DocLink {
+        href: "/community",
+        title: "Contributing to ODP",
+        external: false,
+    },
+];
+
 #[component]
-pub fn DocumentationTraining(#[prop(default = vec![])] links: Vec<DocLink>) -> impl IntoView {
+pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links: Vec<DocLink>) -> impl IntoView {
     view! {
         <section
             class="flex flex-col md:flex-row items-start background_primary w-full overflow-x-hidden px-4 py-8 md:py-[60px] md:px-[120px]"
