@@ -22,7 +22,8 @@ use odp::components::landing::{ClosingColumnsSection, HeroSection, ProjectsSecti
 use odp::components::team_hero::TeamHero;
 use odp::components::themed_icon::ThemedIcon;
 use odp::components::ui::{
-    AnnouncementCard, ArrowLink, ArrowLinkSize, DocLinkItem, IconBlock, LabeledSection, TwoColumnIntro, ValuePropCard,
+    AnnouncementCard, ArrowLink, ArrowLinkSize, DocLinkItem, IconBlock, LabeledSection, ProjectId, ProjectTabs,
+    TwoColumnIntro, ValuePropCard,
 };
 use wasm_bindgen::{JsCast, JsValue};
 use wasm_bindgen_test::*;
@@ -395,5 +396,74 @@ fn announcement_card_renders_title_and_body() {
     assert!(
         root.query_selector(".probe-body").unwrap().is_some(),
         "body element should be rendered as a child"
+    );
+}
+
+// ---------------------------------------------------------------------------
+// t37 — <ProjectTabs>
+// ---------------------------------------------------------------------------
+
+#[wasm_bindgen_test]
+fn project_tabs_render_three_tabs_with_active_marker() {
+    let root = mount(|| {
+        view! {
+            <Router>
+                <ProjectTabs active=ProjectId::EmbeddedController />
+            </Router>
+        }
+    });
+
+    let anchors = root.get_elements_by_tag_name("a");
+    assert_eq!(anchors.length(), 3, "expected exactly three project tabs");
+
+    let mut hrefs = Vec::new();
+    let mut active_count = 0;
+    for i in 0..anchors.length() {
+        let a = anchors.item(i).unwrap();
+        hrefs.push(a.get_attribute("href").unwrap_or_default());
+        if a.get_attribute("aria-current").as_deref() == Some("page") {
+            active_count += 1;
+            let class = a.get_attribute("class").unwrap_or_default();
+            assert!(class.contains("font-bold"), "active tab class should be bold: {class}");
+        }
+    }
+
+    assert_eq!(active_count, 1, "exactly one tab must carry aria-current=page");
+    assert!(
+        hrefs.iter().any(|h| h.ends_with("/boot-firmware")),
+        "patina link missing: {hrefs:?}"
+    );
+    assert!(
+        hrefs.iter().any(|h| h.ends_with("/embedded-controller")),
+        "ec link missing: {hrefs:?}"
+    );
+    assert!(
+        hrefs.iter().any(|h| h.ends_with("/windows-ec-services")),
+        "ec services link missing: {hrefs:?}"
+    );
+}
+
+#[wasm_bindgen_test]
+fn project_tabs_active_marker_matches_active_prop() {
+    let root = mount(|| {
+        view! {
+            <Router>
+                <ProjectTabs active=ProjectId::EcServices />
+            </Router>
+        }
+    });
+
+    let anchors = root.get_elements_by_tag_name("a");
+    let mut active_href = None;
+    for i in 0..anchors.length() {
+        let a = anchors.item(i).unwrap();
+        if a.get_attribute("aria-current").as_deref() == Some("page") {
+            active_href = a.get_attribute("href");
+        }
+    }
+    let href = active_href.expect("an active tab must exist");
+    assert!(
+        href.ends_with("/windows-ec-services"),
+        "active href should be EC Services route, got {href}"
     );
 }

@@ -8,6 +8,10 @@
 
 pub struct ProjectCopy {
     pub title: &'static str,
+    /// Short label for the cross-project navigation tabs (e.g. "Patina").
+    pub short_label: &'static str,
+    /// Site-relative route for this project's page (e.g. "/boot-firmware").
+    pub route: &'static str,
     pub summary: &'static str,
     pub what: &'static str,
     pub why: &'static str,
@@ -20,6 +24,8 @@ pub struct ProjectCopy {
 
 pub const PATINA: ProjectCopy = ProjectCopy {
     title: "Patina",
+    short_label: "Patina",
+    route: "/boot-firmware",
     summary: "Modern Boot Firmware",
     what: r#"Patina is a UEFI compatible firmware interface written in the Rust language with a focus on memory safety and composition. For Patina, we re-evaluated the good and the bad from today's UEFI boot firmware and used this opportunity to embrace new language capabilities, software architecture, programming paradigms, and industry supported tooling. Patina isn't designed to replace everything necessary for system boot but instead to provide a sustainable path forward with high return on investment. Learn more about Patina on our <a href="https://github.com/OpenDevicePartnership/patina" target="_blank" rel="noopener noreferrer" class="underline hover:no-underline">GitHub repository</a> and check out the <a href="https://opendevicepartnership.github.io/patina/" target="_blank" rel="noopener noreferrer" class="underline hover:no-underline">Documentation</a> page."#,
     why: "A lot has changed in the last quarter century. UEFI boot firmware has scaled remarkably well, seamlessly ushering in new generations of hardware for PCs, but as active maintainers of UEFI we know the systemic problems that can’t be addressed without significant change. We understand the challenges of supporting a vast, diverse ecosystem of hardware devices as unique as each user.  We see the nuance in our industry's partnerships and the supply chains critical for their success.  For this reason, we started the Patina project to build a future and a coalition ready for the next set of challenges.",
@@ -32,6 +38,8 @@ pub const PATINA: ProjectCopy = ProjectCopy {
 
 pub const EMBEDDED_CONTROLLER: ProjectCopy = ProjectCopy {
     title: "Secure Embedded Controller",
+    short_label: "Secure EC",
+    route: "/embedded-controller",
     summary: "A hardened firmware platform for modern embedded controllers",
     what: r#"The ODP Secure EC stack is a Rust-based firmware platform for modern embedded controllers, supporting both discrete and integrated ECs.
 
@@ -50,6 +58,8 @@ It’s a modern foundation for building reliable, adaptable EC firmware — not 
 
 pub const EC_SERVICES: ProjectCopy = ProjectCopy {
     title: "Unified Embedded Controller Interface",
+    short_label: "EC Services",
+    route: "/windows-ec-services",
     summary: "",
     what: r#"The Unified Windows EC Service interface defines runtime coordination between firmware components using async message-passing. 
     Each service manages a domain — like power, battery, or host communication — and exposes a structured protocol. 

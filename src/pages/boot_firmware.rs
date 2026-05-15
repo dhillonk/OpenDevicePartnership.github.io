@@ -1,6 +1,7 @@
 use crate::components::documentation_training::DocumentationTraining;
 use crate::components::project_introduction::ProjectIntroduction;
 use crate::components::repo_view::RepositoryGraph;
+use crate::components::ui::{ProjectId, ProjectTabs};
 use crate::data::projects::PATINA;
 
 use leptos::prelude::*;
@@ -18,6 +19,7 @@ pub fn BootFirmware() -> impl IntoView {
             big_image_url=PATINA.big_image_url
             small_image_url=PATINA.small_image_url
         />
+        <ProjectTabs active=ProjectId::Patina />
         <RepositoryGraph nodes=PATINA.nodes_json links=PATINA.links_json />
         <DocumentationTraining />
     }

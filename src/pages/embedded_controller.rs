@@ -1,6 +1,7 @@
 use crate::components::documentation_training::DocumentationTraining;
 use crate::components::project_introduction::ProjectIntroduction;
 use crate::components::repo_view::RepositoryGraph;
+use crate::components::ui::{ProjectId, ProjectTabs};
 use crate::data::projects::EMBEDDED_CONTROLLER;
 
 use leptos::prelude::*;
@@ -18,6 +19,7 @@ pub fn EmbeddedController() -> impl IntoView {
             big_image_url=EMBEDDED_CONTROLLER.big_image_url
             small_image_url=EMBEDDED_CONTROLLER.small_image_url
         />
+        <ProjectTabs active=ProjectId::EmbeddedController />
         <RepositoryGraph
             nodes=EMBEDDED_CONTROLLER.nodes_json
             links=EMBEDDED_CONTROLLER.links_json
