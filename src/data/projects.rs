@@ -31,7 +31,7 @@ pub const PATINA: ProjectCopy = ProjectCopy {
     why: "A lot has changed in the last quarter century. UEFI boot firmware has scaled remarkably well, seamlessly ushering in new generations of hardware for PCs, but as active maintainers of UEFI we know the systemic problems that can’t be addressed without significant change. We understand the challenges of supporting a vast, diverse ecosystem of hardware devices as unique as each user.  We see the nuance in our industry's partnerships and the supply chains critical for their success.  For this reason, we started the Patina project to build a future and a coalition ready for the next set of challenges.",
     team_route: "/team-patina",
     big_image_url: "/images/PatinaBackground.png",
-    small_image_url: "/images/dark/ProjectIcon_P_Patina_DarkMode.svg",
+    small_image_url: "/images/dark/ProjectIcon_P_Patina_DarkMode.webp",
     nodes_json: include_str!("../../data/graphs/patina_nodes.json"),
     links_json: include_str!("../../data/graphs/patina_links.json"),
 };
@@ -51,7 +51,7 @@ The ODP EC firmware rethinks the EC as a secure, modular orchestrator for power,
 It’s a modern foundation for building reliable, adaptable EC firmware — not just patching legacy code.",
     team_route: "/team-ec",
     big_image_url: "/images/ECBackground.png",
-    small_image_url: "/images/dark/ProjectIcon_EC_Patina_DarkMode.svg",
+    small_image_url: "/images/dark/ProjectIcon_EC_Patina_DarkMode.webp",
     nodes_json: include_str!("../../data/graphs/ec_nodes.json"),
     links_json: include_str!("../../data/graphs/ec_links.json"),
 };
@@ -71,7 +71,7 @@ pub const EC_SERVICES: ProjectCopy = ProjectCopy {
     Whether debugging power flows or integrating a new device, these services provide the glue, guardrails, and visibility you need.",
     team_route: "/team-ec-services",
     big_image_url: "/images/ECServicesBackground.png",
-    small_image_url: "/images/dark/ProjectIcon_ES_Patina_DarkMode.svg",
+    small_image_url: "/images/dark/ProjectIcon_ES_Patina_DarkMode.webp",
     nodes_json: include_str!("../../data/graphs/ec_services_nodes.json"),
     links_json: include_str!("../../data/graphs/ec_services_links.json"),
 };
