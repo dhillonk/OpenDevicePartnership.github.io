@@ -25,6 +25,7 @@
 mod arrow_link;
 mod button;
 mod container;
+mod doc_link_item;
 mod grid;
 mod heading;
 mod icon_block;
@@ -39,6 +40,7 @@ mod value_prop_card;
 pub use arrow_link::{ArrowLink, ArrowLinkSize};
 pub use button::{Button, ButtonVariant, IconButton};
 pub use container::Container;
+pub use doc_link_item::DocLinkItem;
 pub use grid::Grid;
 pub use heading::{Heading, HeadingLevel};
 pub use icon_block::{IconBlock, IconBlockSize};

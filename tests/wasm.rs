@@ -21,7 +21,9 @@ use odp::components::header::Header;
 use odp::components::landing::{ClosingColumnsSection, HeroSection, ProjectsSection, ValuePropositionSection};
 use odp::components::team_hero::TeamHero;
 use odp::components::themed_icon::ThemedIcon;
-use odp::components::ui::{ArrowLink, ArrowLinkSize, IconBlock, LabeledSection, TwoColumnIntro, ValuePropCard};
+use odp::components::ui::{
+    ArrowLink, ArrowLinkSize, DocLinkItem, IconBlock, LabeledSection, TwoColumnIntro, ValuePropCard,
+};
 use wasm_bindgen::{JsCast, JsValue};
 use wasm_bindgen_test::*;
 use web_sys::HtmlElement;
@@ -323,4 +325,47 @@ fn labeled_section_renders_uppercase_label_then_children() {
     assert!(label_pos < body_pos, "label must precede body in source order");
     // The label is wrapped in a Mono span (the `mono` brand class).
     assert!(html.contains("WHAT"), "literal WHAT should be in DOM");
+}
+
+// ---------------------------------------------------------------------------
+// t35 — <DocLinkItem>
+// ---------------------------------------------------------------------------
+
+#[wasm_bindgen_test]
+fn doc_link_item_external_renders_li_with_arrow_link() {
+    let root = mount(|| {
+        view! {
+            <ul>
+                <DocLinkItem href="https://example.com/x" title="External Doc" external=true />
+            </ul>
+        }
+    });
+
+    let li = root.query_selector("li").unwrap().expect("li");
+    let anchor = li.query_selector("a").unwrap().expect("anchor inside li");
+    assert_eq!(anchor.get_attribute("href").as_deref(), Some("https://example.com/x"));
+    assert_eq!(anchor.get_attribute("target").as_deref(), Some("_blank"));
+    let html = li.inner_html();
+    assert!(html.contains("External Doc"), "title missing: {html}");
+}
+
+#[wasm_bindgen_test]
+fn doc_link_item_internal_uses_router_anchor() {
+    let root = mount(|| {
+        view! {
+            <Router>
+                <ul>
+                    <DocLinkItem href="/community" title="Community" external=false />
+                </ul>
+            </Router>
+        }
+    });
+
+    let li = root.query_selector("li").unwrap().expect("li");
+    let anchor = li.query_selector("a").unwrap().expect("anchor");
+    assert_eq!(anchor.get_attribute("href").as_deref(), Some("/community"));
+    assert!(
+        anchor.get_attribute("target").is_none(),
+        "internal link must not open new tab"
+    );
 }

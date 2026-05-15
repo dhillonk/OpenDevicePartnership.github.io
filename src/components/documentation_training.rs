@@ -1,6 +1,4 @@
-use crate::components::ui::{
-    ArrowLink, ArrowLinkSize, Heading, HeadingLevel, IconBlock, IconBlockSize, Text, TextSize,
-};
+use crate::components::ui::{DocLinkItem, Heading, HeadingLevel, IconBlock, IconBlockSize, Text, TextSize};
 use leptos::prelude::*;
 
 #[derive(Clone)]
@@ -61,14 +59,7 @@ pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links
                     .into_iter()
                     .map(|link| {
                         view! {
-                            <li>
-                                <ArrowLink
-                                    href=link.href
-                                    title=link.title
-                                    size=ArrowLinkSize::Large
-                                    external=link.external
-                                />
-                            </li>
+                            <DocLinkItem href=link.href title=link.title external=link.external />
                         }
                     })
                     .collect_view()}
