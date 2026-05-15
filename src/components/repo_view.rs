@@ -1,43 +1,33 @@
-use leptos::html::*;
+//! Renders the repository dependency graph using D3 v7.
+//!
+//! Heavy lifting (the D3 force simulation, zoom controls, drag handlers,
+//! style sheet) lives in two static assets that Trunk copies next to the
+//! Wasm bundle:
+//!
+//!  * `public/repo_graph.js`   -- the D3 rendering code, exposed as
+//!    `window.__odpRenderGraph()`.
+//!  * `style/repo_graph.css`   -- linked once from `index.html`.
+//!
+//! On mount this component publishes the per-page node/link payload as
+//! `window.__odpGraphData` and asks the JS module to (re-)render. If
+//! the JS / D3 hasn't loaded yet, `<script>` tags for both are appended
+//! exactly once and the loader chains the first render. Subsequent
+//! mounts (clicking through the three project pages) reuse the already
+//! loaded code and just call `__odpRenderGraph()`.
+
 use leptos::prelude::*;
-use leptos::*;
-use wasm_bindgen::prelude::*;
+use wasm_bindgen::JsCast;
 use web_sys::window;
 
-// Fix the deprecated JsStatic and naming convention
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = ["window", "d3"], thread_local_v2)]
-    static D3: JsValue;
-}
+const D3_SRC: &str = "https://d3js.org/d3.v7.min.js";
+const D3_SCRIPT_ID: &str = "d3-cdn";
+const GRAPH_SCRIPT_ID: &str = "odp-repo-graph-script";
 
 #[component]
 pub fn RepositoryGraph(#[prop(into)] nodes: String, #[prop(into)] links: String) -> impl IntoView {
-    let (nodes_data, _) = signal(nodes);
-    let (links_data, _) = signal(links);
-
-    // Track initialization to prevent multiple runs
-    let (initialized, set_initialized) = signal(false);
-
     Effect::new(move |_| {
-        if !initialized.get() {
-            let nodes_str = nodes_data.get_untracked();
-            let links_str = links_data.get_untracked();
-
-            // Delay execution to next microtask tick to ensure DOM is ready
-            let closure = Closure::once_into_js(move || {
-                init_d3_graph(&nodes_str, &links_str);
-                inject_styles();
-            });
-
-            // Schedule init_d3_graph after rendering
-            window()
-                .unwrap()
-                .set_timeout_with_callback_and_timeout_and_arguments_0(closure.as_ref().unchecked_ref(), 0)
-                .unwrap();
-
-            set_initialized.set(true);
-        }
+        publish_graph_data(&nodes, &links);
+        ensure_graph_loaded();
     });
 
     view! {
@@ -52,319 +42,64 @@ pub fn RepositoryGraph(#[prop(into)] nodes: String, #[prop(into)] links: String)
     }
 }
 
-// Function to inject CSS styles
-fn inject_styles() {
-    let window = window().unwrap();
-    let document = window.document().unwrap();
-    let head = document.head().unwrap();
-
-    let style_element = document.create_element("style").unwrap();
-    style_element.set_inner_html(repository_graph_styles());
-    head.append_child(&style_element).unwrap();
+/// Pushes the per-page node/link JSON onto `window.__odpGraphData` so
+/// `repo_graph.js` can pick it up. Done via an inline `<script>` because
+/// constructing the JS objects from Rust would require pulling in a
+/// JSON-to-JsValue dependency just for this one call site.
+fn publish_graph_data(nodes_json: &str, links_json: &str) {
+    let document = window().and_then(|w| w.document()).expect("document");
+    let head = document.head().expect("head");
+    let script = document.create_element("script").expect("script");
+    script.set_inner_html(&format!(
+        "window.__odpGraphData = {{ nodes: {nodes_json}, links: {links_json} }};\
+         if (typeof window.__odpRenderGraph === 'function') window.__odpRenderGraph();"
+    ));
+    head.append_child(&script).ok();
+    // The inline script does its work on parse; remove it so it doesn't
+    // accumulate one element per route change.
+    script.remove();
 }
 
-#[wasm_bindgen]
-pub fn init_d3_graph(nodes_json: &str, links_json: &str) {
-    let window = window().unwrap();
-    let document = window.document().unwrap();
+/// Appends the d3 CDN `<script>` and the local `repo_graph.js` exactly
+/// once. After the first mount both tags stay in `<head>`; on later
+/// mounts this is a no-op and `repo_graph.js` is already executing
+/// `window.__odpRenderGraph` from `publish_graph_data`'s inline script.
+fn ensure_graph_loaded() {
+    let document = window().and_then(|w| w.document()).expect("document");
+    let head = document.head().expect("head");
 
-    // Store data globally for D3 to access
-    let js_code = format!(
-        r##"
-        window.graphNodes = {nodes_json};
-        window.graphLinks = {links_json};
-        
-        window.initGraph = function() {{
-            const nodes = window.graphNodes;
-            const links = window.graphLinks;
-
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const spacing = 300;
-
-            const svg = d3.select("svg").attr("viewBox", [0, 0, width, height]);
-            const zoomLayer = svg.append("g").attr("class", "zoom-layer");
-
-            const grouped = {{}};
-            const boxHeight = 60;
-            const verticalGap = 20;
-
-            nodes.forEach(d => {{
-                d.fx = d.order * spacing;
-                if (!grouped[d.order]) grouped[d.order] = [];
-                grouped[d.order].push(d);
-            }});
-
-            Object.values(grouped).forEach(group => {{
-                const totalHeight = group.length * (boxHeight + verticalGap);
-                const startY = (height - totalHeight) / 2;
-                group.forEach((node, i) => {{
-                    node.fy = startY + i * (boxHeight + verticalGap);
-                    node.initialFy = node.fy;
-                }});
-            }});
-
-            const classifications = Array.from(
-                new Set(nodes.map(d => JSON.stringify({{ classification: d.classification, order: d.order }})))
-            ).map(s => JSON.parse(s))
-             .sort((a, b) => a.order - b.order);
-
-            const headerGroup = zoomLayer.append("g").attr("class", "column-headers");
-
-            classifications.forEach(({{
-                classification, order
-            }}) => {{
-                const x = order * spacing;
-
-                headerGroup.append("line")
-                    .attr("x1", x)
-                    .attr("y1", 0)
-                    .attr("x2", x)
-                    .attr("y2", height)
-                    .attr("stroke", "#ccc")
-                    .attr("stroke-width", 2)
-                    .attr("stroke-dasharray", "4,4");
-
-                headerGroup.append("text")
-                    .attr("x", x)
-                    .attr("y", 30)
-                    .attr("text-anchor", "middle")
-                    .attr("fill", "#666")
-                    .attr("font-size", "16px")
-                    .attr("font-weight", "bold")
-                    .text(classification);
-            }});
-
-            const link = zoomLayer.append("g")
-                .selectAll("path")
-                .data(links)
-                .join("path")
-                .attr("class", "link");
-
-            const simulation = d3.forceSimulation(nodes)
-                .force("link", d3.forceLink(links).id(d => d.id).distance(150))
-                .force("charge", d3.forceManyBody().strength(-300));
-
-            const node = zoomLayer.append("g")
-                .selectAll("g")
-                .data(nodes)
-                .join("g")
-                .attr("class", "node")
-                .call(drag(simulation));
-
-            node.append("text")
-                .attr("text-anchor", "middle")
-                .attr("dy", "0.35em")
-                .text(d => d.name);
-
-            node.each(function(d) {{
-                const textEl = d3.select(this).select("text").node();
-                const textWidth = textEl.getComputedTextLength();
-                d.boxWidth = textWidth + 20;
-
-                const g = d3.select(this);
-                const rect = g.insert("rect", "text")
-                    .attr("x", -d.boxWidth / 2)
-                    .attr("y", -20)
-                    .attr("width", d.boxWidth)
-                    .attr("height", 40)
-                    .attr("rx", 10)
-                    .attr("ry", 10)
-                    .attr("fill", "white")
-                    .attr("stroke", "#333")
-                    .attr("stroke-width", 1.5);
-
-                d._rect = rect;
-            }});
-
-            node
-                .on("mouseover", function(event, d) {{
-                    d._rect.attr("fill", "#9BFABE");
-                }})
-                .on("mouseout", function(event, d) {{
-                    d._rect.attr("fill", "white");
-                }})
-                .on("click", function(event, d) {{
-                    window.open(d.url, "_blank");
-                }});
-
-            const zoomMin = 0.1;
-            const zoomMax = 3;
-
-            let currentTransform = d3.zoomIdentity;
-
-            const zoomBehavior = d3.zoom()
-                .scaleExtent([zoomMin, zoomMax])
-                .filter((event) => {{
-                    return event.type !== 'wheel';
-                }})
-                .on("zoom", (event) => {{
-                    currentTransform = event.transform;
-                    zoomLayer.attr("transform", currentTransform);
-                }});
-
-            svg.call(zoomBehavior);
-
-            function applyZoom() {{
-                svg.transition().duration(300)
-                   .call(zoomBehavior.transform, currentTransform);
-            }}
-
-            function fitToScreen() {{
-                const xs = nodes.map(n => n.x);
-                const ys = nodes.map(n => n.y);
-                const minX = Math.min(...xs);
-                const maxX = Math.max(...xs);
-                const minY = Math.min(...ys);
-                const maxY = Math.max(...ys);
-
-                const boundsWidth = maxX - minX + 200;
-                const boundsHeight = maxY - minY + 200;
-
-                const scaleX = width / boundsWidth;
-                const scaleY = height / boundsHeight;
-                const scale = Math.min(scaleX, scaleY, zoomMax);
-
-                const centerX = (minX + maxX) / 2;
-                const centerY = (minY + maxY) / 2;
-
-                const tx = width / 2 - scale * centerX;
-                const ty = height / 2 - scale * centerY;
-
-                currentTransform = d3.zoomIdentity.translate(tx, ty).scale(scale);
-                return currentTransform;
-            }}
-
-            // Track if initial fit has been applied
-            let initialFitApplied = false;
-
-            simulation.on("tick", () => {{
-                link.attr("d", d => {{
-                    const dx = d.target.x - d.source.x;
-                    const dy = d.target.y - d.source.y;
-                    const dr = Math.sqrt(dx * dx + dy * dy) * 1.5;
-                    return `M${{d.source.x}},${{d.source.y}} A${{dr}},${{dr}} 0 0,1 ${{d.target.x}},${{d.target.y}}`;
-                }});
-                node.attr("transform", d => `translate(${{ d.x }},${{ d.y }})`);
-                
-                // Apply initial fit after a few ticks when positions have stabilized
-                if (!initialFitApplied && simulation.alpha() < 0.5) {{
-                    initialFitApplied = true;
-                    currentTransform = fitToScreen();
-                    svg.call(zoomBehavior.transform, currentTransform);
-                }}
-            }});
-
-            function drag(simulation) {{
-                function dragstarted(event, d) {{
-                    if (!event.active) simulation.alphaTarget(0.3).restart();
-                }}
-                function dragged(event, d) {{
-                    d.fy = event.y;
-                }}
-                function dragended(event, d) {{
-                    if (!event.active) simulation.alphaTarget(0);
-                    d.fy = d.initialFy;
-                }}
-                return d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
-            }}
-
-            d3.select("#zoom-in").on("click", () => {{
-                const newScale = Math.min(currentTransform.k + 0.1, zoomMax);
-                currentTransform = d3.zoomIdentity
-                    .translate(currentTransform.x, currentTransform.y)
-                    .scale(newScale);
-                applyZoom();
-            }});
-
-            d3.select("#zoom-out").on("click", () => {{
-                const newScale = Math.max(currentTransform.k - 0.1, zoomMin);
-                currentTransform = d3.zoomIdentity
-                    .translate(currentTransform.x, currentTransform.y)
-                    .scale(newScale);
-                applyZoom();
-            }});
-
-            d3.select("#zoom-fit").on("click", () => {{
-                currentTransform = fitToScreen();
-                applyZoom();
-            }});
-        }};
-        
-        // Load D3 and initialize
-        if (typeof d3 === 'undefined') {{
-            const script = document.createElement('script');
-            script.src = 'https://d3js.org/d3.v7.min.js';
-            script.onload = () => window.initGraph();
-            document.head.appendChild(script);
-        }} else {{
-            window.initGraph();
-        }}
-    "##
-    );
-
-    let script_id = "d3-graph-script";
-
-    // Remove old script if it exists
-    if let Some(old_script) = document.get_element_by_id(script_id) {
-        old_script.remove();
+    if document.get_element_by_id(GRAPH_SCRIPT_ID).is_some() {
+        return;
     }
 
-    let script_el = document.create_element("script").unwrap();
-    script_el.set_attribute("id", script_id).unwrap();
-    script_el.set_inner_html(&js_code);
-    document.head().unwrap().append_child(&script_el).unwrap();
-}
+    let load_graph_script = move || {
+        let document = window().and_then(|w| w.document()).expect("document");
+        let head = document.head().expect("head");
+        if document.get_element_by_id(GRAPH_SCRIPT_ID).is_some() {
+            return;
+        }
+        let el = document
+            .create_element("script")
+            .expect("script")
+            .dyn_into::<web_sys::HtmlScriptElement>()
+            .expect("HtmlScriptElement");
+        el.set_id(GRAPH_SCRIPT_ID);
+        el.set_src("/repo_graph.js");
+        head.append_child(&el).ok();
+    };
 
-// CSS styles function
-pub fn repository_graph_styles() -> &'static str {
-    r#"
-        .repository-graph {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background: #f8f9fa;
-        }
-        
-        #zoom-controls {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 5px;
-        }
-        
-        #zoom-controls button {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #zoom-controls button:hover {
-            background: #f0f0f0;
-        }
-        
-        .node {
-            cursor: pointer;
-        }
-        
-        .link {
-            fill: none;
-            stroke: #666;
-            stroke-width: 2;
-        }
-        
-        .column-headers text {
-            font-family: Arial, sans-serif;
-        }
-    "#
+    if document.get_element_by_id(D3_SCRIPT_ID).is_none() {
+        let d3 = document
+            .create_element("script")
+            .expect("script")
+            .dyn_into::<web_sys::HtmlScriptElement>()
+            .expect("HtmlScriptElement");
+        d3.set_id(D3_SCRIPT_ID);
+        d3.set_src(D3_SRC);
+        let onload = wasm_bindgen::closure::Closure::once_into_js(load_graph_script);
+        d3.set_onload(Some(onload.as_ref().unchecked_ref()));
+        head.append_child(&d3).ok();
+    } else {
+        load_graph_script();
+    }
 }

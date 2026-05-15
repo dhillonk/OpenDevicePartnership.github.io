@@ -1,0 +1,52 @@
+/* Styles for the D3 repository graph rendered by
+ * src/components/repo_view.rs + public/repo_graph.js. Loaded once at
+ * boot via index.html so the component does not have to inject a
+ * <style> tag at runtime. */
+
+.repository-graph {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #f8f9fa;
+}
+
+#zoom-controls {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 5px;
+}
+
+#zoom-controls button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#zoom-controls button:hover {
+    background: #f0f0f0;
+}
+
+.repository-graph .node {
+    cursor: pointer;
+}
+
+.repository-graph .link {
+    fill: none;
+    stroke: #666;
+    stroke-width: 2;
+}
+
+.repository-graph .column-headers text {
+    font-family: Arial, sans-serif;
+}
