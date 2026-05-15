@@ -79,7 +79,7 @@ pub fn CommunityTeams() -> impl IntoView {
             <div class="flex flex-col items-left mb-20">
                 <ThemedIcon name="teams" alt="Teams" class="icon" />
                 <span
-                    class="h2_mobile md:h2 break-words w-full"
+                    class="h2 break-words w-full"
                     style="display: flex; justify-content: left; align-items: left;"
                 >
                     {"Steering Committee"}
@@ -88,7 +88,7 @@ pub fn CommunityTeams() -> impl IntoView {
             <TeamGrid members=steering_committee />
             <div class="flex flex-col items-left mb-20">
                 <span
-                    class="h2_mobile md:h2 break-words w-full"
+                    class="h2 break-words w-full"
                     style="display: flex; justify-content: left; align-items: left;"
                 >
                     {"Teams"}
@@ -99,7 +99,7 @@ pub fn CommunityTeams() -> impl IntoView {
                     class="flex flex-col items-start h-full"
                     style="width: 320px; min-height: 350px; justify-content: flex-start;"
                 >
-                    <span class="h3_mobile md:h3 break-words w-full block text-left">
+                    <span class="h3 break-words w-full block text-left">
                         {"Boot Firmware (Patina)"}
                     </span>
                     <span class="p2 break-words w-full block text-left">
@@ -121,7 +121,7 @@ pub fn CommunityTeams() -> impl IntoView {
                     class="flex flex-col items-start h-full"
                     style="width: 320px; min-height: 350px; justify-content: flex-start;"
                 >
-                    <span class="h3_mobile md:h3 break-words w-full block text-left">
+                    <span class="h3 break-words w-full block text-left">
                         {"Secure Embedded Controller"}
                     </span>
                     <span class="p2 break-words w-full block text-left">
@@ -143,7 +143,7 @@ pub fn CommunityTeams() -> impl IntoView {
                     class="flex flex-col items-start h-full"
                     style="width: 320px; min-height: 350px; justify-content: flex-start;"
                 >
-                    <span class="h3_mobile md:h3 break-words w-full block text-left">
+                    <span class="h3 break-words w-full block text-left">
                         {"Unified EC Services"}
                     </span>
                     <span class="p2 break-words w-full block text-left">

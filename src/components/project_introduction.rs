@@ -39,13 +39,13 @@ pub fn ProjectIntroduction(
                             style="object-fit: contain;"
                         />
                         <span
-                            class="h2_mobile md:h1"
+                            class="h1"
                             style="display: block; color: white; margin-bottom: 10px; word-break: break-word; text-align: left;"
                         >
                             {project_title}
                         </span>
                         <span
-                            class="p2_mobile md:p1"
+                            class="p1"
                             style="display: block; color: white; word-break: break-word; text-align: left;"
                         >
                             {project_summary}
@@ -54,9 +54,9 @@ pub fn ProjectIntroduction(
                 </div>
                 <div class="flex flex-col items-start px-2 md:px-0 w-full">
                     <span class="mono block text-left">{"WHAT"}</span>
-                    <span class="p2_mobile md:p2 block text-left" inner_html=project_what></span>
+                    <span class="p2 block text-left" inner_html=project_what></span>
                     <span class="mono block text-left">{"WHY"}</span>
-                    <span class="p2_mobile md:p2 block text-left">{project_why}</span>
+                    <span class="p2 block text-left">{project_why}</span>
                     <span class="mono block text-left">{"WHO"}</span>
                     <div class="link_mobile md:link block text-left">
                         <A href=project_who>{"Learn more about the team →"}</A>
@@ -66,7 +66,7 @@ pub fn ProjectIntroduction(
         </section>
         <div class="background_primary px-2 md:px-0">
             <span
-                class="p1_mobile md:p1"
+                class="p1"
                 style="
                 display: block;
                 text-align: left;

@@ -57,7 +57,7 @@ pub fn TeamECServices() -> impl IntoView {
                     </div>
                     <div class="flex flex-col items-start w-full md:w-[600px]">
                         <span class="mono block text-left">{"Unified EC services team"}</span>
-                        <span class="p1_mobile md:p1 block text-left">
+                        <span class="p1 block text-left">
                             {"Designing and managing implementation of a unified EC Services interface"}
                         </span>
                     </div>

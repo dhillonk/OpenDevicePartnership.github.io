@@ -125,9 +125,7 @@ pub fn AnnouncementsPage() -> impl IntoView {
     view! {
         <div class="flex flex-col w-full min-h-screen background_quaternary">
             <Header background_class="background_quaternary" />
-            <div class="h2_mobile md:h1 px-4 md:px-10 pt-4 md:pt-20 pb-4 md:pb-20">
-                Announcements
-            </div>
+            <div class="h1 px-4 md:px-10 pt-4 md:pt-20 pb-4 md:pb-20">Announcements</div>
             <div class="flex flex-col lg:flex-row w-full flex-1 relative">
                 <div class="w-full lg:w-[450px] xl:w-[500px] min-h-[200px] lg:min-h-[600px] xl:min-h-[700px] overflow-y-auto background_tertiary z-10 p-2 md:p-4 lg:p-6 mb-4 lg:mb-0">
                     <ul class="space-y-2 md:space-y-4">
@@ -175,8 +173,8 @@ pub fn AnnouncementsPage() -> impl IntoView {
                         };
                         view! {
                             <div class="p_mobile md:p">
-                                <div class="h2_mobile md:h2 pb-4 md:pb-6">{title}</div>
-                                <div class="p2_mobile md:p2">{content}</div>
+                                <div class="h2 pb-4 md:pb-6">{title}</div>
+                                <div class="p2">{content}</div>
                             </div>
                         }
                     }}

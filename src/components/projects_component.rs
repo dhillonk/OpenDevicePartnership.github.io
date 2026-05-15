@@ -8,17 +8,17 @@ pub fn ProjectsComponent() -> impl IntoView {
             <div class="flex flex-col md:flex-row gap-10 md:gap-20">
                 <div class="flex flex-col items-start w-full md:w-[700px]">
                     <span class="h1 block text-left">{"System Firmware Domains"}</span>
-                    <span class="h2_mobile md:h2 block text-left">
+                    <span class="h2 block text-left">
                         {"Reusable foundations for secure, high-quality device platforms"}
                     </span>
                 </div>
                 <div class="flex flex-col items-start w-full md:w-[600px] mt-8 md:mt-0">
                     <span class="mono block text-left">{"WHAT"}</span>
-                    <span class="p1_mobile md:p1 block text-left">
+                    <span class="p1 block text-left">
                         {"ODP supports development across three core areas of system firmware. Each domain is designed for modularity, security, and long-term reuse across hardware platforms."}
                     </span>
                     <span class="mono block text-left">{"WHY"}</span>
-                    <span class="p1_mobile md:p1 block text-left">
+                    <span class="p1 block text-left">
                         {"Modern computing devices need modern solutions that prioritize memory safety and security from the language on up."}
                     </span>
                 </div>
@@ -45,13 +45,9 @@ pub fn ProjectsComponent() -> impl IntoView {
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"
                     >
-                        <span class="h2_mobile md:h2 block text-left">
-                            {"Patina (Boot Firmware)"}
-                        </span>
-                        <span class="p1_mobile md:p1 block text-left">
-                            {"Rethink your boot firmware"}
-                        </span>
-                        <span class="p2_mobile md:p2 block text-left">
+                        <span class="h2 block text-left">{"Patina (Boot Firmware)"}</span>
+                        <span class="p1 block text-left">{"Rethink your boot firmware"}</span>
+                        <span class="p2 block text-left">
                             {"Patina provides a UEFI compatible firmware interface written in the Rust language with a focus on memory safety and composition.  Compatible with current UEFI device drivers and loaders but with a focus on the future."}
                         </span>
                         <div class="flex flex-col gap-[8px]">
@@ -94,13 +90,11 @@ pub fn ProjectsComponent() -> impl IntoView {
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"
                     >
-                        <span class="h2_mobile md:h2 block text-left">
-                            {"Secure Embedded Controller"}
-                        </span>
-                        <span class="p1_mobile md:p1 block text-left">
+                        <span class="h2 block text-left">{"Secure Embedded Controller"}</span>
+                        <span class="p1 block text-left">
                             {"A Secure end-to-end Rust-based EC implementation"}
                         </span>
-                        <span class="p2_mobile md:p2 block text-left">
+                        <span class="p2 block text-left">
                             {"ODP EC provides a modern embedded controller firmware written in Rust. Designed for safety and composability, it serves as a foundational layer for secure device management."}
                         </span>
                         <div class="flex flex-col gap-[8px]">
@@ -143,13 +137,13 @@ pub fn ProjectsComponent() -> impl IntoView {
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"
                     >
-                        <span class="h2_mobile md:h2 block text-left">
+                        <span class="h2 block text-left">
                             {"Unified Embedded Controller Services"}
                         </span>
-                        <span class="p1_mobile md:p1 block text-left">
+                        <span class="p1 block text-left">
                             {"A standard and secure cross-architecture EC services implementation"}
                         </span>
-                        <span class="p2_mobile md:p2 block text-left">
+                        <span class="p2 block text-left">
                             {"ODP EC Services provides a modern EC services firmware written in Rust. Designed for safety and composability, it serves as a foundational layer for secure EC services on Windows platforms."}
                         </span>
                         <div class="flex flex-col gap-[8px]">

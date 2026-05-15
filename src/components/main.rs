@@ -11,7 +11,7 @@ pub fn Main() -> impl IntoView {
                     <h1 class="h1 py-4 w-full max-w-full text-left break-words">
                         "Building the Future of Trusted System Software Together"
                     </h1>
-                    <p class="p1_mobile md:p1 w-full max-w-full text-left break-words">
+                    <p class="p1 w-full max-w-full text-left break-words">
                         "Leading technology partners creating secure, reusable, and reliable firmware for modern client devices."
                     </p>
                 </div>
@@ -23,8 +23,8 @@ pub fn Main() -> impl IntoView {
                     >
                         <A href="/getting-started">
                             <div class="flex flex-row items-center justify-center gap-4 w-full max-w-full">
-                                <span class="h3_mobile md:h3">"Getting started"</span>
-                                <span class="h3_mobile md:h3">"→"</span>
+                                <span class="h3">"Getting started"</span>
+                                <span class="h3">"→"</span>
                             </div>
                         </A>
                     </div>
@@ -35,8 +35,8 @@ pub fn Main() -> impl IntoView {
                     >
                         <A href="/projects">
                             <div class="flex flex-row items-center justify-center gap-4 w-full max-w-full">
-                                <span class="h3_mobile md:h3">"Projects"</span>
-                                <span class="h3_mobile md:h3">"→"</span>
+                                <span class="h3">"Projects"</span>
+                                <span class="h3">"→"</span>
                             </div>
                         </A>
                     </div>
@@ -58,11 +58,11 @@ pub fn Main() -> impl IntoView {
                             margin-bottom: 16px;
                             "
                         />
-                        <span class="h2_mobile md:h2 block w-full max-w-full text-left break-words">
+                        <span class="h2 block w-full max-w-full text-left break-words">
                             "Welcome"
                         </span>
                         <div style="height: 10px;"></div>
-                        <span class="p1_mobile md:p1 block w-full max-w-full text-left break-words">
+                        <span class="p1 block w-full max-w-full text-left break-words">
                             "Learn how ODP projects help build secure, modern devices"
                         </span>
                     </div>

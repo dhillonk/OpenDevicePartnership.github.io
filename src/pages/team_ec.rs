@@ -105,7 +105,7 @@ pub fn TeamEC() -> impl IntoView {
                     </div>
                     <div class="flex flex-col items-start w-full md:w-[600px]">
                         <span class="mono block text-left">{"Secure EC team"}</span>
-                        <span class="p1_mobile md:p1 block text-left">
+                        <span class="p1 block text-left">
                             {"Developing and managing secure EC internals"}
                         </span>
                     </div>
