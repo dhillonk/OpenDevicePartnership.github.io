@@ -25,17 +25,17 @@ pub fn ProjectsSection() -> impl IntoView {
             <div class="flex flex-col md:flex-row gap-16 justify-start">
                 <ImageButton
                     href="/boot-firmware"
-                    img_src="/images/patina.png"
+                    img_src="/images/patina.webp"
                     alt="Boot Firmware"
                 />
                 <ImageButton
                     href="/embedded-controller"
-                    img_src="/images/ec.png"
+                    img_src="/images/ec.webp"
                     alt="Embedded Controller"
                 />
                 <ImageButton
                     href="/windows-ec-services"
-                    img_src="/images/ec_services.png"
+                    img_src="/images/ec_services.webp"
                     alt="EC Services"
                 />
             </div>

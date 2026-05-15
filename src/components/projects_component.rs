@@ -41,7 +41,7 @@ pub fn ProjectsComponent() -> impl IntoView {
 
                 <ProjectRow
                     href="/boot-firmware"
-                    img_src="/images/patina.png"
+                    img_src="/images/patina.webp"
                     alt="Boot Firmware"
                     title="Patina (Boot Firmware)"
                     tagline="Rethink your boot firmware"
@@ -53,7 +53,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                 />
                 <ProjectRow
                     href="/embedded-controller"
-                    img_src="/images/ec.png"
+                    img_src="/images/ec.webp"
                     alt="Embedded Controller"
                     title="Secure Embedded Controller"
                     tagline="A Secure end-to-end Rust-based EC implementation"
@@ -65,7 +65,7 @@ pub fn ProjectsComponent() -> impl IntoView {
                 />
                 <ProjectRow
                     href="/windows-ec-services"
-                    img_src="/images/ec_services.png"
+                    img_src="/images/ec_services.webp"
                     alt="EC Services"
                     title="Unified Embedded Controller Services"
                     tagline="A standard and secure cross-architecture EC services implementation"
