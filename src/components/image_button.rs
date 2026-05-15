@@ -14,24 +14,26 @@ pub fn ImageButton(
         <a
             href=href
             style="
-                display: inline-block;
-                border: none;
-                background: none;
-                padding: 0;
-                cursor: pointer;
-                text-decoration: none;
+            display: inline-block;
+            border: none;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+            text-decoration: none;
             "
         >
-            <style>{
-                if let (Some(mw), Some(mh)) = (mobile_width, mobile_height) {
+            <style>
+                {if let (Some(mw), Some(mh)) = (mobile_width, mobile_height) {
                     format!(
                         "@media (max-width: 767px) {{ img[alt='{}'] {{ width: {}px !important; height: {}px !important; }} }}",
-                        alt, mw, mh
+                        alt,
+                        mw,
+                        mh,
                     )
                 } else {
                     String::new()
-                }
-            }</style>
+                }}
+            </style>
             <img
                 src=img_src
                 alt=alt
@@ -43,7 +45,8 @@ pub fn ImageButton(
                         object-fit: cover;
                         display: block;
                     ",
-                    width, height
+                    width,
+                    height,
                 )
             />
         </a>

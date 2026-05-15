@@ -27,7 +27,7 @@ pub fn BootFirmware() -> impl IntoView {
                 big_image_url="/images/PatinaBackground.png"
                 small_image_url="/images/dark/ProjectIcon_P_Patina_DarkMode.svg"
             />
-            <RepositoryGraph nodes=nodes_data links=links_data/>
+            <RepositoryGraph nodes=nodes_data links=links_data />
             <DocumentationTraining />
         </PageLayout>
     }

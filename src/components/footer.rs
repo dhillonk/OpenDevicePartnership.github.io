@@ -36,11 +36,7 @@ pub fn Footer() -> impl IntoView {
                         rel="noopener noreferrer"
                         class="flex items-center justify-center px-1 md:px-[16px] py-1 md:py-[24px]"
                     >
-                        <ThemedIcon
-                            name="zulip"
-                            alt="Zulip"
-                            class="w-5 h-5 md:w-auto md:h-auto"
-                        />
+                        <ThemedIcon name="zulip" alt="Zulip" class="w-5 h-5 md:w-auto md:h-auto" />
                     </a>
 
                     <a

@@ -91,11 +91,9 @@ pub fn TeamPatina() -> impl IntoView {
                 class="background_primary px-2 md:px-[120px] py-4 md:py-[120px]"
                 style="position: relative;"
             >
-                {/* Back Button: above content on mobile, absolutely positioned on desktop */}
+                {}
                 <div class="block md:hidden mb-4">
-                    <a
-                        href="javascript:history.back()"
-                        class="block m-0 p-0">
+                    <a href="javascript:history.back()" class="block m-0 p-0">
                         <ThemedIcon
                             name="backbutton"
                             alt="Back"
@@ -104,9 +102,7 @@ pub fn TeamPatina() -> impl IntoView {
                     </a>
                 </div>
                 <div class="hidden md:block" style="position: absolute; left: 0; top: 0;">
-                    <a
-                        href="javascript:history.back()"
-                        class="block m-0 p-0">
+                    <a href="javascript:history.back()" class="block m-0 p-0">
                         <ThemedIcon
                             name="backbutton"
                             alt="Back"
@@ -115,22 +111,12 @@ pub fn TeamPatina() -> impl IntoView {
                     </a>
                 </div>
                 <div class="flex flex-col md:flex-row gap-[80px] items-start">
-                    {/* Left Column */}
-                    <div class="flex flex-col items-start w-full md:w-[700px]">
-                        <span
-                            class="h1_mobile md:h1 block text-left">
-                            {"Meet the team"}
-                        </span>
-                    </div>
-                    {/* Right Column */}
+                    {} <div class="flex flex-col items-start w-full md:w-[700px]">
+                        <span class="h1_mobile md:h1 block text-left">{"Meet the team"}</span>
+                    </div> {}
                     <div class="flex flex-col items-start w-full md:w-[600px]">
-                        {/* Team Introduction */}
-                        <span
-                            class="mono block text-left">
-                            {"Patina team"}
-                        </span>
-                        <span
-                            class="p1_mobile md:p1 block text-left">
+                        {} <span class="mono block text-left">{"Patina team"}</span>
+                        <span class="p1_mobile md:p1 block text-left">
                             {"Developing and managing development of a new modern UEFI"}
                         </span>
                     </div>

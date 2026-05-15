@@ -24,11 +24,16 @@ pub fn WindowsEcServices() -> impl IntoView {
 
     view! {
         <PageLayout scrollable_x=true>
-            <ProjectIntroduction project_title=project_title project_summary=project_summary project_what=project_what project_why=project_why
+            <ProjectIntroduction
+                project_title=project_title
+                project_summary=project_summary
+                project_what=project_what
+                project_why=project_why
                 project_who="/team-ec-services"
                 big_image_url="/images/ECServicesBackground.png"
-                small_image_url="/images/dark/ProjectIcon_ES_Patina_DarkMode.svg" />
-            <RepositoryGraph nodes=nodes_data links=links_data/>
+                small_image_url="/images/dark/ProjectIcon_ES_Patina_DarkMode.svg"
+            />
+            <RepositoryGraph nodes=nodes_data links=links_data />
             <DocumentationTraining />
         </PageLayout>
     }

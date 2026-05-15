@@ -36,8 +36,7 @@ pub fn PartnersGrid() -> impl IntoView {
     view! {
         <section class="background_primary px-4 md:px-[120px] py-[80px]">
             <div class="mb-[60px]">
-                <span
-                    class="h1_mobile md:h1 break-words w-full block text-left">
+                <span class="h1_mobile md:h1 break-words w-full block text-left">
                     {"Our Partners"}
                 </span>
             </div>
