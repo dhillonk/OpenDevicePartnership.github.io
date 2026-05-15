@@ -32,6 +32,7 @@ mod link;
 mod mono;
 mod stack;
 mod text;
+mod value_prop_card;
 
 pub use arrow_link::{ArrowLink, ArrowLinkSize};
 pub use button::{Button, ButtonVariant, IconButton};
@@ -43,6 +44,7 @@ pub use link::{Link, LinkSize};
 pub use mono::{Mono, MonoSize};
 pub use stack::{Stack, StackDirection};
 pub use text::{Text, TextSize};
+pub use value_prop_card::ValuePropCard;
 
 // Re-exports so callers can pull every primitive from a single path.
 pub use crate::components::section::{Section, Surface};

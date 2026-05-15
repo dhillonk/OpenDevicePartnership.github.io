@@ -1,7 +1,6 @@
 use crate::components::image_button::ImageButton;
 use crate::components::section::{Section, Surface};
-use crate::components::themed_icon::ThemedIcon;
-use crate::components::ui::{Heading, HeadingLevel, Text, TextSize};
+use crate::components::ui::{Heading, HeadingLevel, Text, TextSize, ValuePropCard};
 use leptos::prelude::*;
 
 #[component]
@@ -30,33 +29,24 @@ pub fn LandingPage() -> impl IntoView {
                     {"Value Proposition"}
                 </Heading>
                 <div class="flex flex-col md:flex-row gap-16">
-                    <div class="flex flex-col items-start w-full md:flex-1">
-                        <ThemedIcon name="lock" alt="Security Icon" class="icon" />
-                        <Heading level=HeadingLevel::H3 class="break-words w-full text-left">
-                            {"Enhanced Security"}
-                        </Heading>
-                        <Text size=TextSize::Large class="break-words w-full text-left">
-                            {"Security threats continue to evolve. ODP takes a proactive approach: reducing attack surfaces, using secure hardware features, leveraging the memory-safe Rust language, and designing every component with security-first principles."}
-                        </Text>
-                    </div>
-                    <div class="flex flex-col items-start w-full md:flex-1">
-                        <ThemedIcon name="checkcircle" alt="Interoperability Icon" class="icon" />
-                        <Heading level=HeadingLevel::H3 class="break-words w-full text-left">
-                            {"Standardization"}
-                        </Heading>
-                        <Text size=TextSize::Large class="break-words w-full text-left">
-                            {"Many device firmware components are 'invisible plumbing' - necessary but costly to build and maintain. ODP's standards-based approach simplifies this infrastructure, maximizing reuse across devices, architectures (x86 and ARM), and generations."}
-                        </Text>
-                    </div>
-                    <div class="flex flex-col items-start w-full md:flex-1">
-                        <ThemedIcon name="fastforward" alt="Innovation Icon" class="icon" />
-                        <Heading level=HeadingLevel::H3 class="break-words w-full text-left">
-                            {"Accelerated Development"}
-                        </Heading>
-                        <Text size=TextSize::Large class="break-words w-full text-left">
-                            {"Open collaboration means sharing solutions, reducing duplicated work, and speeding up the development of high-quality products."}
-                        </Text>
-                    </div>
+                    <ValuePropCard
+                        icon="lock"
+                        icon_alt="Security Icon"
+                        title="Enhanced Security"
+                        body="Security threats continue to evolve. ODP takes a proactive approach: reducing attack surfaces, using secure hardware features, leveraging the memory-safe Rust language, and designing every component with security-first principles."
+                    />
+                    <ValuePropCard
+                        icon="checkcircle"
+                        icon_alt="Interoperability Icon"
+                        title="Standardization"
+                        body="Many device firmware components are 'invisible plumbing' - necessary but costly to build and maintain. ODP's standards-based approach simplifies this infrastructure, maximizing reuse across devices, architectures (x86 and ARM), and generations."
+                    />
+                    <ValuePropCard
+                        icon="fastforward"
+                        icon_alt="Innovation Icon"
+                        title="Accelerated Development"
+                        body="Open collaboration means sharing solutions, reducing duplicated work, and speeding up the development of high-quality products."
+                    />
                 </div>
             </div>
         </Section>
