@@ -30,17 +30,12 @@ pub fn ProjectsComponent() -> impl IntoView {
             <div class="flex flex-col gap-16">
 
                 <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton
-                            href="/boot-firmware"
-                            img_src="/images/patina.png"
-                            alt="Boot Firmware"
-                            width=600
-                            height=518
-                            mobile_width=Some(320)
-                            mobile_height=Some(250)
-                        />
-                    </div>
+                    <ImageButton
+                        href="/boot-firmware"
+                        img_src="/images/patina.png"
+                        alt="Boot Firmware"
+                        class="aspect-square max-w-[600px]"
+                    />
                     <div
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"
@@ -75,17 +70,12 @@ pub fn ProjectsComponent() -> impl IntoView {
                     </div>
                 </div>
                 <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton
-                            href="/embedded-controller"
-                            img_src="/images/ec.png"
-                            alt="Embedded Controller"
-                            width=600
-                            height=518
-                            mobile_width=Some(320)
-                            mobile_height=Some(250)
-                        />
-                    </div>
+                    <ImageButton
+                        href="/embedded-controller"
+                        img_src="/images/ec.png"
+                        alt="Embedded Controller"
+                        class="aspect-square max-w-[600px]"
+                    />
                     <div
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"
@@ -122,17 +112,12 @@ pub fn ProjectsComponent() -> impl IntoView {
                     </div>
                 </div>
                 <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-                    <div class="w-full max-w-full md:max-w-[600px] md:w-[600px] md:h-[518px]">
-                        <ImageButton
-                            href="/windows-ec-services"
-                            img_src="/images/ec_services.png"
-                            alt="EC Services"
-                            width=600
-                            height=518
-                            mobile_width=Some(320)
-                            mobile_height=Some(250)
-                        />
-                    </div>
+                    <ImageButton
+                        href="/windows-ec-services"
+                        img_src="/images/ec_services.png"
+                        alt="EC Services"
+                        class="aspect-square max-w-[600px]"
+                    />
                     <div
                         class="flex flex-col items-start w-full md:w-auto mt-8 md:mt-0"
                         style="flex: 1;"
