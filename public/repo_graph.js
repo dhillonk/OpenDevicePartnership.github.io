@@ -1,10 +1,15 @@
 // Repository graph rendered with D3 v7. The Rust component
 // `RepositoryGraph` (src/components/repo_view.rs) sets
 // `window.__odpGraphData = { nodes, links }` and then loads this file
-// once per session. Each call to `window.__odpRenderGraph()` clears
-// the existing <svg> and (re-)renders the graph with whatever is in
-// __odpGraphData, so that route changes between the three project
-// pages get a fresh graph without re-injecting any <script>/<style>.
+// on demand on the first mount of a project page. Each call to
+// `window.__odpRenderGraph()` clears the existing <svg> and
+// (re-)renders the graph with whatever is in __odpGraphData, so that
+// route changes between the three project pages get a fresh graph
+// without re-injecting any <script>/<style>.
+//
+// D3 itself is also loaded on demand by this file (see `ensureD3`),
+// so the ~280 KB d3 bundle never enters the critical path for users
+// who don't visit a project page.
 
 (function () {
     "use strict";
@@ -15,12 +20,29 @@
     const ZOOM_MIN = 0.1;
     const ZOOM_MAX = 3;
 
+    const D3_URL = "https://d3js.org/d3.v7.min.js";
+    let d3LoadingPromise = null;
+
+    function ensureD3() {
+        if (typeof d3 !== "undefined") return Promise.resolve();
+        if (d3LoadingPromise) return d3LoadingPromise;
+        d3LoadingPromise = new Promise((resolve, reject) => {
+            const s = document.createElement("script");
+            s.src = D3_URL;
+            s.async = true;
+            s.onload = () => resolve();
+            s.onerror = () => {
+                d3LoadingPromise = null;
+                reject(new Error("Failed to load D3"));
+            };
+            document.head.appendChild(s);
+        });
+        return d3LoadingPromise;
+    }
+
     function render() {
         if (typeof d3 === "undefined") {
-            // d3 is loaded as a sibling <script defer> in index.html;
-            // on a very first paint it may not be parsed yet. Try
-            // again on the next animation frame.
-            requestAnimationFrame(render);
+            ensureD3().then(render).catch(() => {});
             return;
         }
         const data = window.__odpGraphData;
@@ -223,4 +245,10 @@
     }
 
     window.__odpRenderGraph = render;
+
+    // If the Rust component already published data and called
+    // __odpRenderGraph() before this script finished loading, that
+    // earlier call was a no-op (function did not exist yet). Render
+    // now so the graph appears on first navigation to a project page.
+    if (window.__odpGraphData) render();
 })();

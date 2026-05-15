@@ -2,36 +2,45 @@
 //!
 //! All heavy lifting (force simulation, zoom controls, drag handlers,
 //! styles) lives in two static assets that Trunk copies next to the
-//! Wasm bundle and `index.html` loads as deferred scripts:
+//! Wasm bundle:
 //!
-//!  * `public/repo_graph.js`  -- defines `window.__odpRenderGraph()`.
+//!  * `public/repo_graph.js`  -- defines `window.__odpRenderGraph()`
+//!    and self-loads D3 on demand.
 //!  * `style/repo_graph.css`  -- the graph styles.
 //!
-//! Because both scripts are `<script defer>` they finish executing
-//! before the Wasm bundle boots, so on every component mount we can
-//! just publish the per-page payload as `window.__odpGraphData` and
-//! call `__odpRenderGraph()`. `repo_graph.js` itself handles the rare
-//! race where its `<svg>` host hasn't mounted yet by retrying on the
-//! next animation frame.
+//! Both assets are loaded **lazily**, only when a `RepositoryGraph`
+//! component first mounts (i.e. when the user navigates to a project
+//! page). This keeps the ~280 KB D3 bundle off the critical path for
+//! every other page.
 //!
-//! ## Why no `<script>` injection from Rust?
+//! ## Load order on first mount
 //!
-//! Earlier versions appended d3 + `repo_graph.js` from this Effect on
-//! the first mount. That introduced a load-order race: on the first
-//! navigation to a project page the scripts had not finished
-//! downloading by the time the data was published, so the graph
-//! never appeared until the user reloaded the page (and the scripts
-//! were served from cache).
+//! 1. The Effect publishes per-page payload as `window.__odpGraphData`.
+//! 2. The Effect calls `request_render()`. If `__odpRenderGraph` is
+//!    already defined (subsequent mounts), it runs immediately.
+//! 3. The Effect calls `ensure_graph_script()`, which injects
+//!    `<script src="/repo_graph.js">` exactly once. When that script
+//!    finishes loading, it self-executes `render()` because
+//!    `__odpGraphData` is already set (see `public/repo_graph.js`).
+//! 4. `repo_graph.js` itself injects `<script src=".../d3.v7.min.js">`
+//!    on first render, then resolves once D3 is ready.
+//!
+//! Subsequent route changes just publish fresh data + call render
+//! synchronously -- no more script injection or downloads.
 
 use leptos::prelude::*;
 use wasm_bindgen::{JsCast, JsValue};
 use web_sys::js_sys;
+
+const REPO_GRAPH_SCRIPT_ID: &str = "odp-repo-graph-script";
+const REPO_GRAPH_SCRIPT_SRC: &str = "/repo_graph.js";
 
 #[component]
 pub fn RepositoryGraph(#[prop(into)] nodes: String, #[prop(into)] links: String) -> impl IntoView {
     Effect::new(move |_| {
         publish_graph_data(&nodes, &links);
         request_render();
+        ensure_graph_script();
     });
 
     view! {
@@ -63,10 +72,11 @@ fn publish_graph_data(nodes_json: &str, links_json: &str) {
     let _ = js_sys::Reflect::set(&window, &JsValue::from_str("__odpGraphData"), &payload);
 }
 
-/// Calls `window.__odpRenderGraph()` if it is defined. The script
-/// that defines it is injected via `<script defer>` in `index.html`,
-/// so by the time the Wasm bundle mounts a `RepositoryGraph` it has
-/// already executed.
+/// Calls `window.__odpRenderGraph()` if it is defined. On the very
+/// first mount the script that defines it has not been injected yet,
+/// in which case this is a no-op and `repo_graph.js` will self-render
+/// once it loads (it checks for `__odpGraphData` at the end of its
+/// IIFE).
 fn request_render() {
     let Some(window) = web_sys::window() else {
         return;
@@ -76,5 +86,28 @@ fn request_render() {
     };
     if let Some(func) = render.dyn_ref::<js_sys::Function>() {
         let _ = func.call0(&JsValue::UNDEFINED);
+    }
+}
+
+/// Injects `<script src="/repo_graph.js">` into `<head>` exactly once
+/// per session. Subsequent calls are cheap no-ops.
+fn ensure_graph_script() {
+    let Some(window) = web_sys::window() else {
+        return;
+    };
+    let Some(document) = window.document() else {
+        return;
+    };
+    if document.get_element_by_id(REPO_GRAPH_SCRIPT_ID).is_some() {
+        return;
+    }
+    let Ok(script) = document.create_element("script") else {
+        return;
+    };
+    let _ = script.set_attribute("id", REPO_GRAPH_SCRIPT_ID);
+    let _ = script.set_attribute("src", REPO_GRAPH_SCRIPT_SRC);
+    let _ = script.set_attribute("defer", "");
+    if let Some(head) = document.head() {
+        let _ = head.append_child(&script);
     }
 }
