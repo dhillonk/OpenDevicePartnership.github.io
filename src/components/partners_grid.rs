@@ -2,24 +2,29 @@ use leptos::prelude::*;
 
 struct Partner {
     name: &'static str,
+    url: &'static str,
     logo: &'static str,
 }
 
 const PARTNERS: &[Partner] = &[
     Partner {
         name: "Microsoft Surface",
+        url: "https://microsoft.com/surface",
         logo: "/images/partners/microsoft_surface.svg",
     },
     Partner {
         name: "NXP",
+        url: "https://nxp.com",
         logo: "/images/partners/nxp.svg",
     },
     Partner {
-        name: "tweede golf",
+        name: "Tweede Golf",
+        url: "https://tweedegolf.nl/en",
         logo: "/images/partners/tweede_golf.svg",
     },
     Partner {
         name: "CIX",
+        url: "https://en.cixtech.com",
         logo: "/images/partners/cix.svg",
     },
 ];
@@ -37,11 +42,17 @@ pub fn PartnersGrid() -> impl IntoView {
                 {PARTNERS.iter().map(|partner| {
                     view! {
                         <div class="flex items-center justify-center w-full h-[80px] md:h-[100px]">
-                            <img
+                            <a
+                               href=partner.url
+                               target="_blank"
+                               rel="noopener noreferrer"
+                            >
+                               <img
                                 src=partner.logo
                                 alt=partner.name
                                 class="max-w-[180px] max-h-[70px] md:max-w-[200px] md:max-h-[80px] object-contain"
-                            />
+                               />
+                           </a>
                         </div>
                     }
                 }).collect_view()}
