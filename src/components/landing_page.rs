@@ -5,7 +5,10 @@ use leptos::prelude::*;
 #[component]
 pub fn LandingPage() -> impl IntoView {
     view! {
-        <div class="background_primary px-2 md:px-32" style="width: auto; height: auto;">
+        <div
+            class="background_primary px-4 sm:px-8 md:px-16 lg:px-32"
+            style="width: auto; height: auto;"
+        >
             <div class="flex flex-col md:flex-row gap-20 items-start">
                 <div class="flex flex-col items-start min-w-0 w-full md:flex-1">
                     <span class="h1 break-words w-full block text-left">
@@ -21,7 +24,7 @@ pub fn LandingPage() -> impl IntoView {
                 </div>
             </div>
         </div>
-        <section class="background_secondary px-2 md:px-32 py-20">
+        <section class="background_secondary px-4 sm:px-8 md:px-16 lg:px-32 py-20">
             <div>
                 <h2 class="h2 text-left">{"Value Proposition"}</h2>
                 <div class="flex flex-col md:flex-row gap-16">
@@ -57,7 +60,7 @@ pub fn LandingPage() -> impl IntoView {
         </section>
 
         // ODP Projects Section
-        <section class="background_primary px-2 md:px-32 py-32">
+        <section class="background_primary px-4 sm:px-8 md:px-16 lg:px-32 py-32">
             <div style="max-width: 960px;">
                 <h2 class="h2 text-left">{"ODP Projects"}</h2>
                 <p class="p2" style="text-align: left; max-width: 100%;">
@@ -69,7 +72,7 @@ pub fn LandingPage() -> impl IntoView {
         </section>
 
         // Boot Firmware Buttons Section
-        <section class="background_primary px-2 md:px-32 pb-32">
+        <section class="background_primary px-4 sm:px-8 md:px-16 lg:px-32 pb-32">
             <div class="flex flex-col md:flex-row gap-16 justify-start">
                 <ImageButton
                     href="/boot-firmware"
@@ -90,7 +93,7 @@ pub fn LandingPage() -> impl IntoView {
         </section>
 
         // Two Columns Section
-        <section class="background_primary px-2 md:px-32 py-20">
+        <section class="background_primary px-4 sm:px-8 md:px-16 lg:px-32 py-20">
             <div class="flex flex-col md:flex-row gap-16">
                 <div class="flex flex-col items-start" style="flex: 1;">
                     <span class="h3 block text-left">{"Partner-Oriented Vision"}</span>

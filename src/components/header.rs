@@ -8,19 +8,19 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
     let menu_open = RwSignal::new(false);
     view! {
         <header class=format!(
-            "w-full h-[80px] md:h-[160px] px-2 md:px-32 {} flex items-center justify-between z-50 m-0 p-0 relative",
+            "w-full h-[80px] lg:h-[160px] px-4 sm:px-8 md:px-16 {} flex items-center justify-between z-50 m-0 p-0 relative",
             background_class,
         )>
-            <div class="flex items-center space-x-6">
+            <div class="flex items-center space-x-6 flex-shrink-0">
                 <ThemedIcon
                     name="odplogo"
                     alt="ODP Logo"
-                    class="w-[100px] h-[34.5px] md:w-[149px] md:h-[51.43px] object-contain"
+                    class="w-[120px] h-[41px] sm:w-[140px] sm:h-[48px] lg:w-[180px] lg:h-[62px] object-contain"
                 />
             </div>
 
             <button
-                class="md:hidden flex flex-col justify-center items-center w-10 h-10 p-2 focus:outline-none"
+                class="lg:hidden flex flex-col justify-center items-center w-10 h-10 p-2 focus:outline-none"
                 aria-label="Open menu"
                 on:click=move |_| menu_open.update(|v| *v = !*v)
             >
@@ -29,7 +29,7 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
                 <span class="block w-6 h-0.5 bg-black dark:bg-white"></span>
             </button>
 
-            <nav class="hidden md:flex [column-gap:25px]">
+            <nav class="hidden lg:flex [column-gap:25px]">
                 <NavButton href="/getting-started" label="Getting Started" />
                 <NavButton href="/projects" label="Projects" />
                 <ExternalNavButton
@@ -41,7 +41,7 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
             </nav>
 
             <nav
-                class="absolute right-0 top-full w-[80vw] max-w-xs background_primary flex-col items-end px-4 py-4 space-y-2 shadow-lg md:hidden transition-all duration-200"
+                class="absolute right-0 top-full w-[80vw] max-w-xs background_primary flex-col items-end px-4 py-4 space-y-2 shadow-lg lg:hidden transition-all duration-200"
                 style=move || if menu_open.get() { "display: flex;" } else { "display: none;" }
             >
                 <NavButton href="/getting-started" label="Getting Started" mobile=true />

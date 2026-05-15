@@ -6,8 +6,8 @@ use leptos_router::components::A;
 pub fn Main() -> impl IntoView {
     view! {
         <main class="background_primary">
-            <div class="mx-auto flex flex-col md:flex-row items-start justify-between w-full px-2 sm:px-4">
-                <div class="pl-0 md:pl-32 flex flex-col gap-6 w-full md:w-auto">
+            <div class="mx-auto flex flex-col lg:flex-row items-start justify-between w-full px-2 sm:px-4">
+                <div class="pl-0 lg:pl-32 flex flex-col gap-6 w-full lg:w-auto">
                     <h1 class="h1 py-4 w-full max-w-full text-left break-words">
                         "Building the Future of Trusted System Software Together"
                     </h1>
@@ -16,10 +16,10 @@ pub fn Main() -> impl IntoView {
                     </p>
                 </div>
 
-                <div class="flex flex-col w-full md:w-auto mt-4 md:mt-0">
+                <div class="flex flex-col w-full lg:w-auto mt-4 lg:mt-0">
                     <div
                         style="border: none; text-decoration: none;"
-                        class="flex background_secondary w-full md:w-[478px] h-[120px] md:h-[176px] items-center justify-center px-4 md:px-16"
+                        class="flex background_secondary w-full lg:w-[478px] h-[120px] lg:h-[176px] items-center justify-center px-4 lg:px-16"
                     >
                         <A href="/getting-started">
                             <div class="flex flex-row items-center justify-center gap-4 w-full max-w-full">
@@ -31,7 +31,7 @@ pub fn Main() -> impl IntoView {
 
                     <div
                         style="border: none; text-decoration: none;"
-                        class="flex background_tertiary w-full md:w-[478px] h-[120px] md:h-[176px] items-center justify-center px-4 md:px-16"
+                        class="flex background_tertiary w-full lg:w-[478px] h-[120px] lg:h-[176px] items-center justify-center px-4 lg:px-16"
                     >
                         <A href="/projects">
                             <div class="flex flex-row items-center justify-center gap-4 w-full max-w-full">

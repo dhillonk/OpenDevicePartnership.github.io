@@ -4,7 +4,7 @@ use leptos::prelude::*;
 #[component]
 pub fn ProjectsComponent() -> impl IntoView {
     view! {
-        <section class="background_primary px-6 py-8 md:px-32 md:py-32">
+        <section class="background_primary px-6 py-8 md:px-16 lg:px-32 md:py-20 lg:py-32">
             <div class="flex flex-col md:flex-row gap-10 md:gap-20">
                 <div class="flex flex-col items-start w-full md:flex-1">
                     <span class="h1 block text-left">{"System Firmware Domains"}</span>
@@ -26,7 +26,7 @@ pub fn ProjectsComponent() -> impl IntoView {
         </section>
 
         // Projects Details Section
-        <section class="background_primary px-6 py-8 md:px-32 md:py-32">
+        <section class="background_primary px-6 py-8 md:px-16 lg:px-32 md:py-20 lg:py-32">
             <div class="flex flex-col gap-16">
 
                 <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">

@@ -79,7 +79,10 @@ pub fn TeamEC() -> impl IntoView {
 
     view! {
         <PageLayout>
-            <div class="background_primary px-2 md:px-32 py-4 md:py-32" style="position: relative;">
+            <div
+                class="background_primary px-4 sm:px-8 md:px-16 lg:px-32 py-4 md:py-32"
+                style="position: relative;"
+            >
 
                 <div class="block md:hidden mb-4">
                     <a href="javascript:history.back()" class="block m-0 p-0">
