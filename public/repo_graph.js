@@ -16,8 +16,23 @@
     const ZOOM_MAX = 3;
 
     function render() {
+        if (typeof d3 === "undefined") {
+            // d3 is loaded as a sibling <script defer> in index.html;
+            // on a very first paint it may not be parsed yet. Try
+            // again on the next animation frame.
+            requestAnimationFrame(render);
+            return;
+        }
         const data = window.__odpGraphData;
         if (!data) return;
+
+        const svgEl = document.querySelector(".repository-graph svg");
+        if (!svgEl) {
+            // The host component was mounted but its <svg> isn't in the
+            // DOM yet -- retry on next frame.
+            requestAnimationFrame(render);
+            return;
+        }
 
         const nodes = data.nodes.map((d) => ({ ...d }));
         const links = data.links.map((d) => ({ ...d }));
@@ -25,8 +40,6 @@
         const width = window.innerWidth;
         const height = window.innerHeight;
 
-        const svgEl = document.querySelector(".repository-graph svg");
-        if (!svgEl) return;
         svgEl.innerHTML = "";
 
         const svg = d3.select(svgEl).attr("viewBox", [0, 0, width, height]);
@@ -210,6 +223,4 @@
     }
 
     window.__odpRenderGraph = render;
-    // If d3 is already loaded by a previous mount, render immediately.
-    if (typeof d3 !== "undefined") render();
 })();

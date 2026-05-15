@@ -1,33 +1,37 @@
 //! Renders the repository dependency graph using D3 v7.
 //!
-//! Heavy lifting (the D3 force simulation, zoom controls, drag handlers,
-//! style sheet) lives in two static assets that Trunk copies next to the
-//! Wasm bundle:
+//! All heavy lifting (force simulation, zoom controls, drag handlers,
+//! styles) lives in two static assets that Trunk copies next to the
+//! Wasm bundle and `index.html` loads as deferred scripts:
 //!
-//!  * `public/repo_graph.js`   -- the D3 rendering code, exposed as
-//!    `window.__odpRenderGraph()`.
-//!  * `style/repo_graph.css`   -- linked once from `index.html`.
+//!  * `public/repo_graph.js`  -- defines `window.__odpRenderGraph()`.
+//!  * `style/repo_graph.css`  -- the graph styles.
 //!
-//! On mount this component publishes the per-page node/link payload as
-//! `window.__odpGraphData` and asks the JS module to (re-)render. If
-//! the JS / D3 hasn't loaded yet, `<script>` tags for both are appended
-//! exactly once and the loader chains the first render. Subsequent
-//! mounts (clicking through the three project pages) reuse the already
-//! loaded code and just call `__odpRenderGraph()`.
+//! Because both scripts are `<script defer>` they finish executing
+//! before the Wasm bundle boots, so on every component mount we can
+//! just publish the per-page payload as `window.__odpGraphData` and
+//! call `__odpRenderGraph()`. `repo_graph.js` itself handles the rare
+//! race where its `<svg>` host hasn't mounted yet by retrying on the
+//! next animation frame.
+//!
+//! ## Why no `<script>` injection from Rust?
+//!
+//! Earlier versions appended d3 + `repo_graph.js` from this Effect on
+//! the first mount. That introduced a load-order race: on the first
+//! navigation to a project page the scripts had not finished
+//! downloading by the time the data was published, so the graph
+//! never appeared until the user reloaded the page (and the scripts
+//! were served from cache).
 
 use leptos::prelude::*;
-use wasm_bindgen::JsCast;
-use web_sys::window;
-
-const D3_SRC: &str = "https://d3js.org/d3.v7.min.js";
-const D3_SCRIPT_ID: &str = "d3-cdn";
-const GRAPH_SCRIPT_ID: &str = "odp-repo-graph-script";
+use wasm_bindgen::{JsCast, JsValue};
+use web_sys::js_sys;
 
 #[component]
 pub fn RepositoryGraph(#[prop(into)] nodes: String, #[prop(into)] links: String) -> impl IntoView {
     Effect::new(move |_| {
         publish_graph_data(&nodes, &links);
-        ensure_graph_loaded();
+        request_render();
     });
 
     view! {
@@ -42,64 +46,35 @@ pub fn RepositoryGraph(#[prop(into)] nodes: String, #[prop(into)] links: String)
     }
 }
 
-/// Pushes the per-page node/link JSON onto `window.__odpGraphData` so
-/// `repo_graph.js` can pick it up. Done via an inline `<script>` because
-/// constructing the JS objects from Rust would require pulling in a
-/// JSON-to-JsValue dependency just for this one call site.
+/// Parses the per-page node/link JSON via the browser's native
+/// `JSON.parse` and stores the result on `window.__odpGraphData`.
+/// Silently no-ops if either string is not valid JSON.
 fn publish_graph_data(nodes_json: &str, links_json: &str) {
-    let document = window().and_then(|w| w.document()).expect("document");
-    let head = document.head().expect("head");
-    let script = document.create_element("script").expect("script");
-    script.set_inner_html(&format!(
-        "window.__odpGraphData = {{ nodes: {nodes_json}, links: {links_json} }};\
-         if (typeof window.__odpRenderGraph === 'function') window.__odpRenderGraph();"
-    ));
-    head.append_child(&script).ok();
-    // The inline script does its work on parse; remove it so it doesn't
-    // accumulate one element per route change.
-    script.remove();
+    let Some(window) = web_sys::window() else {
+        return;
+    };
+    let payload = js_sys::Object::new();
+    if let Ok(nodes) = js_sys::JSON::parse(nodes_json) {
+        let _ = js_sys::Reflect::set(&payload, &JsValue::from_str("nodes"), &nodes);
+    }
+    if let Ok(links) = js_sys::JSON::parse(links_json) {
+        let _ = js_sys::Reflect::set(&payload, &JsValue::from_str("links"), &links);
+    }
+    let _ = js_sys::Reflect::set(&window, &JsValue::from_str("__odpGraphData"), &payload);
 }
 
-/// Appends the d3 CDN `<script>` and the local `repo_graph.js` exactly
-/// once. After the first mount both tags stay in `<head>`; on later
-/// mounts this is a no-op and `repo_graph.js` is already executing
-/// `window.__odpRenderGraph` from `publish_graph_data`'s inline script.
-fn ensure_graph_loaded() {
-    let document = window().and_then(|w| w.document()).expect("document");
-    let head = document.head().expect("head");
-
-    if document.get_element_by_id(GRAPH_SCRIPT_ID).is_some() {
+/// Calls `window.__odpRenderGraph()` if it is defined. The script
+/// that defines it is injected via `<script defer>` in `index.html`,
+/// so by the time the Wasm bundle mounts a `RepositoryGraph` it has
+/// already executed.
+fn request_render() {
+    let Some(window) = web_sys::window() else {
         return;
-    }
-
-    let load_graph_script = move || {
-        let document = window().and_then(|w| w.document()).expect("document");
-        let head = document.head().expect("head");
-        if document.get_element_by_id(GRAPH_SCRIPT_ID).is_some() {
-            return;
-        }
-        let el = document
-            .create_element("script")
-            .expect("script")
-            .dyn_into::<web_sys::HtmlScriptElement>()
-            .expect("HtmlScriptElement");
-        el.set_id(GRAPH_SCRIPT_ID);
-        el.set_src("/repo_graph.js");
-        head.append_child(&el).ok();
     };
-
-    if document.get_element_by_id(D3_SCRIPT_ID).is_none() {
-        let d3 = document
-            .create_element("script")
-            .expect("script")
-            .dyn_into::<web_sys::HtmlScriptElement>()
-            .expect("HtmlScriptElement");
-        d3.set_id(D3_SCRIPT_ID);
-        d3.set_src(D3_SRC);
-        let onload = wasm_bindgen::closure::Closure::once_into_js(load_graph_script);
-        d3.set_onload(Some(onload.as_ref().unchecked_ref()));
-        head.append_child(&d3).ok();
-    } else {
-        load_graph_script();
+    let Ok(render) = js_sys::Reflect::get(&window, &JsValue::from_str("__odpRenderGraph")) else {
+        return;
+    };
+    if let Some(func) = render.dyn_ref::<js_sys::Function>() {
+        let _ = func.call0(&JsValue::UNDEFINED);
     }
 }

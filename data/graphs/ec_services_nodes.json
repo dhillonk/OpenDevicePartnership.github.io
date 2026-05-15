@@ -1,0 +1,5 @@
+[
+  {"id": 0, "name": "ec-test-app", "url": "https://github.com/OpenDevicePartnership/ec-test-app", "classification": "app & driver", "order": 1},
+  {"id": 1, "name": "haf-ec-service", "url": "https://github.com/OpenDevicePartnership/haf-ec-service", "classification": "secure partition", "order": 2},
+  {"id": 2, "name": "ffa", "url": "https://github.com/OpenDevicePartnership/ffa", "classification": "ff-a", "order": 3}
+]

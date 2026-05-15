@@ -1,33 +1,13 @@
 use crate::components::page_layout::PageLayout;
-use crate::components::team_grid::{TeamGrid, TeamMember};
+use crate::components::team_grid::TeamGrid;
 use crate::components::themed_icon::ThemedIcon;
+use crate::data::teams::ec_services_team;
 
 use leptos::prelude::*;
 
-fn create_team() -> Vec<TeamMember> {
-    vec![
-        TeamMember {
-            first_name: "Phil",
-            last_name: "Weber",
-            role: "Team leader",
-            github_username: "philgweber",
-            github_url: "https://github.com/philgweber",
-            image_url: "https://github.com/philgweber.png?size=200",
-        },
-        TeamMember {
-            first_name: "Dylan",
-            last_name: "Knutson",
-            role: "Team leader",
-            github_username: "dymk",
-            github_url: "https://github.com/dymk",
-            image_url: "https://github.com/dymk.png?size=200",
-        },
-    ]
-}
-
 #[component]
 pub fn TeamECServices() -> impl IntoView {
-    let team = create_team();
+    let team = ec_services_team();
 
     view! {
         <PageLayout>

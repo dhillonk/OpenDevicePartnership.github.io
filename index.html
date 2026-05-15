@@ -6,9 +6,16 @@
 
     <link data-trunk rel="tailwind-css" href="/style/tailwind.css" />
     <link data-trunk rel="css" href="/style/repo_graph.css" />
-    <link data-trunk rel="rust" data-wasm-opt="z" data-weak-refs />
     <link data-trunk rel="copy-dir" href="/public/images"/>
     <link data-trunk rel="copy-file" href="/public/repo_graph.js"/>
+
+    <!-- Repository graph dependencies. Loaded once per page so the
+         RepositoryGraph component can call window.__odpRenderGraph()
+         immediately on mount without racing against script downloads. -->
+    <script defer src="https://d3js.org/d3.v7.min.js"></script>
+    <script defer src="/repo_graph.js"></script>
+
+    <link data-trunk rel="rust" data-wasm-opt="z" data-weak-refs />
     <link rel="icon" href="images/odpicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&display=swap" rel="stylesheet">
   </head>

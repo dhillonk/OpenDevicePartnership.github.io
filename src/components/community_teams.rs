@@ -1,40 +1,12 @@
 use crate::components::section::Section;
-use crate::components::team_grid::{TeamGrid, TeamMember};
+use crate::components::team_grid::TeamGrid;
 use crate::components::themed_icon::ThemedIcon;
+use crate::data::teams::steering_committee;
 use leptos::prelude::*;
-
-fn create_steering_committee() -> Vec<TeamMember> {
-    vec![
-        TeamMember {
-            first_name: "Karan",
-            last_name: "Dhillon",
-            role: "Member",
-            github_username: "dhillonk",
-            github_url: "https://github.com/dhillonk",
-            image_url: "https://github.com/dhillonk.png?size=200",
-        },
-        TeamMember {
-            first_name: "Jerry",
-            last_name: "Xie",
-            role: "Member",
-            github_username: "jerrysxie",
-            github_url: "https://github.com/jerrysxie",
-            image_url: "https://github.com/jerrysxie.png?size=200",
-        },
-        TeamMember {
-            first_name: "Michael",
-            last_name: "Kubacki",
-            role: "Member",
-            github_username: "makubacki",
-            github_url: "https://github.com/makubacki",
-            image_url: "https://github.com/makubacki.png?size=200",
-        },
-    ]
-}
 
 #[component]
 pub fn CommunityTeams() -> impl IntoView {
-    let steering_committee = create_steering_committee();
+    let steering_committee = steering_committee();
 
     view! {
         <Section class="py-6">

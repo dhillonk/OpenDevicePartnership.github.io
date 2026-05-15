@@ -1,81 +1,13 @@
 use crate::components::page_layout::PageLayout;
-use crate::components::team_grid::{TeamGrid, TeamMember};
+use crate::components::team_grid::TeamGrid;
 use crate::components::themed_icon::ThemedIcon;
+use crate::data::teams::ec_team;
 
 use leptos::prelude::*;
 
-fn create_team() -> Vec<TeamMember> {
-    vec![
-        TeamMember {
-            first_name: "Jerry",
-            last_name: "Xie",
-            role: "Team leader",
-            github_username: "jerrysxie",
-            github_url: "https://github.com/jerrysxie",
-            image_url: "https://github.com/jerrysxie.png?size=200",
-        },
-        TeamMember {
-            first_name: "Felipe",
-            last_name: "Balbi",
-            role: "",
-            github_username: "felipebalbi",
-            github_url: "https://github.com/felipebalbi",
-            image_url: "https://github.com/felipebalbi.png?size=200",
-        },
-        TeamMember {
-            first_name: "Robert",
-            last_name: "Zieba",
-            role: "",
-            github_username: "RobertZ2011",
-            github_url: "https://github.com/RobertZ2011",
-            image_url: "https://github.com/RobertZ2011.png?size=200",
-        },
-        TeamMember {
-            first_name: "Matteo",
-            last_name: "Tullo",
-            role: "",
-            github_username: "tullom",
-            github_url: "https://github.com/tullom",
-            image_url: "https://github.com/tullom.png?size=200",
-        },
-        TeamMember {
-            first_name: "Kurtis",
-            last_name: "Dinelle",
-            role: "",
-            github_username: "kurtjd",
-            github_url: "https://github.com/kurtjd",
-            image_url: "https://github.com/kurtjd.png?size=200",
-        },
-        TeamMember {
-            first_name: "Jimi",
-            last_name: "Huard",
-            role: "",
-            github_username: "JamesHuard",
-            github_url: "https://github.com/JamesHuard",
-            image_url: "https://github.com/JamesHuard.png?size=200",
-        },
-        TeamMember {
-            first_name: "Adam",
-            last_name: "Sasine",
-            role: "",
-            github_username: "asasine",
-            github_url: "https://github.com/asasine",
-            image_url: "https://github.com/asasine.png?size=200",
-        },
-        TeamMember {
-            first_name: "Billy",
-            last_name: "Price",
-            role: "",
-            github_username: "williampMSFT",
-            github_url: "https://github.com/williampMSFT",
-            image_url: "https://github.com/williampMSFT.png?size=200",
-        },
-    ]
-}
-
 #[component]
 pub fn TeamEC() -> impl IntoView {
-    let team = create_team();
+    let team = ec_team();
 
     view! {
         <PageLayout>
