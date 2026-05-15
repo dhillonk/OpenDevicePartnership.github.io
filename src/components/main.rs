@@ -7,11 +7,11 @@ pub fn Main() -> impl IntoView {
     view! {
         <main class="background_primary">
             <div class="mx-auto flex flex-col md:flex-row items-start justify-between w-full px-2 sm:px-4">
-                <div class="pl-0 md:pl-[120px] flex flex-col gap-6 w-full md:w-auto">
-                    <h1 class="h1_mobile md:h1 py-4 w-full max-w-full text-left break-words">
+                <div class="pl-0 md:pl-32 flex flex-col gap-6 w-full md:w-auto">
+                    <h1 class="h1 py-4 w-full max-w-full text-left break-words">
                         "Building the Future of Trusted System Software Together"
                     </h1>
-                    <p class="p1_mobile md:p1 w-full max-w-full text-left break-words">
+                    <p class="p1 w-full max-w-full text-left break-words">
                         "Leading technology partners creating secure, reusable, and reliable firmware for modern client devices."
                     </p>
                 </div>
@@ -19,34 +19,33 @@ pub fn Main() -> impl IntoView {
                 <div class="flex flex-col w-full md:w-auto mt-4 md:mt-0">
                     <div
                         style="border: none; text-decoration: none;"
-                        class="flex background_secondary w-full md:w-[478px] h-[120px] md:h-[176px] items-center justify-center px-4 md:px-[60px]"
+                        class="flex background_secondary w-full md:w-[478px] h-[120px] md:h-[176px] items-center justify-center px-4 md:px-16"
                     >
                         <A href="/getting-started">
                             <div class="flex flex-row items-center justify-center gap-4 w-full max-w-full">
-                                <span class="h3_mobile md:h3">"Getting started"</span>
-                                <span class="h3_mobile md:h3">"→"</span>
+                                <span class="h3">"Getting started"</span>
+                                <span class="h3">"→"</span>
                             </div>
                         </A>
                     </div>
 
                     <div
                         style="border: none; text-decoration: none;"
-                        class="flex background_tertiary w-full md:w-[478px] h-[120px] md:h-[176px] items-center justify-center px-4 md:px-[60px]"
+                        class="flex background_tertiary w-full md:w-[478px] h-[120px] md:h-[176px] items-center justify-center px-4 md:px-16"
                     >
                         <A href="/projects">
                             <div class="flex flex-row items-center justify-center gap-4 w-full max-w-full">
-                                <span class="h3_mobile md:h3">"Projects"</span>
-                                <span class="h3_mobile md:h3">"→"</span>
+                                <span class="h3">"Projects"</span>
+                                <span class="h3">"→"</span>
                             </div>
                         </A>
                     </div>
                 </div>
             </div>
 
-            {}
             <div class="flex flex-col pt-10 px-2 sm:px-4 md:pl-[117px] w-full">
-                {} <div class="flex flex-col lg:flex-row items-start w-full gap-4">
-                    <div class="flex flex-col items-start w-full lg:w-[423px] mr-0 lg:mr-[60px] mb-6 lg:mb-0">
+                <div class="flex flex-col lg:flex-row items-start w-full gap-4">
+                    <div class="flex flex-col items-start w-full lg:w-[423px] mr-0 lg:mr-16 mb-6 lg:mb-0">
                         <ThemedIcon
                             name="video"
                             alt="Video Icon"
@@ -59,11 +58,11 @@ pub fn Main() -> impl IntoView {
                             margin-bottom: 16px;
                             "
                         />
-                        <span class="h2_mobile md:h2 block w-full max-w-full text-left break-words">
+                        <span class="h2 block w-full max-w-full text-left break-words">
                             "Welcome"
                         </span>
                         <div style="height: 10px;"></div>
-                        <span class="p1_mobile md:p1 block w-full max-w-full text-left break-words">
+                        <span class="p1 block w-full max-w-full text-left break-words">
                             "Learn how ODP projects help build secure, modern devices"
                         </span>
                     </div>

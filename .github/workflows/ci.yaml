@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  line-endings:
+    name: Line endings (LF only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dos2unix
+        run: sudo apt-get update && sudo apt-get install -y dos2unix
+
+      - name: Check that all tracked text files use LF
+        run: |
+          # dos2unix -ic lists files that contain CR characters.
+          # We feed it every text file tracked by git (-I excludes binary files in grep,
+          # and git's --eol filter would also work, but -ic is the canonical dos2unix check).
+          offenders=$(git ls-files -z | xargs -0 dos2unix -ic 2>/dev/null || true)
+          if [ -n "$offenders" ]; then
+            echo "::error::The following files contain CRLF or CR line endings; run dos2unix on them:"
+            printf '%s\n' "$offenders"
+            exit 1
+          fi
+          echo "All tracked files use LF line endings."
+
+  formatting:
+    name: leptosfmt --check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo bin
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin
+          key: cargo-bin-leptosfmt-0.1.33
+
+      - name: Install leptosfmt
+        run: |
+          if ! command -v leptosfmt >/dev/null 2>&1; then
+            cargo install leptosfmt --version 0.1.33 --locked
+          fi
+
+      - name: Run leptosfmt --check
+        run: leptosfmt --check src
+
+  build:
+    name: Trunk build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install nightly Rust
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Cache cargo registry and target
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install Trunk
+        run: |
+          wget -qO- https://github.com/trunk-rs/trunk/releases/download/v0.21.14/trunk-x86_64-unknown-linux-gnu.tar.gz \
+            | tar -xzf- -C /usr/local/bin
+
+      - name: Build with Trunk
+        run: trunk build --release

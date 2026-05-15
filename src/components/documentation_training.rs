@@ -44,20 +44,19 @@ pub const DEFAULT_DOC_LINKS: &[DocLink] = &[
 #[component]
 pub fn DocumentationTraining(#[prop(default = DEFAULT_DOC_LINKS.to_vec())] links: Vec<DocLink>) -> impl IntoView {
     view! {
-        <section class="flex flex-col md:flex-row items-start background_primary w-full overflow-x-hidden px-4 py-8 md:py-[60px] md:px-[120px]">
-            {} <div class="flex flex-col items-start w-full" style="align-items: flex-start;">
+        <section class="flex flex-col md:flex-row items-start background_primary w-full overflow-x-hidden px-4 py-8 md:py-16 md:px-32">
+            <div class="flex flex-col items-start w-full" style="align-items: flex-start;">
                 <ThemedIcon
                     name="documentation"
                     alt="Documentation Icon"
                     class="w-[80px] h-[80px] md:w-[150px] md:h-[150px] object-contain mb-4"
                     style="display: block; margin-bottom: 16px;"
                 />
-                <span class="h2_mobile md:h2 text-left break-words block">"Documentation"</span>
+                <span class="h2 text-left break-words block">"Documentation"</span>
                 <div style="height: 10px;"></div>
-                <span class="p1_mobile md:p1 text-left break-words block">
-                    "Start developing with ODP"
-                </span>
-            </div> {} <div class="hidden md:block" style="width: 200px;"></div> {}
+                <span class="p1 text-left break-words block">"Start developing with ODP"</span>
+            </div>
+            <div class="hidden md:block" style="width: 200px;"></div>
             <ul class="flex flex-col pt-4 w-full max-w-full break-words md:pt-4 md:w-[760px] md:max-w-[760px]">
                 {links
                     .into_iter()

@@ -36,10 +36,10 @@ pub fn CommunityTeams() -> impl IntoView {
     let steering_committee = create_steering_committee();
 
     view! {
-        <section class="background_primary px-4 py-6 md:[120px]">
-            {} <div class="flex flex-col md:flex-row gap-[60px]" style="margin-bottom: 80px;">
+        <section class="background_primary px-4 py-6 md:px-32">
+            <div class="flex flex-col md:flex-row gap-16 mb-20">
                 <div class="w-full md:w-[950px]">
-                    <span class="h1_mobile md:h1 break-words w-full block text-left">
+                    <span class="h1 break-words w-full block text-left">
                         {"How ODP is built by its community"}
                     </span>
                 </div>
@@ -75,29 +75,31 @@ pub fn CommunityTeams() -> impl IntoView {
                         </a> {"."}
                     </span>
                 </div>
-            </div> {} <div class="flex flex-col items-left" style="margin-bottom: 80px;">
+            </div>
+            <div class="flex flex-col items-left mb-20">
                 <ThemedIcon name="teams" alt="Teams" class="icon" />
                 <span
-                    class="h2_mobile md:h2 break-words w-full"
+                    class="h2 break-words w-full"
                     style="display: flex; justify-content: left; align-items: left;"
                 >
                     {"Steering Committee"}
                 </span>
-            </div> {} <TeamGrid members=steering_committee /> {}
-            <div class="flex flex-col items-left" style="margin-bottom: 80px;">
+            </div>
+            <TeamGrid members=steering_committee />
+            <div class="flex flex-col items-left mb-20">
                 <span
-                    class="h2_mobile md:h2 break-words w-full"
+                    class="h2 break-words w-full"
                     style="display: flex; justify-content: left; align-items: left;"
                 >
                     {"Teams"}
                 </span>
-            </div> {}
+            </div>
             <div class="flex flex-col md:flex-row items-stretch justify-center" style="gap: 175px;">
                 <div
                     class="flex flex-col items-start h-full"
                     style="width: 320px; min-height: 350px; justify-content: flex-start;"
                 >
-                    <span class="h3_mobile md:h3 break-words w-full block text-left">
+                    <span class="h3 break-words w-full block text-left">
                         {"Boot Firmware (Patina)"}
                     </span>
                     <span class="p2 break-words w-full block text-left">
@@ -119,7 +121,7 @@ pub fn CommunityTeams() -> impl IntoView {
                     class="flex flex-col items-start h-full"
                     style="width: 320px; min-height: 350px; justify-content: flex-start;"
                 >
-                    <span class="h3_mobile md:h3 break-words w-full block text-left">
+                    <span class="h3 break-words w-full block text-left">
                         {"Secure Embedded Controller"}
                     </span>
                     <span class="p2 break-words w-full block text-left">
@@ -141,7 +143,7 @@ pub fn CommunityTeams() -> impl IntoView {
                     class="flex flex-col items-start h-full"
                     style="width: 320px; min-height: 350px; justify-content: flex-start;"
                 >
-                    <span class="h3_mobile md:h3 break-words w-full block text-left">
+                    <span class="h3 break-words w-full block text-left">
                         {"Unified EC Services"}
                     </span>
                     <span class="p2 break-words w-full block text-left">

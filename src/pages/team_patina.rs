@@ -87,11 +87,8 @@ pub fn TeamPatina() -> impl IntoView {
 
     view! {
         <PageLayout>
-            <div
-                class="background_primary px-2 md:px-[120px] py-4 md:py-[120px]"
-                style="position: relative;"
-            >
-                {}
+            <div class="background_primary px-2 md:px-32 py-4 md:py-32" style="position: relative;">
+
                 <div class="block md:hidden mb-4">
                     <a href="javascript:history.back()" class="block m-0 p-0">
                         <ThemedIcon
@@ -110,13 +107,13 @@ pub fn TeamPatina() -> impl IntoView {
                         />
                     </a>
                 </div>
-                <div class="flex flex-col md:flex-row gap-[80px] items-start">
-                    {} <div class="flex flex-col items-start w-full md:w-[700px]">
-                        <span class="h1_mobile md:h1 block text-left">{"Meet the team"}</span>
-                    </div> {}
+                <div class="flex flex-col md:flex-row gap-20 items-start">
+                    <div class="flex flex-col items-start w-full md:w-[700px]">
+                        <span class="h1 block text-left">{"Meet the team"}</span>
+                    </div>
                     <div class="flex flex-col items-start w-full md:w-[600px]">
-                        {} <span class="mono block text-left">{"Patina team"}</span>
-                        <span class="p1_mobile md:p1 block text-left">
+                        <span class="mono block text-left">{"Patina team"}</span>
+                        <span class="p1 block text-left">
                             {"Developing and managing development of a new modern UEFI"}
                         </span>
                     </div>
