@@ -22,6 +22,7 @@
 //! Remove it once every primitive is in active use.
 #![allow(dead_code, unused_imports)]
 
+mod announcement_card;
 mod arrow_link;
 mod button;
 mod container;
@@ -37,6 +38,7 @@ mod text;
 mod two_column_intro;
 mod value_prop_card;
 
+pub use announcement_card::AnnouncementCard;
 pub use arrow_link::{ArrowLink, ArrowLinkSize};
 pub use button::{Button, ButtonVariant, IconButton};
 pub use container::Container;

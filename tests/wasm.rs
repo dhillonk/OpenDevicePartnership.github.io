@@ -22,7 +22,7 @@ use odp::components::landing::{ClosingColumnsSection, HeroSection, ProjectsSecti
 use odp::components::team_hero::TeamHero;
 use odp::components::themed_icon::ThemedIcon;
 use odp::components::ui::{
-    ArrowLink, ArrowLinkSize, DocLinkItem, IconBlock, LabeledSection, TwoColumnIntro, ValuePropCard,
+    AnnouncementCard, ArrowLink, ArrowLinkSize, DocLinkItem, IconBlock, LabeledSection, TwoColumnIntro, ValuePropCard,
 };
 use wasm_bindgen::{JsCast, JsValue};
 use wasm_bindgen_test::*;
@@ -367,5 +367,33 @@ fn doc_link_item_internal_uses_router_anchor() {
     assert!(
         anchor.get_attribute("target").is_none(),
         "internal link must not open new tab"
+    );
+}
+
+// ---------------------------------------------------------------------------
+// t36 — <AnnouncementCard>
+// ---------------------------------------------------------------------------
+
+#[wasm_bindgen_test]
+fn announcement_card_renders_title_and_body() {
+    let root = mount(|| {
+        view! {
+            <AnnouncementCard title="Probe Title">
+                <p class="probe-body">"Probe announcement body."</p>
+            </AnnouncementCard>
+        }
+    });
+
+    let html = root.inner_html();
+    assert!(html.contains("Probe Title"), "title missing: {html}");
+    assert!(html.contains("Probe announcement body."), "body missing: {html}");
+
+    let title_pos = html.find("Probe Title").unwrap();
+    let body_pos = html.find("Probe announcement body.").unwrap();
+    assert!(title_pos < body_pos, "title must precede body");
+
+    assert!(
+        root.query_selector(".probe-body").unwrap().is_some(),
+        "body element should be rendered as a child"
     );
 }
