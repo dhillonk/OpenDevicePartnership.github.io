@@ -44,27 +44,27 @@
   /* Surfaces ---------------------------------------------------------- */
 
   .header_background {
-    @apply bg-[#FFFFFF] dark:bg-[#171717];
+    @apply bg-surface-primary dark:bg-surface-primary-dark;
   }
 
   .background_primary {
-    @apply bg-[#FFFFFF] dark:bg-[#171717];
+    @apply bg-surface-primary dark:bg-surface-primary-dark;
   }
    
   .background_secondary {
-    @apply bg-[#F1F1F1] dark:bg-[#3B3B3B];
+    @apply bg-surface-secondary dark:bg-surface-secondary-dark;
   }
 
   .background_tertiary {
-    @apply bg-[#E2E2E2] dark:bg-[#595959];
+    @apply bg-surface-tertiary dark:bg-surface-tertiary-dark;
   }
 
   .background_quaternary {
-    @apply bg-[#CACACA] dark:bg-[#797979];
+    @apply bg-surface-quaternary dark:bg-surface-quaternary-dark;
   }
 
   .background_announcement {
-    @apply bg-[#FEEED6] dark:bg-[#FEEED6];
+    @apply bg-surface-announcement dark:bg-surface-announcement-dark;
   }
 
   /* Headings ---------------------------------------------------------- */
@@ -357,7 +357,7 @@
 
   /* Header buttons on quaternary background (announcements page) */
   .background_quaternary .odp-header-btn {
-    @apply bg-[#CACACA] dark:bg-[#797979] border-black dark:border-white;
+    @apply bg-surface-quaternary dark:bg-surface-quaternary-dark border-black dark:border-white;
   }
 
   .background_quaternary .odp-header-btn-active {
