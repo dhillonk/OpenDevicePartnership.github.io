@@ -1,0 +1,45 @@
+# Cloudflare Pages reads this file at the root of the published
+# directory and applies the listed headers to matching requests.
+# See https://developers.cloudflare.com/pages/configuration/headers/
+
+# Default headers for every response. Light security hardening; no
+# CSP yet because the d3 CDN script is loaded dynamically and would
+# need to be allow-listed.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=()
+
+# Trunk fingerprints these with a content hash in the filename, so
+# they are safe to cache forever. A new build emits a new hash and
+# index.html points to it; the old hash becomes orphan and aged out.
+/*.wasm
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Matches the wasm-bindgen JS shim (odp-<hash>.js) which is also
+# fingerprinted. Plain repo_graph.js is unhashed and falls through
+# to the default cache (which is fine -- it's tiny).
+/odp-*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Self-hosted fonts: Trunk copies these as-is (no fingerprint).
+# Cache for a week and revalidate. If the file ever changes, busting
+# the cache means visitors see a one-week-old font for at most a
+# week; trade-off is acceptable for the perf win.
+/fonts/*.woff2
+  Cache-Control: public, max-age=604800, must-revalidate
+
+# Images are not fingerprinted but rarely change. Same trade-off.
+/images/*
+  Cache-Control: public, max-age=604800, must-revalidate
+
+# index.html and the data/* JSON must always be revalidated so a
+# fresh deploy is picked up immediately.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
