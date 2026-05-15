@@ -22,11 +22,13 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
             background_class,
         )>
             <div class="flex items-center space-x-6 flex-shrink-0">
-                <ThemedIcon
-                    name="odplogo"
-                    alt="ODP Logo"
-                    class="w-[120px] h-[41px] sm:w-[140px] sm:h-[48px] lg:w-[180px] lg:h-[62px] object-contain"
-                />
+                <A href="/" attr:aria-label="Open Device Partnership home">
+                    <ThemedIcon
+                        name="odplogo"
+                        alt="ODP Logo"
+                        class="w-[120px] h-[41px] sm:w-[140px] sm:h-[48px] lg:w-[180px] lg:h-[62px] object-contain"
+                    />
+                </A>
             </div>
 
             <button
@@ -49,7 +51,6 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
                     label="Library"
                 />
                 <NavButton href="/community" label="Community" />
-                <NavButton href="/home" label="Home" />
             </nav>
 
             // Backdrop: catches clicks outside the open mobile menu and dismisses it.
@@ -80,7 +81,6 @@ pub fn Header(#[prop(optional, default = "header_background")] background_class:
                     on_navigate=close_menu
                 />
                 <NavButton href="/community" label="Community" mobile=true on_navigate=close_menu />
-                <NavButton href="/home" label="Home" mobile=true on_navigate=close_menu />
             </nav>
         </header>
     }

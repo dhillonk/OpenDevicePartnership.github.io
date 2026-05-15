@@ -44,7 +44,6 @@ pub fn App() -> impl IntoView {
                     // share the standard chrome with `overflow-x: hidden`.
                     <ParentRoute path=path!("") view=SiteShell>
                         <Route path=path!("/") view=Home />
-                        <Route path=path!("/home") view=Home />
                         <Route path=path!("/community") view=Community />
                         <Route path=path!("/team-ec") view=TeamEC />
                         <Route path=path!("/team-ec-services") view=TeamECServices />
